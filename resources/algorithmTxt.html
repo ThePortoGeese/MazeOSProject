@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Relatório sobre o Algoritmo de Geração e Resolução de Labirintos</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #020d1a;
+            color: #ffffff;
+            padding: 20px;
+        }
+        h1, h2 {
+            color: #1e90ff;
+        }
+        h1 {
+            text-align: center;
+            border-bottom: 2px solid #1e90ff;
+            padding-bottom: 10px;
+        }
+        h2 {
+            margin-top: 30px;
+        }
+        p, ul {
+            line-height: 1.6;
+        }
+        ul {
+            padding-left: 20px;
+        }
+        li {
+            margin-bottom: 8px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Relatório sobre o Algoritmo de Geração e Resolução de Labirintos</h1>
+    
+    <h2>Introdução</h2>
+    <p>O presente relatório descreve o funcionamento de um algoritmo responsável pela geração e resolução de labirintos. O algoritmo está estruturado de forma modular e utiliza conceitos de recursividade para gerar caminhos dentro do labirinto e encontrar a solução.</p>
+    
+    <h2>Estrutura do Algoritmo</h2>
+    <p>O sistema baseia-se em três principais componentes:</p>
+    <ul>
+        <li><strong>Geração do Labirinto:</strong> Responsável por construir uma estrutura de células interligadas, criando caminhos e barreiras.</li>
+        <li><strong>Resolução do Labirinto:</strong> Utiliza um método recursivo para encontrar um caminho viável entre a entrada e a saída do labirinto.</li>
+        <li><strong>Estruturas de Dados:</strong> Utiliza objetos para representar células e conexões, armazenando o estado do labirinto.</li>
+    </ul>
+    
+    <h2>Geração do Labirinto</h2>
+    <p>A geração do labirinto ocorre através de uma abordagem baseada em escavação recursiva. Os principais passos incluem:</p>
+    <ul>
+        <li><strong>Criação da grade de células:</strong> O labirinto é inicializado com uma matriz de células interligadas, onde cada célula pode conter conexões para seus vizinhos.</li>
+        <li><strong>Definição da entrada e saída:</strong> A entrada e a saída são escolhidas aleatoriamente em uma das bordas do labirinto.</li>
+        <li><strong>Escavação recursiva:</strong>
+            <ul>
+                <li>Começando pela entrada, o algoritmo percorre recursivamente as células vizinhas de forma aleatória.</li>
+                <li>Cada conexão entre células pode ser marcada como livre (sem obstáculo) ou bloqueada.</li>
+                <li>Se uma célula não foi visitada, o caminho entre ela e a célula anterior é aberto, e a escavação continua.</li>
+                <li>O processo se repete até que o labirinto esteja completamente escavado.</li>
+            </ul>
+        </li>
+    </ul>
+    
+    <h2>Resolução do Labirinto</h2>
+    <p>Para encontrar um caminho viável dentro do labirinto, o algoritmo segue uma abordagem recursiva:</p>
+    <ul>
+        <li><strong>Inicialização:</strong> Um mapa de células visitadas é criado para evitar revisitar locais já percorridos.</li>
+        <li><strong>Busca Recursiva:</strong>
+            <ul>
+                <li>O algoritmo começa na entrada e tenta seguir pelos caminhos possíveis.</li>
+                <li>Caso uma célula leve diretamente à saída, a solução é encontrada.</li>
+                <li>Se a célula atual não for a saída, o algoritmo tenta mover-se para uma célula adjacente que não tenha obstáculos.</li>
+                <li>Caso todas as direções sejam bloqueadas, o algoritmo retrocede e busca outra alternativa.</li>
+            </ul>
+        </li>
+        <li><strong>Marcação do Caminho:</strong> Ao encontrar a solução, as células percorridas são marcadas, formando o caminho correto.</li>
+    </ul>
+    
+    <h2>Conclusão</h2>
+    <p>O algoritmo implementa de maneira eficiente a geração e resolução de labirintos, utilizando recursividade tanto para a construção quanto para a busca do caminho correto. Essa abordagem permite criar labirintos complexos e encontrar soluções de forma otimizada. A modularização do sistema facilita a manutenção e expansão do código, tornando-o aplicável a diversas situações de navegação e resolução de problemas.</p>
+</body>
+</html>

@@ -1,0 +1,14 @@
+<RCC>
+    <qresource prefix="/labNames">
+        <file>resources/firstName.txt</file>
+        <file>resources/secondName.txt</file>
+    </qresource>
+    <qresource prefix="/others">
+        <file>resources/credits.mp4</file>
+        <file>resources/appLogo.png</file>
+        <file>resources/algorithmTxt.html</file>
+    </qresource>
+    <qresource prefix="/fonts">
+        <file>Roboto-Medium.ttf</file>
+    </qresource>
+</RCC>

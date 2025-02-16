@@ -1,0 +1,569 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>informationPage</class>
+ <widget class="QWidget" name="informationPage">
+  <property name="windowModality">
+   <enum>Qt::WindowModality::ApplicationModal</enum>
+  </property>
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>649</width>
+    <height>600</height>
+   </rect>
+  </property>
+  <property name="palette">
+   <palette>
+    <active>
+     <colorrole role="WindowText">
+      <brush brushstyle="SolidPattern">
+       <color alpha="255">
+        <red>255</red>
+        <green>255</green>
+        <blue>255</blue>
+       </color>
+      </brush>
+     </colorrole>
+     <colorrole role="Button">
+      <brush brushstyle="SolidPattern">
+       <color alpha="255">
+        <red>2</red>
+        <green>13</green>
+        <blue>26</blue>
+       </color>
+      </brush>
+     </colorrole>
+     <colorrole role="Light">
+      <brush brushstyle="SolidPattern">
+       <color alpha="255">
+        <red>3</red>
+        <green>19</green>
+        <blue>39</blue>
+       </color>
+      </brush>
+     </colorrole>
+     <colorrole role="Midlight">
+      <brush brushstyle="SolidPattern">
+       <color alpha="255">
+        <red>2</red>
+        <green>16</green>
+        <blue>32</blue>
+       </color>
+      </brush>
+     </colorrole>
+     <colorrole role="Dark">
+      <brush brushstyle="SolidPattern">
+       <color alpha="255">
+        <red>1</red>
+        <green>6</green>
+        <blue>13</blue>
+       </color>
+      </brush>
+     </colorrole>
+     <colorrole role="Mid">
+      <brush brushstyle="SolidPattern">
+       <color alpha="255">
+        <red>1</red>
+        <green>9</green>
+        <blue>17</blue>
+       </color>
+      </brush>
+     </colorrole>
+     <colorrole role="Text">
+      <brush brushstyle="SolidPattern">
+       <color alpha="255">
+        <red>255</red>
+        <green>255</green>
+        <blue>255</blue>
+       </color>
+      </brush>
+     </colorrole>
+     <colorrole role="BrightText">
+      <brush brushstyle="SolidPattern">
+       <color alpha="255">
+        <red>255</red>
+        <green>255</green>
+        <blue>255</blue>
+       </color>
+      </brush>
+     </colorrole>
+     <colorrole role="ButtonText">
+      <brush brushstyle="SolidPattern">
+       <color alpha="255">
+        <red>255</red>
+        <green>255</green>
+        <blue>255</blue>
+       </color>
+      </brush>
+     </colorrole>
+     <colorrole role="Base">
+      <brush brushstyle="SolidPattern">
+       <color alpha="255">
+        <red>0</red>
+        <green>0</green>
+        <blue>0</blue>
+       </color>
+      </brush>
+     </colorrole>
+     <colorrole role="Window">
+      <brush brushstyle="SolidPattern">
+       <color alpha="255">
+        <red>2</red>
+        <green>13</green>
+        <blue>26</blue>
+       </color>
+      </brush>
+     </colorrole>
+     <colorrole role="Shadow">
+      <brush brushstyle="SolidPattern">
+       <color alpha="255">
+        <red>0</red>
+        <green>0</green>
+        <blue>0</blue>
+       </color>
+      </brush>
+     </colorrole>
+     <colorrole role="AlternateBase">
+      <brush brushstyle="SolidPattern">
+       <color alpha="255">
+        <red>1</red>
+        <green>6</green>
+        <blue>13</blue>
+       </color>
+      </brush>
+     </colorrole>
+     <colorrole role="ToolTipBase">
+      <brush brushstyle="SolidPattern">
+       <color alpha="255">
+        <red>255</red>
+        <green>255</green>
+        <blue>220</blue>
+       </color>
+      </brush>
+     </colorrole>
+     <colorrole role="ToolTipText">
+      <brush brushstyle="SolidPattern">
+       <color alpha="255">
+        <red>0</red>
+        <green>0</green>
+        <blue>0</blue>
+       </color>
+      </brush>
+     </colorrole>
+     <colorrole role="PlaceholderText">
+      <brush brushstyle="SolidPattern">
+       <color alpha="127">
+        <red>255</red>
+        <green>255</green>
+        <blue>255</blue>
+       </color>
+      </brush>
+     </colorrole>
+     <colorrole role="Accent">
+      <brush brushstyle="SolidPattern">
+       <color alpha="255">
+        <red>0</red>
+        <green>0</green>
+        <blue>0</blue>
+       </color>
+      </brush>
+     </colorrole>
+    </active>
+    <inactive>
+     <colorrole role="WindowText">
+      <brush brushstyle="SolidPattern">
+       <color alpha="255">
+        <red>255</red>
+        <green>255</green>
+        <blue>255</blue>
+       </color>
+      </brush>
+     </colorrole>
+     <colorrole role="Button">
+      <brush brushstyle="SolidPattern">
+       <color alpha="255">
+        <red>2</red>
+        <green>13</green>
+        <blue>26</blue>
+       </color>
+      </brush>
+     </colorrole>
+     <colorrole role="Light">
+      <brush brushstyle="SolidPattern">
+       <color alpha="255">
+        <red>3</red>
+        <green>19</green>
+        <blue>39</blue>
+       </color>
+      </brush>
+     </colorrole>
+     <colorrole role="Midlight">
+      <brush brushstyle="SolidPattern">
+       <color alpha="255">
+        <red>2</red>
+        <green>16</green>
+        <blue>32</blue>
+       </color>
+      </brush>
+     </colorrole>
+     <colorrole role="Dark">
+      <brush brushstyle="SolidPattern">
+       <color alpha="255">
+        <red>1</red>
+        <green>6</green>
+        <blue>13</blue>
+       </color>
+      </brush>
+     </colorrole>
+     <colorrole role="Mid">
+      <brush brushstyle="SolidPattern">
+       <color alpha="255">
+        <red>1</red>
+        <green>9</green>
+        <blue>17</blue>
+       </color>
+      </brush>
+     </colorrole>
+     <colorrole role="Text">
+      <brush brushstyle="SolidPattern">
+       <color alpha="255">
+        <red>255</red>
+        <green>255</green>
+        <blue>255</blue>
+       </color>
+      </brush>
+     </colorrole>
+     <colorrole role="BrightText">
+      <brush brushstyle="SolidPattern">
+       <color alpha="255">
+        <red>255</red>
+        <green>255</green>
+        <blue>255</blue>
+       </color>
+      </brush>
+     </colorrole>
+     <colorrole role="ButtonText">
+      <brush brushstyle="SolidPattern">
+       <color alpha="255">
+        <red>255</red>
+        <green>255</green>
+        <blue>255</blue>
+       </color>
+      </brush>
+     </colorrole>
+     <colorrole role="Base">
+      <brush brushstyle="SolidPattern">
+       <color alpha="255">
+        <red>0</red>
+        <green>0</green>
+        <blue>0</blue>
+       </color>
+      </brush>
+     </colorrole>
+     <colorrole role="Window">
+      <brush brushstyle="SolidPattern">
+       <color alpha="255">
+        <red>2</red>
+        <green>13</green>
+        <blue>26</blue>
+       </color>
+      </brush>
+     </colorrole>
+     <colorrole role="Shadow">
+      <brush brushstyle="SolidPattern">
+       <color alpha="255">
+        <red>0</red>
+        <green>0</green>
+        <blue>0</blue>
+       </color>
+      </brush>
+     </colorrole>
+     <colorrole role="AlternateBase">
+      <brush brushstyle="SolidPattern">
+       <color alpha="255">
+        <red>1</red>
+        <green>6</green>
+        <blue>13</blue>
+       </color>
+      </brush>
+     </colorrole>
+     <colorrole role="ToolTipBase">
+      <brush brushstyle="SolidPattern">
+       <color alpha="255">
+        <red>255</red>
+        <green>255</green>
+        <blue>220</blue>
+       </color>
+      </brush>
+     </colorrole>
+     <colorrole role="ToolTipText">
+      <brush brushstyle="SolidPattern">
+       <color alpha="255">
+        <red>0</red>
+        <green>0</green>
+        <blue>0</blue>
+       </color>
+      </brush>
+     </colorrole>
+     <colorrole role="PlaceholderText">
+      <brush brushstyle="SolidPattern">
+       <color alpha="127">
+        <red>255</red>
+        <green>255</green>
+        <blue>255</blue>
+       </color>
+      </brush>
+     </colorrole>
+     <colorrole role="Accent">
+      <brush brushstyle="SolidPattern">
+       <color alpha="255">
+        <red>0</red>
+        <green>0</green>
+        <blue>0</blue>
+       </color>
+      </brush>
+     </colorrole>
+    </inactive>
+    <disabled>
+     <colorrole role="WindowText">
+      <brush brushstyle="SolidPattern">
+       <color alpha="255">
+        <red>1</red>
+        <green>6</green>
+        <blue>13</blue>
+       </color>
+      </brush>
+     </colorrole>
+     <colorrole role="Button">
+      <brush brushstyle="SolidPattern">
+       <color alpha="255">
+        <red>2</red>
+        <green>13</green>
+        <blue>26</blue>
+       </color>
+      </brush>
+     </colorrole>
+     <colorrole role="Light">
+      <brush brushstyle="SolidPattern">
+       <color alpha="255">
+        <red>3</red>
+        <green>19</green>
+        <blue>39</blue>
+       </color>
+      </brush>
+     </colorrole>
+     <colorrole role="Midlight">
+      <brush brushstyle="SolidPattern">
+       <color alpha="255">
+        <red>2</red>
+        <green>16</green>
+        <blue>32</blue>
+       </color>
+      </brush>
+     </colorrole>
+     <colorrole role="Dark">
+      <brush brushstyle="SolidPattern">
+       <color alpha="255">
+        <red>1</red>
+        <green>6</green>
+        <blue>13</blue>
+       </color>
+      </brush>
+     </colorrole>
+     <colorrole role="Mid">
+      <brush brushstyle="SolidPattern">
+       <color alpha="255">
+        <red>1</red>
+        <green>9</green>
+        <blue>17</blue>
+       </color>
+      </brush>
+     </colorrole>
+     <colorrole role="Text">
+      <brush brushstyle="SolidPattern">
+       <color alpha="255">
+        <red>1</red>
+        <green>6</green>
+        <blue>13</blue>
+       </color>
+      </brush>
+     </colorrole>
+     <colorrole role="BrightText">
+      <brush brushstyle="SolidPattern">
+       <color alpha="255">
+        <red>255</red>
+        <green>255</green>
+        <blue>255</blue>
+       </color>
+      </brush>
+     </colorrole>
+     <colorrole role="ButtonText">
+      <brush brushstyle="SolidPattern">
+       <color alpha="255">
+        <red>1</red>
+        <green>6</green>
+        <blue>13</blue>
+       </color>
+      </brush>
+     </colorrole>
+     <colorrole role="Base">
+      <brush brushstyle="SolidPattern">
+       <color alpha="255">
+        <red>2</red>
+        <green>13</green>
+        <blue>26</blue>
+       </color>
+      </brush>
+     </colorrole>
+     <colorrole role="Window">
+      <brush brushstyle="SolidPattern">
+       <color alpha="255">
+        <red>2</red>
+        <green>13</green>
+        <blue>26</blue>
+       </color>
+      </brush>
+     </colorrole>
+     <colorrole role="Shadow">
+      <brush brushstyle="SolidPattern">
+       <color alpha="255">
+        <red>0</red>
+        <green>0</green>
+        <blue>0</blue>
+       </color>
+      </brush>
+     </colorrole>
+     <colorrole role="AlternateBase">
+      <brush brushstyle="SolidPattern">
+       <color alpha="255">
+        <red>2</red>
+        <green>13</green>
+        <blue>26</blue>
+       </color>
+      </brush>
+     </colorrole>
+     <colorrole role="ToolTipBase">
+      <brush brushstyle="SolidPattern">
+       <color alpha="255">
+        <red>255</red>
+        <green>255</green>
+        <blue>220</blue>
+       </color>
+      </brush>
+     </colorrole>
+     <colorrole role="ToolTipText">
+      <brush brushstyle="SolidPattern">
+       <color alpha="255">
+        <red>0</red>
+        <green>0</green>
+        <blue>0</blue>
+       </color>
+      </brush>
+     </colorrole>
+     <colorrole role="PlaceholderText">
+      <brush brushstyle="SolidPattern">
+       <color alpha="127">
+        <red>1</red>
+        <green>6</green>
+        <blue>13</blue>
+       </color>
+      </brush>
+     </colorrole>
+     <colorrole role="Accent">
+      <brush brushstyle="SolidPattern">
+       <color alpha="255">
+        <red>1</red>
+        <green>9</green>
+        <blue>18</blue>
+       </color>
+      </brush>
+     </colorrole>
+    </disabled>
+   </palette>
+  </property>
+  <property name="windowTitle">
+   <string>Form</string>
+  </property>
+  <layout class="QVBoxLayout" name="verticalLayout">
+   <property name="leftMargin">
+    <number>0</number>
+   </property>
+   <property name="topMargin">
+    <number>0</number>
+   </property>
+   <property name="rightMargin">
+    <number>0</number>
+   </property>
+   <property name="bottomMargin">
+    <number>12</number>
+   </property>
+   <item>
+    <layout class="QVBoxLayout" name="verticalLayout_3">
+     <item>
+      <widget class="QTextBrowser" name="textBrowser">
+       <property name="documentTitle">
+        <string>Relatório sobre o Algoritmo de Geração e Resolução de Labirintos</string>
+       </property>
+       <property name="lineWrapColumnOrWidth">
+        <number>0</number>
+       </property>
+       <property name="html">
+        <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta charset=&quot;utf-8&quot; /&gt;&lt;title&gt;Relatório sobre o Algoritmo de Geração e Resolução de Labirintos&lt;/title&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+hr { height: 1px; border-width: 0; }
+li.unchecked::marker { content: &quot;\2610&quot;; }
+li.checked::marker { content: &quot;\2612&quot;; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'Segoe UI'; font-size:9pt; font-weight:400; font-style:normal;&quot; bgcolor=&quot;#020d1a&quot;&gt;
+&lt;h1 align=&quot;center&quot; style=&quot; margin-top:18px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'Arial','sans-serif'; font-size:xx-large; font-weight:700; color:#1e90ff;&quot;&gt;Relatório sobre o Algoritmo de Geração e Resolução de Labirintos&lt;/span&gt;&lt;span style=&quot; font-family:'Arial','sans-serif'; color:#ffffff;&quot;&gt; &lt;/span&gt;&lt;/h1&gt;
+&lt;h2 style=&quot; margin-top:30px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'Arial','sans-serif'; font-size:x-large; font-weight:700; color:#1e90ff;&quot;&gt;Introdução&lt;/span&gt;&lt;span style=&quot; font-family:'Arial','sans-serif'; color:#ffffff;&quot;&gt; &lt;/span&gt;&lt;/h2&gt;
+&lt;p style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; line-height:160%;&quot;&gt;&lt;span style=&quot; font-family:'Arial','sans-serif'; color:#ffffff;&quot;&gt;O presente relatório descreve o funcionamento de um algoritmo responsável pela geração e resolução de labirintos. O algoritmo está estruturado de forma modular e utiliza conceitos de recursividade para gerar caminhos dentro do labirinto e encontrar a solução. &lt;/span&gt;&lt;/p&gt;
+&lt;h2 style=&quot; margin-top:30px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'Arial','sans-serif'; font-size:x-large; font-weight:700; color:#1e90ff;&quot;&gt;Estrutura do Algoritmo&lt;/span&gt;&lt;span style=&quot; font-family:'Arial','sans-serif'; color:#ffffff;&quot;&gt; &lt;/span&gt;&lt;/h2&gt;
+&lt;p style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; line-height:160%;&quot;&gt;&lt;span style=&quot; font-family:'Arial','sans-serif'; color:#ffffff;&quot;&gt;O sistema baseia-se em três principais componentes: &lt;/span&gt;&lt;/p&gt;
+&lt;ul style=&quot;margin-top: 0px; margin-bottom: 0px; margin-left: 0px; margin-right: 0px; -qt-list-indent: 1;&quot;&gt;
+&lt;li style=&quot; font-family:'Arial','sans-serif'; color:#ffffff;&quot; style=&quot; margin-top:12px; margin-bottom:8px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; line-height:160%;&quot;&gt;&lt;span style=&quot; font-weight:700;&quot;&gt;Geração do Labirinto:&lt;/span&gt; Responsável por construir uma estrutura de células interligadas, criando caminhos e barreiras. &lt;/li&gt;
+&lt;li style=&quot; font-family:'Arial','sans-serif'; color:#ffffff;&quot; style=&quot; margin-top:0px; margin-bottom:8px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; line-height:160%;&quot;&gt;&lt;span style=&quot; font-weight:700;&quot;&gt;Resolução do Labirinto:&lt;/span&gt; Utiliza um método recursivo para encontrar um caminho viável entre a entrada e a saída do labirinto. &lt;/li&gt;
+&lt;li style=&quot; font-family:'Arial','sans-serif'; color:#ffffff;&quot; style=&quot; margin-top:0px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; line-height:160%;&quot;&gt;&lt;span style=&quot; font-weight:700;&quot;&gt;Estruturas de Dados:&lt;/span&gt; Utiliza objetos para representar células e conexões, armazenando o estado do labirinto. &lt;/li&gt;&lt;/ul&gt;
+&lt;h2 style=&quot; margin-top:30px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'Arial','sans-serif'; font-size:x-large; font-weight:700; color:#1e90ff;&quot;&gt;Geração do Labirinto&lt;/span&gt;&lt;span style=&quot; font-family:'Arial','sans-serif'; color:#ffffff;&quot;&gt; &lt;/span&gt;&lt;/h2&gt;
+&lt;p style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; line-height:160%;&quot;&gt;&lt;span style=&quot; font-family:'Arial','sans-serif'; color:#ffffff;&quot;&gt;A geração do labirinto ocorre através de uma abordagem baseada em escavação recursiva. Os principais passos incluem: &lt;/span&gt;&lt;/p&gt;
+&lt;ul style=&quot;margin-top: 0px; margin-bottom: 0px; margin-left: 0px; margin-right: 0px; -qt-list-indent: 1;&quot;&gt;
+&lt;li style=&quot; font-family:'Arial','sans-serif'; color:#ffffff;&quot; style=&quot; margin-top:12px; margin-bottom:8px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; line-height:160%;&quot;&gt;&lt;span style=&quot; font-weight:700;&quot;&gt;Criação da grade de células:&lt;/span&gt; O labirinto é inicializado com uma matriz de células interligadas, onde cada célula pode conter conexões para seus vizinhos. &lt;/li&gt;
+&lt;li style=&quot; font-family:'Arial','sans-serif'; color:#ffffff;&quot; style=&quot; margin-top:0px; margin-bottom:8px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; line-height:160%;&quot;&gt;&lt;span style=&quot; font-weight:700;&quot;&gt;Definição da entrada e saída:&lt;/span&gt; A entrada e a saída são escolhidas aleatoriamente em uma das bordas do labirinto. &lt;/li&gt;
+&lt;li style=&quot; font-family:'Arial','sans-serif'; color:#ffffff;&quot; style=&quot; margin-top:0px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; line-height:160%;&quot;&gt;&lt;span style=&quot; font-weight:700;&quot;&gt;Escavação recursiva:&lt;/span&gt; 
+&lt;ul style=&quot;margin-top: 0px; margin-bottom: 0px; margin-left: 0px; margin-right: 0px; -qt-list-indent: 2;&quot;&gt;
+&lt;li style=&quot; font-family:'Arial','sans-serif'; color:#ffffff;&quot; style=&quot; margin-top:0px; margin-bottom:8px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; line-height:160%;&quot;&gt;Começando pela entrada, o algoritmo percorre recursivamente as células vizinhas de forma aleatória. &lt;/li&gt;
+&lt;li style=&quot; font-family:'Arial','sans-serif'; color:#ffffff;&quot; style=&quot; margin-top:0px; margin-bottom:8px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; line-height:160%;&quot;&gt;Cada conexão entre células pode ser marcada como livre (sem obstáculo) ou bloqueada. &lt;/li&gt;
+&lt;li style=&quot; font-family:'Arial','sans-serif'; color:#ffffff;&quot; style=&quot; margin-top:0px; margin-bottom:8px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; line-height:160%;&quot;&gt;Se uma célula não foi visitada, o caminho entre ela e a célula anterior é aberto, e a escavação continua. &lt;/li&gt;
+&lt;li style=&quot; font-family:'Arial','sans-serif'; color:#ffffff;&quot; style=&quot; margin-top:0px; margin-bottom:8px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; line-height:160%;&quot;&gt;O processo se repete até que o labirinto esteja completamente escavado. &lt;/li&gt;&lt;/ul&gt;&lt;/li&gt;&lt;/ul&gt;
+&lt;h2 style=&quot; margin-top:30px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'Arial','sans-serif'; font-size:x-large; font-weight:700; color:#1e90ff;&quot;&gt;Resolução do Labirinto&lt;/span&gt;&lt;span style=&quot; font-family:'Arial','sans-serif'; color:#ffffff;&quot;&gt; &lt;/span&gt;&lt;/h2&gt;
+&lt;p style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; line-height:160%;&quot;&gt;&lt;span style=&quot; font-family:'Arial','sans-serif'; color:#ffffff;&quot;&gt;Para encontrar um caminho viável dentro do labirinto, o algoritmo segue uma abordagem recursiva: &lt;/span&gt;&lt;/p&gt;
+&lt;ul style=&quot;margin-top: 0px; margin-bottom: 0px; margin-left: 0px; margin-right: 0px; -qt-list-indent: 1;&quot;&gt;
+&lt;li style=&quot; font-family:'Arial','sans-serif'; color:#ffffff;&quot; style=&quot; margin-top:12px; margin-bottom:8px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; line-height:160%;&quot;&gt;&lt;span style=&quot; font-weight:700;&quot;&gt;Inicialização:&lt;/span&gt; Um mapa de células visitadas é criado para evitar revisitar locais já percorridos. &lt;/li&gt;
+&lt;li style=&quot; font-family:'Arial','sans-serif'; color:#ffffff;&quot; style=&quot; margin-top:0px; margin-bottom:8px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; line-height:160%;&quot;&gt;&lt;span style=&quot; font-weight:700;&quot;&gt;Busca Recursiva:&lt;/span&gt; 
+&lt;ul style=&quot;margin-top: 0px; margin-bottom: 0px; margin-left: 0px; margin-right: 0px; -qt-list-indent: 2;&quot;&gt;
+&lt;li style=&quot; font-family:'Arial','sans-serif'; color:#ffffff;&quot; style=&quot; margin-top:0px; margin-bottom:8px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; line-height:160%;&quot;&gt;O algoritmo começa na entrada e tenta seguir pelos caminhos possíveis. &lt;/li&gt;
+&lt;li style=&quot; font-family:'Arial','sans-serif'; color:#ffffff;&quot; style=&quot; margin-top:0px; margin-bottom:8px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; line-height:160%;&quot;&gt;Caso uma célula leve diretamente à saída, a solução é encontrada. &lt;/li&gt;
+&lt;li style=&quot; font-family:'Arial','sans-serif'; color:#ffffff;&quot; style=&quot; margin-top:0px; margin-bottom:8px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; line-height:160%;&quot;&gt;Se a célula atual não for a saída, o algoritmo tenta mover-se para uma célula adjacente que não tenha obstáculos. &lt;/li&gt;
+&lt;li style=&quot; font-family:'Arial','sans-serif'; color:#ffffff;&quot; style=&quot; margin-top:0px; margin-bottom:8px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; line-height:160%;&quot;&gt;Caso todas as direções sejam bloqueadas, o algoritmo retrocede e busca outra alternativa. &lt;/li&gt;&lt;/ul&gt;&lt;/li&gt;
+&lt;li style=&quot; font-family:'Arial','sans-serif'; color:#ffffff;&quot; style=&quot; margin-top:0px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; line-height:160%;&quot;&gt;&lt;span style=&quot; font-weight:700;&quot;&gt;Marcação do Caminho:&lt;/span&gt; Ao encontrar a solução, as células percorridas são marcadas, formando o caminho correto. &lt;/li&gt;&lt;/ul&gt;
+&lt;h2 style=&quot; margin-top:30px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'Arial','sans-serif'; font-size:x-large; font-weight:700; color:#1e90ff;&quot;&gt;Conclusão&lt;/span&gt;&lt;span style=&quot; font-family:'Arial','sans-serif'; color:#ffffff;&quot;&gt; &lt;/span&gt;&lt;/h2&gt;
+&lt;p style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; line-height:160%;&quot;&gt;&lt;span style=&quot; font-family:'Arial','sans-serif'; color:#ffffff;&quot;&gt;O algoritmo implementa de maneira eficiente a geração e resolução de labirintos, utilizando recursividade tanto para a construção quanto para a busca do caminho correto. Essa abordagem permite criar labirintos complexos e encontrar soluções de forma otimizada. A modularização do sistema facilita a manutenção e expansão do código, tornando-o aplicável a diversas situações de navegação e resolução de problemas. &lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+       </property>
+       <property name="overwriteMode">
+        <bool>false</bool>
+       </property>
+       <property name="source">
+        <url>
+         <string>qrc:/others/resources/algorithmTxt.html</string>
+        </url>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

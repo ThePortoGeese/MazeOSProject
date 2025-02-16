@@ -1,0 +1,11 @@
+debug/customvideowidget.o
+debug/informationpage.o
+debug/main.o
+debug/mazeView.o
+debug/mazes.o
+debug/menuwindow.o
+debug/qrc_data.o
+debug/moc_informationpage.o
+debug/moc_mazes.o
+debug/moc_mazeview.o
+debug/moc_menuwindow.o

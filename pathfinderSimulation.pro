@@ -15,15 +15,17 @@ SOURCES += \
     informationpage.cpp \
     main.cpp \
     mazeView.cpp \
-    mazes.cpp \
-    menuwindow.cpp
+    mazeclass.cpp \
+    menuwindow.cpp \
+    qmazes.cpp
 
 HEADERS += \
     customvideowidget.h \
     informationpage.h \
-    mazes.h \
+    mazeclass.h \
     mazeview.h \
-    menuwindow.h
+    menuwindow.h \
+    qmazes.h
 
 FORMS += \
     informationpage.ui \

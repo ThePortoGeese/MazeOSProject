@@ -2,10 +2,12 @@ release/customvideowidget.o
 release/informationpage.o
 release/main.o
 release/mazeView.o
-release/mazes.o
+release/mazeclass.o
 release/menuwindow.o
+release/qmazes.o
 release/qrc_data.o
 release/moc_informationpage.o
-release/moc_mazes.o
+release/moc_mazeclass.o
 release/moc_mazeview.o
 release/moc_menuwindow.o
+release/moc_qmazes.o

@@ -4,7 +4,7 @@
 
 QMediaPlayer* player=new QMediaPlayer;
 QAudioOutput* output;
-mazes* currentMaze=nullptr;
+QMazes* currentMaze=nullptr;
 QElapsedTimer* runtime=new QElapsedTimer;
 menuWindow::menuWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -90,7 +90,7 @@ void menuWindow::on_btnGenerate_clicked()
 
 void menuWindow::on_btnGenerateMaze_clicked()
 {
-    currentMaze=new mazes(ui->slidX->value(),ui->slidY->value());
+    currentMaze=new QMazes(ui->slidX->value(),ui->slidY->value());
     currentMaze->createMaze();
     QMessageBox::information(this,"Info","Sucesso!");
     connect(currentMaze,SIGNAL(cellTriggered(int,int,int)),ui->graphicsView,SLOT(changeCellColour(int,int,int)));

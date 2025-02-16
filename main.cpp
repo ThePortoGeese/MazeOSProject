@@ -1,5 +1,5 @@
 #include "menuwindow.h"
-#include "mazes.h"
+#include "qmazes.h"
 #include <QApplication>
 #include <map>
 #include <vector>

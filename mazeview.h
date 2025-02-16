@@ -1,6 +1,6 @@
 #ifndef MAZEVIEW_H
 #define MAZEVIEW_H
-#include <mazes.h>
+#include <qmazes.h>
 #include <QGraphicsView>
 
 const QColor color=Qt::red;
@@ -11,7 +11,7 @@ class mazeView : public QGraphicsView
 public:
     mazeView(QWidget* parent=0);
 
-    void drawMaze(mazes* currentMaze);
+    void drawMaze(QMazes* currentMaze);
 
     void clearCells();
 private:

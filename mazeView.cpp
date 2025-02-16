@@ -23,7 +23,7 @@ mazeView::mazeView(QWidget* parent) : QGraphicsView::QGraphicsView(parent) {
     setBackgroundBrush(backGround);
 };
 
-void mazeView::drawMaze(mazes* currentMaze){
+void mazeView::drawMaze(QMazes* currentMaze){
     setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
 

@@ -1,6 +1,6 @@
 #ifndef MENUWINDOW_H
 #define MENUWINDOW_H
-#include <mazes.h>
+#include <qmazes.h>
 #include <QMainWindow>
 #include "QtMultimedia/QMediaPlayer"
 #include "QtMultimedia/QAudioOutput"

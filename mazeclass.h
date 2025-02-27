@@ -4,6 +4,23 @@
 #include <vector>
 #include <QWidget>
 #include <QObject>
+
+
+namespace MazeEnums{
+enum directions{
+    left=0,
+    up=1,
+    right=0,
+    down=1
+};
+
+enum obstacles{
+    noObstacles=0,
+    obstacle=1,
+    entrance=2,
+    exit=5,
+};
+}
 class cell;
 
 class mazeClass
@@ -20,7 +37,7 @@ public:
     }
 
     void mazeSolver();
-
+    void mazeSolver(const int& tX,const int& tY);
     const int& x() {return X;}
     const int& y() {return Y;}
 
@@ -32,6 +49,7 @@ protected:
     int X,Y;
     std::vector<std::vector<cell>> daMaze;
     virtual bool recursiveSolver(std::vector<std::vector<bool>>& booleanGrid, const int i, const int y);
+    virtual bool recursiveSolver(std::vector<std::vector<bool>>& booleanGrid, const int i, const int y,const int& tX, const int& tY);
     virtual void recursiveDiggingFunction(int x, int y, std::vector<std::vector<bool> > &booleanGrid);
 };
 
@@ -41,6 +59,16 @@ public:
     cell* from;
     cell* to;
     int obstacle=1;
+
+    connection(cell* fr,cell* t,int obs){
+        from=fr;
+        to=t;
+        obstacle=obs;
+    }
+    connection(){
+        from=nullptr;
+        to=nullptr;
+    }
 };
 
 class cell

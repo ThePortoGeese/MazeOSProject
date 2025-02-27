@@ -4,6 +4,7 @@
 #include <QMainWindow>
 #include "QtMultimedia/QMediaPlayer"
 #include "QtMultimedia/QAudioOutput"
+#include "cellgraphicsrectitem.h"
 #include <qmessagebox.h>
 #include <informationpage.h>
 namespace Ui {
@@ -31,6 +32,14 @@ private slots:
 
     void on_btnSolveMaze_clicked();
     void on_btnSummary_clicked();
+    void chartPathToCell(const int& tX,const int& tY);
+    void updateStatusText();
+
+    void on_btnNewUserMaze_clicked();
+
+    void on_btnUserOpenMaze_clicked();
+
+    void on_btnUserSave_clicked();
 
 private:
     Ui::menuWindow *ui;

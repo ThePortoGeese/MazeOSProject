@@ -11,21 +11,29 @@ CONFIG += c++17
 QT += multimedia multimediawidgets
 
 SOURCES += \
+    cellgraphicsrectitem.cpp \
     customvideowidget.cpp \
     informationpage.cpp \
     main.cpp \
     mazeView.cpp \
     mazeclass.cpp \
     menuwindow.cpp \
+    previewmazeview.cpp \
     qmazes.cpp
 
 HEADERS += \
+    abstractgraphicsrectitem.h \
+    cellgraphicsrectitem.h \
+    crementbuttons.h \
     customvideowidget.h \
     informationpage.h \
     mazeclass.h \
     mazeview.h \
     menuwindow.h \
-    qmazes.h
+    previewmazeview.h \
+    qmazes.h \
+    wallhgraphicsrectitem.h \
+    wallvgraphicsrectitem.h
 
 FORMS += \
     informationpage.ui \

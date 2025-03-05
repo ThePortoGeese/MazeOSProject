@@ -32,9 +32,10 @@ public:
     virtual void connectionsPrint();
 
     virtual void createMaze();
-    const std::vector<std::vector<cell>>& getMaze(){
+    const std::vector<std::vector<cell>>& getMaze() const{
         return daMaze;
     }
+    bool mazeChecker();
 
     void mazeSolver();
     void mazeSolver(const int& tX,const int& tY);
@@ -48,8 +49,8 @@ public:
 protected:
     int X,Y;
     std::vector<std::vector<cell>> daMaze;
-    virtual bool recursiveSolver(std::vector<std::vector<bool>>& booleanGrid, const int i, const int y);
-    virtual bool recursiveSolver(std::vector<std::vector<bool>>& booleanGrid, const int i, const int y,const int& tX, const int& tY);
+    virtual bool recursiveSolver(std::vector<std::vector<bool>>& booleanGrid, const int i, const int y, const bool &store); //This is a recursive backtracker function
+    virtual bool recursiveSolver(std::vector<std::vector<bool>>& booleanGrid, const int i, const int y,const int& tX, const int& tY); //This is also a recursive backtracker function
     virtual void recursiveDiggingFunction(int x, int y, std::vector<std::vector<bool> > &booleanGrid);
 };
 

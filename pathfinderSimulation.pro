@@ -17,6 +17,7 @@ SOURCES += \
     main.cpp \
     mazeView.cpp \
     mazeclass.cpp \
+    mazenamedialog.cpp \
     menuwindow.cpp \
     previewmazeview.cpp \
     qmazes.cpp
@@ -28,15 +29,18 @@ HEADERS += \
     customvideowidget.h \
     informationpage.h \
     mazeclass.h \
+    mazenamedialog.h \
     mazeview.h \
     menuwindow.h \
     previewmazeview.h \
     qmazes.h \
+    qmazesconversionmethods.h \
     wallhgraphicsrectitem.h \
     wallvgraphicsrectitem.h
 
 FORMS += \
     informationpage.ui \
+    mazenamedialog.ui \
     menuwindow.ui
 
 # Default rules for deployment.

@@ -1,6 +1,5 @@
 #ifndef PREVIEWMAZEVIEW_H
 #define PREVIEWMAZEVIEW_H
-
 #include <QGraphicsView>
 #include <thread>
 #include <vector>
@@ -10,21 +9,20 @@
 
 class PreviewMazeView : public QGraphicsView
 {
-
+    friend class QMazesConversionMethods;
     Q_OBJECT
 public:
     PreviewMazeView(QWidget* parent=0);
 
-    const std::map<int, QVector<WallHGraphicsRectItem*>>& getHWalls() const {
+    const std::map<int, QVector<WallHGraphicsRectItem*>>& getHWalls() {
         return hWalls;
     }
 
-    const std::map<int, QVector<WallVGraphicsRectItem*>>& getVWalls() const {
+    const std::map<int, QVector<WallVGraphicsRectItem*>>& getVWalls() {
         return vWalls;
     }
 
     void newMaze();
-
 
     static void deleteScene(QGraphicsScene* deleteScene){
         if(deleteScene!=nullptr){
@@ -41,24 +39,27 @@ public:
 public slots:
 
     void incrementCellsH(int h);
+
     void incrementCellsV(int h);
+
     void decrementCellsH(int h);
+
     void decrementCellsV(int h);
 
-    void addEntrance(AbstractGraphicsRectItem* a){
+    void addEntrance(AbstractGraphicsRectItem* a=nullptr){
         if(!entrance){
             entrance=1;
         } else{
-            a->setBrush(backGround);
+            if(a!=nullptr) a->setBrush(backGround);
             emit errorCatched("Só pode haver uma entrada.");
         }
     }
-    void addExit(AbstractGraphicsRectItem* a){
+    void addExit(AbstractGraphicsRectItem* a=nullptr){
 
         if(!exit){
             exit=1;
         } else{
-            a->setBrush(backGround);
+            if(a!=nullptr) a->setBrush(backGround);
             emit errorCatched("Só pode haver uma saída.");
         }
     }

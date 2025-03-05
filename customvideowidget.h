@@ -1,7 +1,7 @@
 #ifndef CUSTOMVIDEOWIDGET_H
 #define CUSTOMVIDEOWIDGET_H
 
-#include "qmediaplayer.h"
+#include "QtMultimedia/QMediaPlayer"
 #include <QVideoWidget>
 #include "qevent.h"
 

@@ -153,9 +153,9 @@ void mazeClass::recursiveDiggingFunction(int x,int y, std::vector<std::vector<bo
     for(int k=0;k<4;k++){
         switch(nums[k]){
         case 1:
-            if(daMaze[y][x].connectionFrom[MazeEnums::right]!=nullptr&&daMaze[y][x].connectionFrom[MazeEnums::right]->obstacle!=2){
+            if(daMaze[y][x].connectionFrom[MazeEnums::left]!=nullptr&&daMaze[y][x].connectionFrom[MazeEnums::left]->obstacle!=2){
                 if(!booleanGrid[y][x-1]){
-                    daMaze[y][x].connectionFrom[MazeEnums::right]->obstacle=MazeEnums::noObstacles;
+                    daMaze[y][x].connectionFrom[MazeEnums::left]->obstacle=MazeEnums::noObstacles;
                     recursiveDiggingFunction(x-1 , y,booleanGrid);
                 }
             }
@@ -169,17 +169,17 @@ void mazeClass::recursiveDiggingFunction(int x,int y, std::vector<std::vector<bo
             }
             break;
         case 3:
-            if(daMaze[y][x].connectionsTo[MazeEnums::left].to!=nullptr){
+            if(daMaze[y][x].connectionsTo[MazeEnums::right].to!=nullptr){
                 if(!booleanGrid[y][x+1]){
-                    daMaze[y][x].connectionsTo[MazeEnums::left].obstacle=MazeEnums::noObstacles;
+                    daMaze[y][x].connectionsTo[MazeEnums::right].obstacle=MazeEnums::noObstacles;
                     recursiveDiggingFunction( x+1, y,booleanGrid);
                 }
             }
             break;
         case 4:
-            if(daMaze[y][x].connectionsTo[MazeEnums::up].to!=nullptr){
+            if(daMaze[y][x].connectionsTo[MazeEnums::down].to!=nullptr){
                 if(!booleanGrid[y+1][x]){
-                    daMaze[y][x].connectionsTo[MazeEnums::up].obstacle=MazeEnums::noObstacles;
+                    daMaze[y][x].connectionsTo[MazeEnums::down].obstacle=MazeEnums::noObstacles;
                     recursiveDiggingFunction(x, y+1,booleanGrid);
                 }
             }
@@ -191,16 +191,49 @@ void mazeClass::recursiveDiggingFunction(int x,int y, std::vector<std::vector<bo
     return;
 }
 
+void mazeClass::mazeSolver() {
+    std::vector<std::vector<bool>> booleanGrid(daMaze.size(), std::vector<bool>(daMaze[0].size(), false));
+    int ix=-1,iy=-1;
+    for(int i=0;i<(int)daMaze.size();i++){
+        for(int k=0;k<(int)daMaze[i][0].connectionFrom.size();k++){
+            if(daMaze[i][0].connectionFrom[k]!=nullptr){
+                if(daMaze[i][0].connectionFrom[k]->obstacle==2){
+                    ix=i;
+                    iy=0;
+                }
+            }
+        }
+    }
+    if(iy==-1){
+        for(int i=0;i<(int)daMaze[0].size();i++){
+            for(int k=0;k<(int)daMaze[0][i].connectionFrom.size();k++){
+                if(daMaze[0][i].connectionFrom[k]!=nullptr){
+                    if(daMaze[0][i].connectionFrom[k]->obstacle==2){
+                        ix=0;
+                        iy=i;
+                    }
+                }
+            }
+        }
+    }
 
+    //std::cout<<"Ix value: "<<ix<< " Iy value: "<<iy<<'\n';
 
-bool mazeClass::recursiveSolver(std::vector<std::vector<bool>>& booleanGrid, const int i, const int y) {
-    if (i<0||i>=(int)daMaze.size()||y<0||y>=(int)daMaze[0].size()||booleanGrid[i][y]) {
+    if(recursiveSolver(booleanGrid, ix, iy,1)){
+        //std::cout<<"Success!\n";
+    } else {
+        //std::cout<<"MASSIVE fail!\n";
+    }
+}
+
+bool mazeClass::recursiveSolver(std::vector<std::vector<bool>>& booleanGrid, const int i, const int j, const bool& store) {
+    if (i<0||i>=(int)daMaze.size()||j<0||j>=(int)daMaze[0].size()||booleanGrid[i][j]) {
         return false;
     }
     //std::cout<<"Path to: "<<i<< " "<<y<<'\n';
-    for(int k=0;k<(int)daMaze[i][y].connectionsTo.size();k++){
-        if (daMaze[i][y].connectionsTo[k].obstacle==5) {
-            correctPath.push_back(&daMaze[i][y]);
+    for(int k=0;k<(int)daMaze[i][j].connectionsTo.size();k++){
+        if (daMaze[i][j].connectionsTo[k].obstacle==5) {
+            if(store)correctPath.push_back(&daMaze[i][j]);
             //std::cout<<"Found solution at: "<<i<<" "<<y<<'\n';
             return true;
         }
@@ -208,92 +241,132 @@ bool mazeClass::recursiveSolver(std::vector<std::vector<bool>>& booleanGrid, con
     }
     std::array<int,4> nums{1,2,3,4};
 
-    booleanGrid[i][y] = true;
+    booleanGrid[i][j] = true;
     std::random_shuffle(nums.begin(),nums.end());
 
     for(int k=0;k<4;k++){
         switch(nums[k]){
         case 1:
-            if(daMaze[i][y].connectionFrom[0]!=nullptr&&daMaze[i][y].connectionFrom[0]->obstacle==0){
-                if(recursiveSolver(booleanGrid, i, y-1)) {
-                    correctPath.push_back(&daMaze[i][y]);
+            if(daMaze[i][j].connectionFrom[0]!=nullptr&&daMaze[i][j].connectionFrom[0]->obstacle==0){
+                if(recursiveSolver(booleanGrid, i, j-1,store)) {
+                    if(store)correctPath.push_back(&daMaze[i][j]);
                     return true;
                 }
             }
             break;
         case 2:
-            if(daMaze[i][y].connectionFrom[1]!=nullptr&&daMaze[i][y].connectionFrom[1]->obstacle==0){
-                if(recursiveSolver(booleanGrid, i-1, y)) {
-                    correctPath.push_back(&daMaze[i][y]);
+            if(daMaze[i][j].connectionFrom[1]!=nullptr&&daMaze[i][j].connectionFrom[1]->obstacle==0){
+                if(recursiveSolver(booleanGrid, i-1, j,store)) {
+                    if(store)correctPath.push_back(&daMaze[i][j]);
                     return true;
                 }
             }
             break;
         case 3:
-            if(daMaze[i][y].connectionsTo[0].to!=nullptr&&daMaze[i][y].connectionsTo[0].obstacle==0){
-                if(recursiveSolver(booleanGrid, i, y +1)) {
-                    correctPath.push_back(&daMaze[i][y]);
+            if(daMaze[i][j].connectionsTo[0].to!=nullptr&&daMaze[i][j].connectionsTo[0].obstacle==0){
+                if(recursiveSolver(booleanGrid, i, j +1,store)) {
+                    if(store)correctPath.push_back(&daMaze[i][j]);
                     return true;}
             }
             break;
         case 4:
-            if(daMaze[i][y].connectionsTo[1].to!=nullptr&&daMaze[i][y].connectionsTo[1].obstacle==0){
-                if(recursiveSolver(booleanGrid, i+1, y)) {
-                    correctPath.push_back(&daMaze[i][y]);
+            if(daMaze[i][j].connectionsTo[1].to!=nullptr&&daMaze[i][j].connectionsTo[1].obstacle==0){
+                if(recursiveSolver(booleanGrid, i+1, j,store)) {
+                    if(store)correctPath.push_back(&daMaze[i][j]);
                     return true;}
             }
             break;
         }
 
     }
-    booleanGrid[i][y] = false;
+    booleanGrid[i][j] = false;
 
     return false;
 }
+
+
+void mazeClass::mazeSolver(const int& tX,const int& tY) {
+    if(correctPath.size()!=0) {
+        correctPath.clear();
+    }
+    std::vector<std::vector<bool>> booleanGrid(daMaze.size(), std::vector<bool>(daMaze[0].size(), false));
+    int ix=-1,iy=-1;
+    for(int i=0;i<(int)daMaze.size();i++){
+        for(int k=0;k<(int)daMaze[i][0].connectionFrom.size();k++){
+            if(daMaze[i][0].connectionFrom[k]!=nullptr){
+                if(daMaze[i][0].connectionFrom[k]->obstacle==2){
+                    ix=i;
+                    iy=0;
+                }
+            }
+        }
+    }
+    if(iy==-1){
+        for(int i=0;i<(int)daMaze[0].size();i++){
+            for(int k=0;k<(int)daMaze[0][i].connectionFrom.size();k++){
+                if(daMaze[0][i].connectionFrom[k]!=nullptr){
+                    if(daMaze[0][i].connectionFrom[k]->obstacle==2){
+                        ix=0;
+                        iy=i;
+                    }
+                }
+            }
+        }
+    }
+
+    //std::cout<<"Ix value: "<<ix<< " Iy value: "<<iy<<'\n';
+
+    if(recursiveSolver(booleanGrid, ix, iy,tX,tY)){
+        //std::cout<<"Success!\n";
+    } else {
+        //std::cout<<"MASSIVE fail!\n";
+    }
+}
+
 //Overload of solver operation to find path to cell at (tX, tY)
-bool mazeClass::recursiveSolver(std::vector<std::vector<bool>>& booleanGrid, const int i, const int y,const int& tX,const int& tY) {
-    if(i==tX&&y==tY){
+bool mazeClass::recursiveSolver(std::vector<std::vector<bool>>& booleanGrid, const int i, const int j,const int& tX,const int& tY) {
+    if(i==tY&&j==tX){
         //Do whatever you wanna do with this path here
         return true;
     }
 
-    if (i<0||i>=(int)daMaze.size()||y<0||y>=(int)daMaze[0].size()||booleanGrid[i][y]) {
+    if (i<0||i>=(int)daMaze.size()||j<0||j>=(int)daMaze[0].size()||booleanGrid[i][j]) {
         return false;
     }
 
     std::array<int,4> nums{1,2,3,4};
 
-    booleanGrid[i][y] = true;
+    booleanGrid[i][j] = true;
     std::random_shuffle(nums.begin(),nums.end());
-    correctPath.push_back(&daMaze[i][y]);
+    correctPath.push_back(&daMaze[i][j]);
     for(int k=0;k<4;k++){
         switch(nums[k]){
         case 1:
-            if(daMaze[i][y].connectionFrom[0]!=nullptr&&daMaze[i][y].connectionFrom[0]->obstacle==0){
-                if(recursiveSolver(booleanGrid, i, y-1,tX,tY)) {
+            if(daMaze[i][j].connectionFrom[0]!=nullptr&&daMaze[i][j].connectionFrom[0]->obstacle==0){
+                if(recursiveSolver(booleanGrid, i, j-1,tX,tY)) {
                     //Do whatever you wanna do with this path here
                     return true;
                 }
             }
             break;
         case 2:
-            if(daMaze[i][y].connectionFrom[1]!=nullptr&&daMaze[i][y].connectionFrom[1]->obstacle==0){
-                if(recursiveSolver(booleanGrid, i-1, y,tX,tY)) {
+            if(daMaze[i][j].connectionFrom[1]!=nullptr&&daMaze[i][j].connectionFrom[1]->obstacle==0){
+                if(recursiveSolver(booleanGrid, i-1, j,tX,tY)) {
                     //Do whatever you wanna do with this path here
                     return true;
                 }
             }
             break;
         case 3:
-            if(daMaze[i][y].connectionsTo[0].to!=nullptr&&daMaze[i][y].connectionsTo[0].obstacle==0){
-                if(recursiveSolver(booleanGrid, i, y +1,tX,tY)) {
+            if(daMaze[i][j].connectionsTo[0].to!=nullptr&&daMaze[i][j].connectionsTo[0].obstacle==0){
+                if(recursiveSolver(booleanGrid, i, j +1,tX,tY)) {
                     //Do whatever you wanna do with this path here
                     return true;}
             }
             break;
         case 4:
-            if(daMaze[i][y].connectionsTo[1].to!=nullptr&&daMaze[i][y].connectionsTo[1].obstacle==0){
-                if(recursiveSolver(booleanGrid, i+1, y,tX,tY)) {
+            if(daMaze[i][j].connectionsTo[1].to!=nullptr&&daMaze[i][j].connectionsTo[1].obstacle==0){
+                if(recursiveSolver(booleanGrid, i+1, j,tX,tY)) {
                     //Do whatever you wanna do with this path here
                     return true;}
             }
@@ -301,81 +374,43 @@ bool mazeClass::recursiveSolver(std::vector<std::vector<bool>>& booleanGrid, con
         }
 
     }
-    booleanGrid[i][y] = false;
+    booleanGrid[i][j] = false;
 
     return false;
 }
-
-void mazeClass::mazeSolver() {
-    if(correctPath.size()==0){ //why solve it again, is he stoopid
-        std::vector<std::vector<bool>> booleanGrid(daMaze.size(), std::vector<bool>(daMaze[0].size(), false));
-        int ix=-1,iy=-1;
-        for(int i=0;i<(int)daMaze.size();i++){
-            for(int k=0;k<(int)daMaze[i][0].connectionFrom.size();k++){
-                if(daMaze[i][0].connectionFrom[k]!=nullptr){
-                    if(daMaze[i][0].connectionFrom[k]->obstacle==2){
-                        ix=i;
-                        iy=0;
+//This function ONLY checks the maze, it does NOT store the correct path anywhere, could be useful
+bool mazeClass::mazeChecker() {
+    std::vector<std::vector<bool>> booleanGrid(daMaze.size(), std::vector<bool>(daMaze[0].size(), false));
+    int ix=-1,iy=-1;
+    for(int i=0;i<(int)daMaze.size();i++){
+        for(int k=0;k<(int)daMaze[i][0].connectionFrom.size();k++){
+            if(daMaze[i][0].connectionFrom[k]!=nullptr){
+                if(daMaze[i][0].connectionFrom[k]->obstacle==2){
+                    ix=i;
+                    iy=0;
+                }
+            }
+        }
+    }
+    if(iy==-1){
+        for(int i=0;i<(int)daMaze[0].size();i++){
+            for(int k=0;k<(int)daMaze[0][i].connectionFrom.size();k++){
+                if(daMaze[0][i].connectionFrom[k]!=nullptr){
+                    if(daMaze[0][i].connectionFrom[k]->obstacle==2){
+                        ix=0;
+                        iy=i;
                     }
                 }
             }
         }
-        if(iy==-1){
-            for(int i=0;i<(int)daMaze[0].size();i++){
-                for(int k=0;k<(int)daMaze[0][i].connectionFrom.size();k++){
-                    if(daMaze[0][i].connectionFrom[k]!=nullptr){
-                        if(daMaze[0][i].connectionFrom[k]->obstacle==2){
-                            ix=0;
-                            iy=i;
-                        }
-                    }
-                }
-            }
-        }
+    }
 
-        //std::cout<<"Ix value: "<<ix<< " Iy value: "<<iy<<'\n';
+    //std::cout<<"Ix value: "<<ix<< " Iy value: "<<iy<<'\n';
 
-        if(recursiveSolver(booleanGrid, ix, iy)){
-                //std::cout<<"Returned True\n";
-        } else {
-            //std::cout<<"Returned Flase\n"
-        }
+    if(recursiveSolver(booleanGrid, ix, iy,0)){
+        return true;
+    } else {
+        return false;
     }
 }
 
-void mazeClass::mazeSolver(const int& tX,const int& tY) {
-    if(correctPath.size()==0){ //why solve it again, is he stoopid
-        std::vector<std::vector<bool>> booleanGrid(daMaze.size(), std::vector<bool>(daMaze[0].size(), false));
-        int ix=-1,iy=-1;
-        for(int i=0;i<(int)daMaze.size();i++){
-            for(int k=0;k<(int)daMaze[i][0].connectionFrom.size();k++){
-                if(daMaze[i][0].connectionFrom[k]!=nullptr){
-                    if(daMaze[i][0].connectionFrom[k]->obstacle==2){
-                        ix=i;
-                        iy=0;
-                    }
-                }
-            }
-        }
-        if(iy==-1){
-            for(int i=0;i<(int)daMaze[0].size();i++){
-                for(int k=0;k<(int)daMaze[0][i].connectionFrom.size();k++){
-                    if(daMaze[0][i].connectionFrom[k]!=nullptr){
-                        if(daMaze[0][i].connectionFrom[k]->obstacle==2){
-                            ix=0;
-                            iy=i;
-                        }
-                    }
-                }
-            }
-        }
-
-        //std::cout<<"Ix value: "<<ix<< " Iy value: "<<iy<<'\n';
-
-        if(recursiveSolver(booleanGrid, ix, iy,tX,tY)){
-            //std::cout<<"Returned True\n";
-        } else {
-            //std::cout<<"Returned Flase\n"
-        }
-    }
-}

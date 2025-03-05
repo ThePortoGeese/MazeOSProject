@@ -11,7 +11,7 @@ public:
     CrementButtons():QPushButton(){};
     CrementButtons(QWidget* parent):QPushButton(parent){};
 
-    void mousePressEvent(QMouseEvent *e)
+    void mousePressEvent(QMouseEvent *e) override
     {
         if (e->modifiers() == Qt::ShiftModifier) {
             emit crementFunctionality(10);

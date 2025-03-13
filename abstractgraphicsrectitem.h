@@ -3,7 +3,7 @@
 #include "qpainter.h"
 #include <QGraphicsObject>
 static const QBrush cellB(QColor(0,0,0));
-static const QBrush backGround(QColor(0,255,255));
+static const QBrush backGround(QColor(111, 183, 214));
 static const QBrush correctPathColor(QColor(0, 200, 81));
 
 class AbstractGraphicsRectItem : public QGraphicsObject
@@ -19,24 +19,25 @@ public:
     }
 
     AbstractGraphicsRectItem():QGraphicsObject(){};
-    QBrush Brush(){
+    const QBrush& Brush(){
         return brush;
     }
     void setBrush(QBrush br){
         brush=br;
         update();
     }
-    virtual void mousePressEvent(QGraphicsSceneMouseEvent *event) override{
 
+    //Need to Rework this
+    virtual void mousePressEvent(QGraphicsSceneMouseEvent *event) override{
         if(brush==cellB) {
             emit removedEntrance();
             emit removedExit();
             setBrush(backGround);
         }
         else {
-            setBrush(cellB);
-            emit addedEntrance(this);
-            emit addedExit(this);
+             setBrush(cellB);
+             emit addedEntrance(this);
+             emit addedExit(this);
         }
 
         QGraphicsObject::mousePressEvent(event);
@@ -49,6 +50,14 @@ public:
         painter->setPen(Qt::NoPen);
         painter->drawRect(boundingRect());
     }
+
+    void setOuter(){
+        outerWall=1;
+    }
+
+    const bool& getOuter(){
+        return outerWall;
+    }
 signals:
     void addedEntrance(AbstractGraphicsRectItem*);
     void addedExit(AbstractGraphicsRectItem*);
@@ -56,6 +65,7 @@ signals:
     void removedEntrance();
     void removedExit();
 protected:
+    bool outerWall=0;
     bool clicked=0;
     QBrush brush = QBrush(backGround);
 

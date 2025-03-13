@@ -277,8 +277,8 @@ bool mazeClass::recursiveSolver(std::vector<std::vector<bool>>& booleanGrid, con
             }
             break;
         }
-
     }
+
     booleanGrid[i][j] = false;
 
     return false;

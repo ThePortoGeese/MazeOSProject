@@ -1,8 +1,5 @@
 #include "customvideowidget.h"
 
-
-CustomVideoWidget::CustomVideoWidget() {}
-
 void CustomVideoWidget::keyPressEvent(QKeyEvent *event){
     if(event->key()==Qt::Key_Space&&event->isAutoRepeat()){
         if(this->player!=nullptr){
@@ -15,4 +12,8 @@ void CustomVideoWidget::keyPressEvent(QKeyEvent *event){
     else {
         if(this->player!=nullptr) player->setPlaybackRate(1);
     }
+}
+
+void CustomVideoWidget::mousePressEvent(QMouseEvent *event){
+    event->setAccepted(0);
 }

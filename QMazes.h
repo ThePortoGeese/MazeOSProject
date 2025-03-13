@@ -39,8 +39,14 @@ public:
     static QMazes* convertFromFile(QFile* file);
 
     void nameGenerator();
-
+    void notUserGenerated(){
+        userGenerated=0;
+    }
     std::vector<temporaryPathHolder*> tempPath;
+
+    const bool& getUserGeneratedStatus(){
+        return userGenerated;
+    }
 
     void saveAsFile(QString fileName);
 signals:

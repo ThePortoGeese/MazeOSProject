@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="pt">
+<body>
+    <p>O algoritmo recursivo para resolver labirintos baseia-se na técnica de <strong>backtracking</strong>. Ele explora cada caminho possível de forma recursiva até encontrar a saída ou concluir que não há solução.</p>
+    <p><strong>Passos:</strong></p>
+    <ul>
+        <li>Marca a posição atual como visitada.</li>
+        <li>Tenta mover-se para uma direção válida (cima, baixo, esquerda, direita).</li>
+        <li>Se encontrar a saída, retorna sucesso. Se encontrar um beco sem saída, retrocede (<em>backtrack</em>) e tenta outra direção.</li>
+        <li>Repete até resolver o labirinto ou esgotar todas as possibilidades.</li>
+    </ul>
+    <p>Este método é eficiente para labirintos pequenos ou moderados, mas pode tornar-se ineficiente para labirintos muito grandes devido ao consumo de memória da pilha recursiva.</p>
+</body>
+</html>

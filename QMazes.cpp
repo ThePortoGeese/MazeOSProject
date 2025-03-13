@@ -250,15 +250,9 @@ void QMazes::nameGenerator(){
 }
 
 void QMazes::saveAsFile(QString fileName){
-    if(!QDir(QCoreApplication::applicationDirPath()+"/userMazes").exists()){
-        QDir(QCoreApplication::applicationDirPath()).mkdir("userMazes");
-    }
-    QFile file(QCoreApplication::applicationDirPath()+"/userMazes/"+fileName+".maz");
-    if(file.exists()) {
-        QDir(QCoreApplication::applicationDirPath()+"/userMazes/").remove(fileName+".maz");
-        //Deleting previous file so it doesnt explode
-    }
-    if(file.open(QIODevice::WriteOnly|QIODevice::Text)){
+    QFile file(QStandardPaths::writableLocation(QStandardPaths::DocumentsLocation)+"/MazeOS/userMazes/"+fileName+".maz");
+
+    if(file.open(QIODevice::WriteOnly|QIODevice::Text|QIODevice::Truncate)){
         QTextStream out(&file);
         //qDebug()<<file.fileName();
         out<<name<<'\n';
@@ -293,6 +287,7 @@ void QMazes::saveAsFile(QString fileName){
                     }
                     //if I allow the user to do an exit in these, i must change this
                     out<<char(QMazeEnums::entrance);
+                    continue;
                 }
                 if(i%2!=0){ //Since i represents lines, is odd and I've checked corners, null connections and cells,
                             // this can only be a Horizontal Connection since they "occupy" the same i (line) as cells (graphically speaking)
@@ -416,6 +411,7 @@ QMazes* QMazes::convertFromFile(QFile* file){
                 }
             }
         }
+        file->close();
         returnMaze->name=mazeName;
         return returnMaze;
     }

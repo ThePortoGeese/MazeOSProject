@@ -102,6 +102,7 @@ public:
                 }
             }
         }
+        preview->fitInView(preview->sceneRect());
     }
 };
 

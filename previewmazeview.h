@@ -6,6 +6,8 @@
 #include <wallhgraphicsrectitem.h>
 #include <map>
 #include <wallvgraphicsrectitem.h>
+#include "cellgraphicsrectitem.h"
+#include "qevent.h"
 
 class PreviewMazeView : public QGraphicsView
 {
@@ -30,12 +32,21 @@ public:
             deleteScene->clear();
         }
     }
+    void setToggleBrush(const bool& boolean){
+        toggleBrush=boolean;
+    }
     bool entranceExists(){
         return entrance;
     }
     bool exitExists(){
         return exit;
     }
+    enum toggleBrush{
+        brushRemoveWalls,
+        brushAddWalls
+    };
+
+    void mouseMoveEvent(QMouseEvent *event) override;
 public slots:
 
     void incrementCellsH(int h);
@@ -72,12 +83,21 @@ public slots:
     int X() {return x;}
     int Y(){return y;}
 
-
+    void setSavedStatus(bool saved){
+        savedStatus=saved;
+    }
+    const bool& getSavedStatus(){
+        return savedStatus;
+    }
 private:
     bool entrance,exit;
     std::map<int,QVector<WallHGraphicsRectItem*>> hWalls;
     std::map<int,QVector<WallVGraphicsRectItem*>> vWalls;
     int x=2,y=2;
+
+    bool savedStatus=0;
+    //Since there are only 2 brushes, I just made it a bool value
+    bool toggleBrush=brushRemoveWalls;
 
 public slots:
 

@@ -1,5 +1,5 @@
 #include "previewmazeview.h"
-#include "cellgraphicsrectitem.h"
+
 
 
 
@@ -7,17 +7,15 @@ PreviewMazeView::PreviewMazeView(QWidget* parent) : QGraphicsView(parent){
     setAlignment(Qt::AlignTop | Qt::AlignLeft);
     setScene(new QGraphicsScene);
     scene()->setBackgroundBrush(backGround);
-
-
+    setMouseTracking(0);
 }
 
 void PreviewMazeView::newMaze(){
-    QGraphicsScene* sceneToDelete=scene();
+    savedStatus=0;
     setScene(new QGraphicsScene);
     scene()->setBackgroundBrush(backGround);
     x=2;
     y=2;
-    std::thread worker(deleteScene,sceneToDelete);
     entrance=0;
     exit=0;
 
@@ -41,10 +39,12 @@ void PreviewMazeView::newMaze(){
             case 0:
                 connect(rect,SIGNAL(addedEntrance(AbstractGraphicsRectItem*)),this,SLOT(addEntrance(AbstractGraphicsRectItem*)));
                 connect(rect,SIGNAL(removedEntrance()),this,SLOT(removeEntrance()));
+                rect->setOuter();
                 break;
             case 2:
                 connect(rect,SIGNAL(addedExit(AbstractGraphicsRectItem*)),this,SLOT(addExit(AbstractGraphicsRectItem*)));
                 connect(rect,SIGNAL(removedExit()),this,SLOT(removeExit()));
+                rect->setOuter();
                 break;
             }
             scene()->addItem(rect);
@@ -60,10 +60,12 @@ void PreviewMazeView::newMaze(){
             case 0:
                 connect(rect,SIGNAL(addedEntrance(AbstractGraphicsRectItem*)),this,SLOT(addEntrance(AbstractGraphicsRectItem*)));
                 connect(rect,SIGNAL(removedEntrance()),this,SLOT(removeEntrance()));
+                rect->setOuter();
                 break;
             case 2:
                 connect(rect,SIGNAL(addedExit(AbstractGraphicsRectItem*)),this,SLOT(addExit(AbstractGraphicsRectItem*)));
                 connect(rect,SIGNAL(removedExit()),this,SLOT(removeExit()));
+                rect->setOuter();
                 break;
             }
             scene()->addItem(rect);
@@ -71,7 +73,6 @@ void PreviewMazeView::newMaze(){
         }
     }
     setSceneRect(0,0,11,11);
-    worker.join();
 }
 
 void PreviewMazeView::incrementCellsH(int h){
@@ -86,6 +87,7 @@ void PreviewMazeView::incrementCellsH(int h){
                 connect(rect,SIGNAL(removedEntrance()),this,SLOT(removeEntrance()));
                 scene()->addItem(rect);
                 vWalls[0].push_back(rect);
+                rect->setOuter();
             }
             //Adding Cells
             for(int i=0;i<y;i++){
@@ -121,7 +123,7 @@ void PreviewMazeView::incrementCellsH(int h){
                 connect(rect,SIGNAL(removedExit()),this,SLOT(removeExit()));
                 scene()->addItem(rect);
                 vWalls[y].push_back(rect);
-
+                rect->setOuter();
             }
 
             setSceneRect(0, 0, 4*x+(x+1), 4*y+(y+1));
@@ -141,6 +143,7 @@ void PreviewMazeView::incrementCellsV(int h){
                 connect(rect,SIGNAL(removedEntrance()),this,SLOT(removeEntrance()));
                 scene()->addItem(rect);
                 hWalls[y-1].push_back(rect);
+                rect->setOuter();
             }
             //Adding new Cells
             for(int i=0;i<x;i++){
@@ -180,6 +183,7 @@ void PreviewMazeView::incrementCellsV(int h){
                 connect(rect,SIGNAL(removedExit()),this,SLOT(removeExit()));
                 scene()->addItem(rect);
                 hWalls[y-1].push_back(rect);
+                rect->setOuter();
             }
 
             /*for(int i=0;i<vWalls[0].size();i++){
@@ -261,6 +265,15 @@ void PreviewMazeView::decrementCellsV(int h){
         y-=1;
     }
     fitInView(sceneRect());
-
 }
 
+void PreviewMazeView::mouseMoveEvent(QMouseEvent *event){
+    if(items(event->pos()).count()>0&&event->buttons()==Qt::LeftButton){
+        if(dynamic_cast<WallHGraphicsRectItem*>(items(event->pos())[0])!=nullptr||dynamic_cast<WallVGraphicsRectItem*>(items(event->pos())[0])!=nullptr){
+            if(!((AbstractGraphicsRectItem*)this->items(event->pos())[0])->getOuter()){
+                ((AbstractGraphicsRectItem*)this->items(event->pos())[0])->setBrush(toggleBrush?backGround:cellB);
+            }
+            savedStatus=0;
+        }
+    }
+}

@@ -7,9 +7,24 @@
         <file>resources/credits.mp4</file>
         <file>resources/appLogo.png</file>
         <file>resources/algorithmTxt.html</file>
-        <file>resources/trophyIcon.png</file>
+        <file>resources/recursiveDescription.txt</file>
+        <file>resources/recursiveFuncVideo.mp4</file>
+        <file>resources/hardnessRating.txt</file>
     </qresource>
     <qresource prefix="/fonts">
         <file>Roboto-Medium.ttf</file>
+    </qresource>
+    <qresource prefix="/buttonIcons">
+        <file>resources/addMaze.png</file>
+        <file>resources/addWallsBrush.png</file>
+        <file>resources/contractMazeH.png</file>
+        <file>resources/contractMazeV.png</file>
+        <file>resources/expandMazeH.png</file>
+        <file>resources/expandMazeV.png</file>
+        <file>resources/openMaze.png</file>
+        <file>resources/removeWallsBrush.png</file>
+        <file>resources/saveMaze.png</file>
+        <file>resources/trophyIcon.png</file>
+        <file>resources/trophyIconBlue.png</file>
     </qresource>
 </RCC>

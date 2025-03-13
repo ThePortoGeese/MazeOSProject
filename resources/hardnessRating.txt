@@ -1,0 +1,31 @@
+1000000
+Impossível
+500000
+Calma chavalo! Ainda partes o meu código!
+300000
+Insano!
+200000
+Super Difícil
+100000
+Moderadamente difícil
+50000
+Ok, já estamos a chegar a algum lado…
+30000
+Não és desafio para este algoritmo
+20000
+És um aluno do 2º Ciclo?
+10000
+Um gajo do 1º Ano resolvia isto…
+1000
+Faltaste à aula de EV?
+0 
+Sequer Tentaste?
+
+
+
+
+
+
+
+
+

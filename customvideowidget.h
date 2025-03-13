@@ -8,14 +8,15 @@
 class CustomVideoWidget : public QVideoWidget
 {
 public:
-    CustomVideoWidget();
-
+    CustomVideoWidget(QWidget* parent=nullptr) : QVideoWidget(parent){};
     void setPlayer(QMediaPlayer* p){
         player=p;
     }
 
 private:
 
+
+    void mousePressEvent(QMouseEvent *event)override;
     void keyPressEvent(QKeyEvent *event) override;
 
     QMediaPlayer* player=nullptr;

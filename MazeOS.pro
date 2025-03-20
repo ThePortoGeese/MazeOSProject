@@ -11,44 +11,44 @@ CONFIG += c++17
 QT += multimedia multimediawidgets
 
 SOURCES += \
-    algorithmselectionbox.cpp \
-    cellgraphicsrectitem.cpp \
-    customvideowidget.cpp \
-    graphicsviewlabviewproccess.cpp \
-    informationpage.cpp \
+    Widgets/algorithmselectionbox.cpp \
+    GraphicsViewsitems/cellgraphicsrectitem.cpp \
+    Widgets/customvideowidget.cpp \
+    GraphicsViews/graphicsviewlabviewproccess.cpp \
+    Widgets/informationpage.cpp \
     main.cpp \
-    mazeView.cpp \
+    GraphicsViews/mazeView.cpp \
     mazeclass.cpp \
-    menuwindow.cpp \
-    namedialog.cpp \
-    previewmazeview.cpp \
+    Widgets/menuwindow.cpp \
+    Widgets/namedialog.cpp \
+    GraphicsViews/previewmazeview.cpp \
     qmazes.cpp
 
 HEADERS += \
-    abstractgraphicsrectitem.h \
-    algorithmselectionbox.h \
-    cellgraphicsrectitem.h \
-    crementbuttons.h \
-    customvideowidget.h \
-    graphicsviewlabviewproccess.h \
-    informationpage.h \
+    GraphicsViewsitems/abstractgraphicsrectitem.h \
+    Widgets/algorithmselectionbox.h \
+    GraphicsViewsitems/cellgraphicsrectitem.h \
+    Widgets/crementbuttons.h \
+    Widgets/customvideowidget.h \
+    GraphicsViews/graphicsviewlabviewproccess.h \
+    Widgets/informationpage.h \
     mazeclass.h \
-    mazeview.h \
-    menuwindow.h \
-    namedialog.h \
-    noclickqtxtbrowser.h \
-    previewmazeview.h \
-    qlabelwithpresssignal.h \
+    GraphicsViews/mazeview.h \
+    Widgets/menuwindow.h \
+    Widgets/namedialog.h \
+    Widgets/noclickqtxtbrowser.h \
+    GraphicsViews/previewmazeview.h \
+    Widgets/qlabelwithpresssignal.h \
     qmazes.h \
     qmazesconversionmethods.h \
-    wallhgraphicsrectitem.h \
-    wallvgraphicsrectitem.h
+    GraphicsViewsitems/wallhgraphicsrectitem.h \
+    GraphicsViewsitems/wallvgraphicsrectitem.h
 
 FORMS += \
-    algorithmselectionbox.ui \
-    informationpage.ui \
-    menuwindow.ui \
-    namedialog.ui
+    Widgets/algorithmselectionbox.ui \
+    Widgets/informationpage.ui \
+    Widgets/menuwindow.ui \
+    Widgets/namedialog.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

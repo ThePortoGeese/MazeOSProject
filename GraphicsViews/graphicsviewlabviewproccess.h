@@ -6,7 +6,10 @@
 class GraphicsViewLabViewProccess : public QGraphicsView
 {
 public:
-    GraphicsViewLabViewProccess();
+    GraphicsViewLabViewProccess(int nBalls,QString instructionsTxtFile,QWidget* parent=nullptr);
+
+private:
+
 };
 
 #endif // GRAPHICSVIEWLABVIEWPROCCESS_H

@@ -57,9 +57,14 @@ private slots:
 
     void changeAlgorithmSelection(AlgorithmSelectionBox* box);
 
+    void algorithmSelectionHoverEnter(AlgorithmSelectionBox* box);
+
+    void algorithmSelectionHoverLeave();
+
     void on_btnSelectAlgorithmNext_clicked();
 
     void setLeaderboard();
+
     void saveLeaderboard();
 
     void on_btnLeaderBoards_clicked();
@@ -74,7 +79,11 @@ private slots:
 
     void on_btnRemoveWall_clicked();
 
+    void appLogoClick();
+
     QString getHardnessRating(int score);
+
+    void mazeSolvingTimeOut();
 private:
     Ui::menuWindow *ui;
 };

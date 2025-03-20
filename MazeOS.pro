@@ -14,6 +14,7 @@ SOURCES += \
     algorithmselectionbox.cpp \
     cellgraphicsrectitem.cpp \
     customvideowidget.cpp \
+    graphicsviewlabviewproccess.cpp \
     informationpage.cpp \
     main.cpp \
     mazeView.cpp \
@@ -29,6 +30,7 @@ HEADERS += \
     cellgraphicsrectitem.h \
     crementbuttons.h \
     customvideowidget.h \
+    graphicsviewlabviewproccess.h \
     informationpage.h \
     mazeclass.h \
     mazeview.h \
@@ -36,6 +38,7 @@ HEADERS += \
     namedialog.h \
     noclickqtxtbrowser.h \
     previewmazeview.h \
+    qlabelwithpresssignal.h \
     qmazes.h \
     qmazesconversionmethods.h \
     wallhgraphicsrectitem.h \

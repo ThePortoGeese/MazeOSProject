@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="pt">
+<body>
+    <p>O algoritmo de <strong>Abraça Paredes</strong> baseia-se na ideia simples de seguir uma parede (normalmente à esquerda ou à direita) até encontrar a saída do labirinto. O algoritmo segue uma sequência de movimentos com base nas direções possíveis e faz tentativas de virar para a esquerda, continuar na mesma direção ou virar para a direita, dependendo das condições do labirinto.</p>
+    
+    <p><strong>Passos:</strong></p>
+    <ul>
+        <li>Começa na entrada do labirinto e tenta mover-se na direção inicial.</li>
+        <li>Se possível, vira à esquerda e segue essa direção, evitando as células que já foram visitadas.</li>
+        <li>Se não for possível mover-se para a esquerda, continua na direção atual.</li>
+        <li>Se não for possível continuar na direção atual, vira à direita.</li>
+        <li>Se nenhuma dessas opções for possível, vira para trás, o que indica que o algoritmo encontrou um beco sem saída.</li>
+        <li>Repete este processo até encontrar a saída ou atingir o limite de tempo (caso o algoritmo não consiga encontrar uma solução dentro do tempo permitido).</li>
+    </ul>
+    
+    <p>Este método é simples e eficiente para labirintos onde uma solução sempre existe e não há grandes obstáculos. No entanto, pode ser ineficiente em labirintos mais complexos, onde a direção da parede seguida não leva à solução rapidamente.</p>
+</body>
+</html>

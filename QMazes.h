@@ -34,6 +34,8 @@ public:
         return name;
     }
 
+    bool recursiveMazeSolver() override;
+    bool recursiveMazeSolver(const int& tX,const int& tY) override;
     void createMaze() override;
 
     static QMazes* convertFromFile(QFile* file);
@@ -47,14 +49,24 @@ public:
     const bool& getUserGeneratedStatus(){
         return userGenerated;
     }
-
+    bool wallFollowerMazeSolver() override ;
     void saveAsFile(QString fileName);
+
+    void setEvaluated(bool b){
+        evaluated=b;
+    }
+    const bool& getEvaluated(){
+        return evaluated;
+    }
 signals:
     void cellTriggered(int x,int y,int connectionNumber);
     void mazeSolved();
+    void timeOut();
 private:
-    bool recursiveSolver(std::vector<std::vector<bool>>& booleanGrid, const int i, const int y,const bool& store) override;
-    bool recursiveSolver(std::vector<std::vector<bool>>& booleanGrid, const int i, const int y,const int& tX,const int& tY) override;
+    QElapsedTimer runtimeTime;
+    bool evaluated=0;
+    bool recursiveSolvingFunction(std::vector<std::vector<bool>>& booleanGrid, const int i, const int y,const bool& store) override;
+    bool recursiveSolvingFunction(std::vector<std::vector<bool>>& booleanGrid, const int i, const int y,const int& tX,const int& tY) override;
     QString name="";
     bool userGenerated=1;
 public slots:

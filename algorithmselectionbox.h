@@ -17,7 +17,7 @@ public:
     explicit AlgorithmSelectionBox(QString algTitle, QString algDesc, QString videoFile, QWidget *parent = nullptr);
     ~AlgorithmSelectionBox();
     void mousePressEvent(QMouseEvent *event) override;
-    const bool& getClicked(){
+    const bool& isClicked(){
         return clicked;
     }
     void setClicked(bool b){
@@ -27,6 +27,9 @@ public:
     void leaveEvent(QEvent* e) override;
 signals:
     void algorithmSelectionChanged(AlgorithmSelectionBox*);
+
+    void algorithmSelectionHoverEntered(AlgorithmSelectionBox*);
+    void algorithmSelectionHoverLeave();
 private:
     QMediaPlayer* player;
     Ui::AlgorithmSelectionBox *ui;

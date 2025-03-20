@@ -997,7 +997,7 @@
         <number>20</number>
        </property>
        <item>
-        <widget class="QLabel" name="lblImage">
+        <widget class="QLabelWithPressSignal" name="lblImage">
          <property name="minimumSize">
           <size>
            <width>60</width>
@@ -1051,10 +1051,16 @@
          <item>
           <widget class="QPushButton" name="btnGenerate">
            <property name="sizePolicy">
-            <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+            <sizepolicy hsizetype="Expanding" vsizetype="MinimumExpanding">
              <horstretch>0</horstretch>
              <verstretch>0</verstretch>
             </sizepolicy>
+           </property>
+           <property name="minimumSize">
+            <size>
+             <width>0</width>
+             <height>74</height>
+            </size>
            </property>
            <property name="palette">
             <palette>
@@ -1381,9 +1387,9 @@
               <colorrole role="Button">
                <brush brushstyle="SolidPattern">
                 <color alpha="255">
-                 <red>0</red>
-                 <green>168</green>
-                 <blue>232</blue>
+                 <red>82</red>
+                 <green>153</green>
+                 <blue>175</blue>
                 </color>
                </brush>
               </colorrole>
@@ -1453,18 +1459,18 @@
               <colorrole role="Base">
                <brush brushstyle="SolidPattern">
                 <color alpha="255">
-                 <red>0</red>
-                 <green>168</green>
-                 <blue>232</blue>
+                 <red>82</red>
+                 <green>153</green>
+                 <blue>175</blue>
                 </color>
                </brush>
               </colorrole>
               <colorrole role="Window">
                <brush brushstyle="SolidPattern">
                 <color alpha="255">
-                 <red>0</red>
-                 <green>168</green>
-                 <blue>232</blue>
+                 <red>82</red>
+                 <green>153</green>
+                 <blue>175</blue>
                 </color>
                </brush>
               </colorrole>
@@ -1548,6 +1554,15 @@ QPushButton:checked {
     border-style: solid;
     border-color: rgb(0, 168, 232);
 	border-radius: 10px;
+}
+
+QPushButton:disabled {
+	background-color: rgb(82, 153, 175);
+    color: rgb(49, 51, 53);
+    border-width: 1px;
+    border-style: solid;
+    border-color: rgb(23, 37, 53);
+    border-radius: 10px;
 }</string>
            </property>
            <property name="text">
@@ -1571,6 +1586,12 @@ QPushButton:checked {
              <horstretch>0</horstretch>
              <verstretch>0</verstretch>
             </sizepolicy>
+           </property>
+           <property name="minimumSize">
+            <size>
+             <width>0</width>
+             <height>74</height>
+            </size>
            </property>
            <property name="palette">
             <palette>
@@ -1897,9 +1918,9 @@ QPushButton:checked {
               <colorrole role="Button">
                <brush brushstyle="SolidPattern">
                 <color alpha="255">
-                 <red>0</red>
-                 <green>168</green>
-                 <blue>232</blue>
+                 <red>82</red>
+                 <green>153</green>
+                 <blue>175</blue>
                 </color>
                </brush>
               </colorrole>
@@ -1969,18 +1990,18 @@ QPushButton:checked {
               <colorrole role="Base">
                <brush brushstyle="SolidPattern">
                 <color alpha="255">
-                 <red>0</red>
-                 <green>168</green>
-                 <blue>232</blue>
+                 <red>82</red>
+                 <green>153</green>
+                 <blue>175</blue>
                 </color>
                </brush>
               </colorrole>
               <colorrole role="Window">
                <brush brushstyle="SolidPattern">
                 <color alpha="255">
-                 <red>0</red>
-                 <green>168</green>
-                 <blue>232</blue>
+                 <red>82</red>
+                 <green>153</green>
+                 <blue>175</blue>
                 </color>
                </brush>
               </colorrole>
@@ -2063,6 +2084,14 @@ QPushButton:checked {
     border-style: solid;
     border-color: rgb(0, 168, 232);
 	border-radius: 10px;
+}
+QPushButton:disabled {
+	background-color: rgb(82, 153, 175);
+    color: rgb(49, 51, 53);
+    border-width: 1px;
+    border-style: solid;
+    border-color: rgb(23, 37, 53);
+    border-radius: 10px;
 }</string>
            </property>
            <property name="text">
@@ -2084,7 +2113,7 @@ QPushButton:checked {
            <property name="minimumSize">
             <size>
              <width>74</width>
-             <height>0</height>
+             <height>74</height>
             </size>
            </property>
            <property name="palette">
@@ -2412,9 +2441,9 @@ QPushButton:checked {
               <colorrole role="Button">
                <brush brushstyle="SolidPattern">
                 <color alpha="255">
-                 <red>0</red>
-                 <green>168</green>
-                 <blue>232</blue>
+                 <red>82</red>
+                 <green>153</green>
+                 <blue>175</blue>
                 </color>
                </brush>
               </colorrole>
@@ -2484,18 +2513,18 @@ QPushButton:checked {
               <colorrole role="Base">
                <brush brushstyle="SolidPattern">
                 <color alpha="255">
-                 <red>0</red>
-                 <green>168</green>
-                 <blue>232</blue>
+                 <red>82</red>
+                 <green>153</green>
+                 <blue>175</blue>
                 </color>
                </brush>
               </colorrole>
               <colorrole role="Window">
                <brush brushstyle="SolidPattern">
                 <color alpha="255">
-                 <red>0</red>
-                 <green>168</green>
-                 <blue>232</blue>
+                 <red>82</red>
+                 <green>153</green>
+                 <blue>175</blue>
                 </color>
                </brush>
               </colorrole>
@@ -2573,6 +2602,15 @@ QPushButton:checked {
     border-style: solid;
     border-color: rgb(0, 168, 232);
 	border-radius: 10px;
+}
+
+QPushButton:disabled {
+	background-color: rgb(82, 153, 175);
+    color: rgb(49, 51, 53);
+    border-width: 1px;
+    border-style: solid;
+    border-color: rgb(23, 37, 53);
+    border-radius: 10px;
 }</string>
            </property>
            <property name="text">
@@ -2612,48 +2650,6 @@ QPushButton:checked {
       <property name="bottomMargin">
        <number>12</number>
       </property>
-      <item row="1" column="1">
-       <spacer name="horizontalSpacer_2">
-        <property name="orientation">
-         <enum>Qt::Orientation::Horizontal</enum>
-        </property>
-        <property name="sizeHint" stdset="0">
-         <size>
-          <width>40</width>
-          <height>20</height>
-         </size>
-        </property>
-       </spacer>
-      </item>
-      <item row="1" column="0">
-       <widget class="QPushButton" name="btnSummary">
-        <property name="text">
-         <string/>
-        </property>
-        <property name="icon">
-         <iconset theme="QIcon::ThemeIcon::DocumentPageSetup"/>
-        </property>
-        <property name="flat">
-         <bool>true</bool>
-        </property>
-       </widget>
-      </item>
-      <item row="1" column="2">
-       <widget class="QPushButton" name="btnCredits">
-        <property name="sizePolicy">
-         <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
-          <horstretch>0</horstretch>
-          <verstretch>0</verstretch>
-         </sizepolicy>
-        </property>
-        <property name="text">
-         <string>Créditos</string>
-        </property>
-        <property name="flat">
-         <bool>true</bool>
-        </property>
-       </widget>
-      </item>
       <item row="0" column="0" colspan="3">
        <widget class="QStackedWidget" name="stackedWidget">
         <property name="palette">
@@ -3125,6 +3121,9 @@ QPushButton:checked {
           </disabled>
          </palette>
         </property>
+        <property name="currentIndex">
+         <number>0</number>
+        </property>
         <widget class="QWidget" name="pgMenu">
          <layout class="QVBoxLayout" name="verticalLayout">
           <property name="leftMargin">
@@ -3140,7 +3139,7 @@ QPushButton:checked {
            <number>0</number>
           </property>
           <item>
-           <widget class="QScrollArea" name="scrollArea">
+           <widget class="QScrollArea" name="scrollAreaMenu">
             <property name="palette">
              <palette>
               <active>
@@ -3622,7 +3621,7 @@ QPushButton:checked {
             <property name="widgetResizable">
              <bool>true</bool>
             </property>
-            <widget class="QWidget" name="scrlAreaContents">
+            <widget class="QWidget" name="scrlAreaMenuContents">
              <property name="geometry">
               <rect>
                <x>0</x>
@@ -3631,6 +3630,293 @@ QPushButton:checked {
                <height>648</height>
               </rect>
              </property>
+             <property name="palette">
+              <palette>
+               <active>
+                <colorrole role="Base">
+                 <brush brushstyle="SolidPattern">
+                  <color alpha="255">
+                   <red>4</red>
+                   <green>26</green>
+                   <blue>52</blue>
+                  </color>
+                 </brush>
+                </colorrole>
+                <colorrole role="Window">
+                 <brush brushstyle="SolidPattern">
+                  <color alpha="255">
+                   <red>4</red>
+                   <green>26</green>
+                   <blue>52</blue>
+                  </color>
+                 </brush>
+                </colorrole>
+               </active>
+               <inactive>
+                <colorrole role="Base">
+                 <brush brushstyle="SolidPattern">
+                  <color alpha="255">
+                   <red>4</red>
+                   <green>26</green>
+                   <blue>52</blue>
+                  </color>
+                 </brush>
+                </colorrole>
+                <colorrole role="Window">
+                 <brush brushstyle="SolidPattern">
+                  <color alpha="255">
+                   <red>4</red>
+                   <green>26</green>
+                   <blue>52</blue>
+                  </color>
+                 </brush>
+                </colorrole>
+               </inactive>
+               <disabled>
+                <colorrole role="Base">
+                 <brush brushstyle="SolidPattern">
+                  <color alpha="255">
+                   <red>4</red>
+                   <green>26</green>
+                   <blue>52</blue>
+                  </color>
+                 </brush>
+                </colorrole>
+                <colorrole role="Window">
+                 <brush brushstyle="SolidPattern">
+                  <color alpha="255">
+                   <red>4</red>
+                   <green>26</green>
+                   <blue>52</blue>
+                  </color>
+                 </brush>
+                </colorrole>
+               </disabled>
+              </palette>
+             </property>
+             <layout class="QGridLayout" name="gridLayout_12">
+              <property name="leftMargin">
+               <number>0</number>
+              </property>
+              <property name="topMargin">
+               <number>0</number>
+              </property>
+              <property name="rightMargin">
+               <number>0</number>
+              </property>
+              <item row="5" column="2">
+               <spacer name="verticalSpacer_18">
+                <property name="orientation">
+                 <enum>Qt::Orientation::Vertical</enum>
+                </property>
+                <property name="sizeType">
+                 <enum>QSizePolicy::Policy::Fixed</enum>
+                </property>
+                <property name="sizeHint" stdset="0">
+                 <size>
+                  <width>20</width>
+                  <height>40</height>
+                 </size>
+                </property>
+               </spacer>
+              </item>
+              <item row="6" column="1" colspan="3">
+               <widget class="QLabel" name="label_6">
+                <property name="font">
+                 <font>
+                  <pointsize>15</pointsize>
+                  <italic>true</italic>
+                  <bold>false</bold>
+                 </font>
+                </property>
+                <property name="text">
+                 <string>&quot;A imaginação não é a fuga da realidade, mas a sua extensão infinita.&quot;</string>
+                </property>
+                <property name="alignment">
+                 <set>Qt::AlignmentFlag::AlignCenter</set>
+                </property>
+               </widget>
+              </item>
+              <item row="4" column="2">
+               <widget class="QLabel" name="label_7">
+                <property name="maximumSize">
+                 <size>
+                  <width>250</width>
+                  <height>250</height>
+                 </size>
+                </property>
+                <property name="text">
+                 <string/>
+                </property>
+                <property name="pixmap">
+                 <pixmap resource="data.qrc">:/others/resources/appLogoBig.png</pixmap>
+                </property>
+                <property name="scaledContents">
+                 <bool>true</bool>
+                </property>
+                <property name="alignment">
+                 <set>Qt::AlignmentFlag::AlignCenter</set>
+                </property>
+               </widget>
+              </item>
+              <item row="2" column="0">
+               <spacer name="horizontalSpacer_13">
+                <property name="orientation">
+                 <enum>Qt::Orientation::Horizontal</enum>
+                </property>
+                <property name="sizeType">
+                 <enum>QSizePolicy::Policy::Fixed</enum>
+                </property>
+                <property name="sizeHint" stdset="0">
+                 <size>
+                  <width>40</width>
+                  <height>20</height>
+                 </size>
+                </property>
+               </spacer>
+              </item>
+              <item row="7" column="1" colspan="3">
+               <spacer name="verticalSpacer_16">
+                <property name="orientation">
+                 <enum>Qt::Orientation::Vertical</enum>
+                </property>
+                <property name="sizeHint" stdset="0">
+                 <size>
+                  <width>20</width>
+                  <height>40</height>
+                 </size>
+                </property>
+               </spacer>
+              </item>
+              <item row="3" column="2">
+               <spacer name="verticalSpacer_15">
+                <property name="orientation">
+                 <enum>Qt::Orientation::Vertical</enum>
+                </property>
+                <property name="sizeType">
+                 <enum>QSizePolicy::Policy::Fixed</enum>
+                </property>
+                <property name="sizeHint" stdset="0">
+                 <size>
+                  <width>20</width>
+                  <height>40</height>
+                 </size>
+                </property>
+               </spacer>
+              </item>
+              <item row="2" column="1" colspan="3">
+               <widget class="QLabel" name="label_5">
+                <property name="palette">
+                 <palette>
+                  <active>
+                   <colorrole role="WindowText">
+                    <brush brushstyle="SolidPattern">
+                     <color alpha="255">
+                      <red>0</red>
+                      <green>168</green>
+                      <blue>232</blue>
+                     </color>
+                    </brush>
+                   </colorrole>
+                   <colorrole role="Text">
+                    <brush brushstyle="SolidPattern">
+                     <color alpha="255">
+                      <red>0</red>
+                      <green>168</green>
+                      <blue>232</blue>
+                     </color>
+                    </brush>
+                   </colorrole>
+                  </active>
+                  <inactive>
+                   <colorrole role="WindowText">
+                    <brush brushstyle="SolidPattern">
+                     <color alpha="255">
+                      <red>0</red>
+                      <green>168</green>
+                      <blue>232</blue>
+                     </color>
+                    </brush>
+                   </colorrole>
+                   <colorrole role="Text">
+                    <brush brushstyle="SolidPattern">
+                     <color alpha="255">
+                      <red>0</red>
+                      <green>168</green>
+                      <blue>232</blue>
+                     </color>
+                    </brush>
+                   </colorrole>
+                  </inactive>
+                  <disabled/>
+                 </palette>
+                </property>
+                <property name="font">
+                 <font>
+                  <pointsize>24</pointsize>
+                  <bold>true</bold>
+                 </font>
+                </property>
+                <property name="text">
+                 <string>Bem Vindo ao MazeOS!</string>
+                </property>
+                <property name="textFormat">
+                 <enum>Qt::TextFormat::PlainText</enum>
+                </property>
+               </widget>
+              </item>
+              <item row="1" column="1">
+               <spacer name="verticalSpacer_17">
+                <property name="orientation">
+                 <enum>Qt::Orientation::Vertical</enum>
+                </property>
+                <property name="sizeType">
+                 <enum>QSizePolicy::Policy::Fixed</enum>
+                </property>
+                <property name="sizeHint" stdset="0">
+                 <size>
+                  <width>20</width>
+                  <height>30</height>
+                 </size>
+                </property>
+               </spacer>
+              </item>
+              <item row="5" column="4">
+               <spacer name="horizontalSpacer_15">
+                <property name="orientation">
+                 <enum>Qt::Orientation::Horizontal</enum>
+                </property>
+                <property name="sizeType">
+                 <enum>QSizePolicy::Policy::Fixed</enum>
+                </property>
+                <property name="sizeHint" stdset="0">
+                 <size>
+                  <width>40</width>
+                  <height>20</height>
+                 </size>
+                </property>
+               </spacer>
+              </item>
+              <item row="0" column="0" colspan="5">
+               <widget class="QLabel" name="label_4">
+                <property name="sizePolicy">
+                 <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+                  <horstretch>0</horstretch>
+                  <verstretch>0</verstretch>
+                 </sizepolicy>
+                </property>
+                <property name="text">
+                 <string/>
+                </property>
+                <property name="pixmap">
+                 <pixmap resource="data.qrc">:/others/resources/welcomepageStrip.png</pixmap>
+                </property>
+                <property name="scaledContents">
+                 <bool>true</bool>
+                </property>
+               </widget>
+              </item>
+             </layout>
             </widget>
            </widget>
           </item>
@@ -3687,6 +3973,32 @@ QPushButton:checked {
                  <verstretch>0</verstretch>
                 </sizepolicy>
                </property>
+               <property name="styleSheet">
+                <string notr="true">QPushButton {
+    color: rgb(2, 13, 26);
+    border-width: 1px;
+    border-style: solid;
+    border-radius: 10px;
+}
+
+QPushButton:checked {
+	background-color : rgb(23, 37, 53);
+	color : rgb(0, 168, 232);
+	border-width: 1px;
+    border-style: solid;
+    border-color: rgb(0, 168, 232);
+	border-radius: 10px;
+}
+
+QPushButton:disabled {
+	background-color: rgb(82, 153, 175);
+    color: rgb(49, 51, 53);
+    border-width: 1px;
+    border-style: solid;
+    border-color: rgb(23, 37, 53);
+    border-radius: 10px;
+}</string>
+               </property>
                <property name="text">
                 <string/>
                </property>
@@ -3713,6 +4025,13 @@ QPushButton:checked {
                  <verstretch>0</verstretch>
                 </sizepolicy>
                </property>
+               <property name="styleSheet">
+                <string notr="true">QPushButton {
+    color: rgb(2, 13, 26);
+    border-width: 1px;
+    border-radius: 10px;
+}</string>
+               </property>
                <property name="text">
                 <string/>
                </property>
@@ -3735,6 +4054,13 @@ QPushButton:checked {
                  <horstretch>0</horstretch>
                  <verstretch>0</verstretch>
                 </sizepolicy>
+               </property>
+               <property name="styleSheet">
+                <string notr="true">QPushButton {
+    color: rgb(2, 13, 26);
+    border-width: 1px;
+    border-radius: 10px;
+}</string>
                </property>
                <property name="text">
                 <string/>
@@ -3816,6 +4142,31 @@ QPushButton:checked {
                  <verstretch>0</verstretch>
                 </sizepolicy>
                </property>
+               <property name="styleSheet">
+                <string notr="true">QPushButton {
+    color: rgb(2, 13, 26);
+    border-width: 1px;
+    border-radius: 10px;
+}
+
+QPushButton:checked {
+	background-color : rgb(23, 37, 53);
+	color : rgb(0, 168, 232);
+	border-width: 1px;
+    border-style: solid;
+    border-color: rgb(0, 168, 232);
+	border-radius: 10px;
+}
+
+QPushButton:disabled {
+	background-color: rgb(82, 153, 175);
+    color: rgb(49, 51, 53);
+    border-width: 1px;
+    border-style: solid;
+    border-color: rgb(23, 37, 53);
+    border-radius: 10px;
+}</string>
+               </property>
                <property name="text">
                 <string/>
                </property>
@@ -3832,6 +4183,9 @@ QPushButton:checked {
                <property name="checkable">
                 <bool>true</bool>
                </property>
+               <property name="checked">
+                <bool>true</bool>
+               </property>
               </widget>
              </item>
              <item>
@@ -3842,12 +4196,19 @@ QPushButton:checked {
                  <verstretch>0</verstretch>
                 </sizepolicy>
                </property>
+               <property name="styleSheet">
+                <string notr="true">QPushButton {
+    color: rgb(2, 13, 26);
+    border-width: 1px;
+    border-radius: 10px;
+}</string>
+               </property>
                <property name="text">
                 <string/>
                </property>
                <property name="icon">
-                <iconset>
-                 <normaloff>resources/expandMazeH.png</normaloff>resources/expandMazeH.png</iconset>
+                <iconset resource="data.qrc">
+                 <normaloff>:/buttonIcons/resources/expandMazeH.png</normaloff>:/buttonIcons/resources/expandMazeH.png</iconset>
                </property>
                <property name="iconSize">
                 <size>
@@ -3864,6 +4225,13 @@ QPushButton:checked {
                  <horstretch>0</horstretch>
                  <verstretch>0</verstretch>
                 </sizepolicy>
+               </property>
+               <property name="styleSheet">
+                <string notr="true">QPushButton {
+    color: rgb(2, 13, 26);
+    border-width: 1px;
+    border-radius: 10px;
+}</string>
                </property>
                <property name="text">
                 <string/>
@@ -3903,6 +4271,13 @@ QPushButton:checked {
                  <verstretch>0</verstretch>
                 </sizepolicy>
                </property>
+               <property name="styleSheet">
+                <string notr="true">QPushButton {
+    color: rgb(2, 13, 26);
+    border-width: 1px;
+    border-radius: 10px;
+}</string>
+               </property>
                <property name="text">
                 <string/>
                </property>
@@ -3926,6 +4301,13 @@ QPushButton:checked {
                  <verstretch>0</verstretch>
                 </sizepolicy>
                </property>
+               <property name="styleSheet">
+                <string notr="true">QPushButton {
+    color: rgb(2, 13, 26);
+    border-width: 1px;
+    border-radius: 10px;
+}</string>
+               </property>
                <property name="text">
                 <string/>
                </property>
@@ -3948,6 +4330,13 @@ QPushButton:checked {
                  <horstretch>0</horstretch>
                  <verstretch>0</verstretch>
                 </sizepolicy>
+               </property>
+               <property name="styleSheet">
+                <string notr="true">QPushButton {
+    color: rgb(2, 13, 26);
+    border-width: 1px;
+    border-radius: 10px;
+}</string>
                </property>
                <property name="text">
                 <string/>
@@ -7784,6 +8173,48 @@ QPushButton:checked {
         </widget>
        </widget>
       </item>
+      <item row="1" column="2">
+       <widget class="QPushButton" name="btnCredits">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="text">
+         <string>Créditos</string>
+        </property>
+        <property name="flat">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="0">
+       <widget class="QPushButton" name="btnSummary">
+        <property name="text">
+         <string/>
+        </property>
+        <property name="icon">
+         <iconset theme="QIcon::ThemeIcon::DocumentPageSetup"/>
+        </property>
+        <property name="flat">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="1">
+       <spacer name="horizontalSpacer_2">
+        <property name="orientation">
+         <enum>Qt::Orientation::Horizontal</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>40</width>
+          <height>20</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
      </layout>
     </item>
    </layout>
@@ -7810,6 +8241,11 @@ QPushButton:checked {
    <class>CrementButtons</class>
    <extends>QPushButton</extends>
    <header>crementbuttons.h</header>
+  </customwidget>
+  <customwidget>
+   <class>QLabelWithPressSignal</class>
+   <extends>QLabel</extends>
+   <header>qlabelwithpresssignal.h</header>
   </customwidget>
  </customwidgets>
  <resources>

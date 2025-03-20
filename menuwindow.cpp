@@ -52,15 +52,38 @@ QMazes* currentMazeView=nullptr;
         //Stuff Related to the algorithm choosing thingies
         AlgorithmSelectionBox* recursive = new AlgorithmSelectionBox("Algoritmo Recursivo","qrc:/others/resources/recursiveDescription.txt","qrc:/others/resources/recursiveFuncVideo.mp4",ui->scrlAreaSelectAlgorithm);
         ui->scrlAreaSelectAlgorithmContents->layout()->addWidget(recursive);
-        AlgorithmSelectionBox* other = new AlgorithmSelectionBox("Brevemente","","",ui->scrlAreaSelectAlgorithm);
+        AlgorithmSelectionBox* other = new AlgorithmSelectionBox("Algoritmo \"Abraça Paredes\"","qrc:/others/resources/wallfollowerDesciption.txt","",ui->scrlAreaSelectAlgorithm);
         ui->scrlAreaSelectAlgorithmContents->layout()->addWidget(other);
         AlgorithmSelectionBox* other1 = new AlgorithmSelectionBox("Brevemente","","",ui->scrlAreaSelectAlgorithm);
         ui->scrlAreaSelectAlgorithmContents->layout()->addWidget(other1);
-        other->setEnabled(0);
-        other1->setEnabled(0);
         for(int i=0;i<ui->scrlAreaSelectAlgorithmContents->children().size();i++){
             AlgorithmSelectionBox* box=dynamic_cast<AlgorithmSelectionBox*>(ui->scrlAreaSelectAlgorithmContents->children()[i]);
-            if(box!=nullptr) connect(box,SIGNAL(algorithmSelectionChanged(AlgorithmSelectionBox*)),this,SLOT(changeAlgorithmSelection(AlgorithmSelectionBox*)));
+            if(box!=nullptr){
+                connect(box,SIGNAL(algorithmSelectionHoverEntered(AlgorithmSelectionBox*)),this,SLOT(algorithmSelectionHoverEnter(AlgorithmSelectionBox*)));
+                connect(box,SIGNAL(algorithmSelectionHoverLeave()),this,SLOT(algorithmSelectionHoverLeave()));
+                connect(box,SIGNAL(algorithmSelectionChanged(AlgorithmSelectionBox*)),this,SLOT(changeAlgorithmSelection(AlgorithmSelectionBox*)));
+                box->setStyleSheet("\
+                    QGroupBox {\
+                        color: rgb(255, 255, 255);\
+                        border-width: 2px;\
+                        border-style: solid;\
+                        background-color : rgba(4, 26, 52,50%);\
+                        border-color: rgb(255, 255, 255);\
+                        padding-top: 15px;\
+                        margin-top: 5px;\
+                    }\
+                    QGroupBox:disabled {\
+                        color: rgba(255, 255, 255,50%);\
+                        background-color : rgba(4, 26, 52,0%);\
+                        border-width: 0.5px;\
+                    }\
+                    QGroupBox::title {\
+                        subcontrol-origin: margin;\
+                        subcontrol-position: top center; \
+                        margin-left: 3px;\
+                        margin-right: 3px;\
+                    }");
+            }
         }
 
         if(!(QDir((QStandardPaths::writableLocation(QStandardPaths::DocumentsLocation)+QStringLiteral("/MazeOS"))).exists())){
@@ -76,6 +99,17 @@ QMazes* currentMazeView=nullptr;
         font.setBold(1);
         font.setPointSize(18);
         ui->tblLeaderboard->horizontalHeader()->setFont(font);
+        {
+            QFont txtFont = ui->lblGenerate->font();
+            txtFont.setBold(1);
+            txtFont.setPointSize(48);
+            QLabel* lbl = new QLabel("LABIRINTOS");
+            lbl->setFont(txtFont);
+            ((QGridLayout*)ui->scrlAreaMenuContents->layout())->addWidget(lbl,0,0,1,5,Qt::AlignHCenter);
+            lbl->setStyleSheet("background-color: rgba(0, 0, 0, 100); color: white;");
+            lbl->setSizePolicy(QSizePolicy::Minimum,QSizePolicy::Fixed);
+        }
+        connect(ui->lblImage,SIGNAL(mousePressed()),this,SLOT(appLogoClick()));
     }
 
     menuWindow::~menuWindow()
@@ -97,10 +131,13 @@ QMazes* currentMazeView=nullptr;
     }
 
     void menuWindow::resizeEvent(QResizeEvent* event){
-        if(ui->stackedWidget->currentIndex()==pgLabViewProccess) if(ui->graphicsView->scene()!=nullptr) ui->graphicsView->fitInView(ui->graphicsView->scene()->sceneRect());
-        if(ui->stackedWidget->currentIndex()==pgNewUser) if(ui->graphicsMazePreview->scene()!=nullptr) ui->graphicsMazePreview->fitInView(ui->graphicsMazePreview->scene()->sceneRect());
+        if(ui->stackedWidget->currentIndex()==pgLabViewProccess){ {
+                if(ui->graphicsView->scene()!=nullptr) ui->graphicsView->fitInView(ui->graphicsView->scene()->sceneRect());}
+        }
+        else if(ui->stackedWidget->currentIndex()==pgNewUser){ if(ui->graphicsMazePreview->scene()!=nullptr) {
+                ui->graphicsMazePreview->fitInView(ui->graphicsMazePreview->scene()->sceneRect());}
+        }
         QWidget::resizeEvent(event);
-
     }
 //End og General Functions
 
@@ -133,6 +170,30 @@ QMazes* currentMazeView=nullptr;
         ui->lblSelectedFile->setText("");
         ui->btnSelectFileNext->setVisible(0);
     }
+    void menuWindow::appLogoClick()
+    {
+        ui->btnResolve->setChecked(0);
+        ui->btnLeaderBoards->setChecked(0);
+        ui->btnGenerate->setChecked(0);
+        ui->btnLeaderBoards->setIcon(QPixmap(":/buttonIcons/resources/trophyIcon.png"));
+
+        if(!ui->graphicsMazePreview->getSavedStatus()&&ui->stackedWidget->currentIndex()==pgNewUser){
+            if(!areYouSureModal()) {
+                ui->btnResolve->setChecked(0);
+                ui->btnGenerate->setChecked(1);
+                return;
+            }
+        }
+
+        ui->btnResolve->setChecked(0);
+        ui->btnLeaderBoards->setChecked(0);
+        ui->btnGenerate->setChecked(0);
+
+
+        if(ui->stackedWidget->currentIndex()==pgNewUser) resetMazeCreator();
+
+        ui->stackedWidget->setCurrentIndex(pgMenu);
+    }
     void menuWindow::on_btnGenerate_clicked()
     {
         ui->btnResolve->setChecked(0);
@@ -144,6 +205,9 @@ QMazes* currentMazeView=nullptr;
             ui->graphicsMazePreview->newMaze();
             ui->stackedWidget->setCurrentIndex(pgNewUser);
             ui->graphicsMazePreview->fitInView(ui->graphicsMazePreview->sceneRect());
+            ui->btnAddWall->setChecked(0);
+            ui->btnRemoveWall->setChecked(1);
+            ui->graphicsMazePreview->setToggleBrush(PreviewMazeView::brushRemoveWalls);
         }
     }
 
@@ -215,6 +279,7 @@ QMazes* currentMazeView=nullptr;
         ui->btnCredits->setEnabled(enabled);
         ui->btnSummary->setEnabled(enabled);
         ui->btnLeaderBoards->setEnabled(enabled);
+        ui->lblImage->setEnabled(enabled);
     }
 
 //End of overhead menu buttons
@@ -280,6 +345,11 @@ QMazes* currentMazeView=nullptr;
             }
             if(currentMazeView!=nullptr) delete currentMazeView;
             currentMazeView=QMazes::convertFromFile(&file);
+
+            if(currentMazeView->getEvaluated()){
+                QMessageBox::information(this,"Atenção","Este labirinto já foi avaliado e portanto não receberá pontuação.");
+            }
+
             ui->btnSelectFileNext->setVisible(1);
             ui->lblSelectedFile->setText(currentMazeView->getName());
         }
@@ -288,9 +358,18 @@ QMazes* currentMazeView=nullptr;
         void menuWindow::on_btnSelectFileNext_clicked()
         {
             connect(currentMazeView,SIGNAL(cellTriggered(int,int,int)),ui->graphicsView,SLOT(changeCellColour(int,int,int)));
+            connect(currentMazeView,SIGNAL(timeOut()),this,SLOT(mazeSolvingTimeOut()));
             ui->stackedWidgetLabView->setCurrentIndex(pgSelectAlgorithm);
             ui->btnSelectAlgorithmNext->setVisible(0);
             ui->lblMazeName->setText(currentMazeView->getName());
+
+            for(int i=0;i<ui->scrlAreaSelectAlgorithmContents->children().size();i++){
+                AlgorithmSelectionBox* castBox=dynamic_cast<AlgorithmSelectionBox*>(ui->scrlAreaSelectAlgorithmContents->children()[i]);
+                if(castBox==nullptr) continue;
+                castBox->setClicked(0);
+                castBox->setDisabled(0);
+            }
+
         }
 
     //End of Functions related to the select file proccess
@@ -301,19 +380,63 @@ QMazes* currentMazeView=nullptr;
             for(int i=0;i<ui->scrlAreaSelectAlgorithmContents->children().size();i++){
                 AlgorithmSelectionBox* castBox=dynamic_cast<AlgorithmSelectionBox*>(ui->scrlAreaSelectAlgorithmContents->children()[i]);
                 if(castBox==nullptr) continue;
-
-                if(ui->scrlAreaSelectAlgorithmContents->children()[i]!=box) castBox->setClicked(0);
+                if(box!=nullptr){
+                    if(ui->scrlAreaSelectAlgorithmContents->children()[i]!=box) {
+                        castBox->setClicked(0);
+                        castBox->setDisabled(1);
+                    }
+                    else {
+                        castBox->setClicked(1);
+                        castBox->setEnabled(1);
+                    }
+                }
             }
             if(box!=nullptr) ui->btnSelectAlgorithmNext->setVisible(1);
-            else ui->btnSelectAlgorithmNext->setVisible(0);
+            else {
+                ui->btnSelectAlgorithmNext->setVisible(0);
+            }
         }
 
+        void menuWindow::algorithmSelectionHoverEnter(AlgorithmSelectionBox* box){
+            bool anyClicked=0;
+            for(int i=0;i<ui->scrlAreaSelectAlgorithmContents->children().size();i++){
+                AlgorithmSelectionBox* castBox=dynamic_cast<AlgorithmSelectionBox*>(ui->scrlAreaSelectAlgorithmContents->children()[i]);
+                if(castBox==nullptr) continue;
+                if(castBox->isClicked()) anyClicked=1;
+            }
+            if(!anyClicked){
+                for(int i=0;i<ui->scrlAreaSelectAlgorithmContents->children().size();i++){
+                    AlgorithmSelectionBox* castBox=dynamic_cast<AlgorithmSelectionBox*>(ui->scrlAreaSelectAlgorithmContents->children()[i]);
+                    if(castBox==nullptr) continue;
+
+                    if(ui->scrlAreaSelectAlgorithmContents->children()[i]!=box) castBox->setDisabled(1);
+                    else castBox->setDisabled(0);
+                }
+            }
+        }
+
+        void menuWindow::algorithmSelectionHoverLeave(){
+            bool anyClicked=0;
+            for(int i=0;i<ui->scrlAreaSelectAlgorithmContents->children().size();i++){
+                AlgorithmSelectionBox* castBox=dynamic_cast<AlgorithmSelectionBox*>(ui->scrlAreaSelectAlgorithmContents->children()[i]);
+                if(castBox==nullptr) continue;
+                if(!castBox->isClicked()) castBox->setDisabled(1); else anyClicked=1;
+            }
+            if(!anyClicked){
+                for(int i=0;i<ui->scrlAreaSelectAlgorithmContents->children().size();i++){
+                    AlgorithmSelectionBox* castBox=dynamic_cast<AlgorithmSelectionBox*>(ui->scrlAreaSelectAlgorithmContents->children()[i]);
+                    if(castBox==nullptr) continue;
+                    castBox->setEnabled(1);
+                }
+            }
+        }
 
         void menuWindow::on_btnSelectAlgorithmNext_clicked()
         {
             ui->stackedWidgetLabView->setCurrentIndex(pgLabView);
             ui->graphicsView->drawMaze(currentMazeView);
             ui->graphicsView->fitInView(ui->graphicsView->sceneRect());
+            ui->btnSolveMaze->setEnabled(1);
         }
 
 
@@ -323,9 +446,7 @@ QMazes* currentMazeView=nullptr;
         void menuWindow::on_btnSolveMaze_clicked()
         {
             ui->graphicsView->clearCells();
-            ui->btnGenerate->setEnabled(0);
-            ui->btnResolve->setEnabled(0);
-            ui->btnCredits->setEnabled(0);
+            setMenuButtonsEnabled(0);
             ui->btnSolveMaze->setEnabled(0);
 
             QElapsedTimer* runtime=new QElapsedTimer;
@@ -333,49 +454,84 @@ QMazes* currentMazeView=nullptr;
             ui->graphicsView->setBusy(1);
             ui->lblStatus->setText("ESTADO: A Resolver...");
 
-            long score=0;
+            long score=-1;
 
-            if(currentMazeView->getUserGeneratedStatus()){
-                score=(((currentMazeView->x()*currentMazeView->y())/2*0.75+runtime->elapsed()*0.25)*300);
+            int selectedAlgorithm;
+            for(int i=0;i<ui->scrlAreaSelectAlgorithmContents->children().size();i++){
+                AlgorithmSelectionBox* castBox=dynamic_cast<AlgorithmSelectionBox*>(ui->scrlAreaSelectAlgorithmContents->children()[i]);
+                if(castBox==nullptr) continue;
+                if(castBox->isClicked()) selectedAlgorithm=i;
             }
-
-            currentMazeView->mazeSolver();
-            QMessageBox::information(this,"Informação","Demorei: "+QString::number((float)runtime->elapsed()/1000)+"s\nPontuação: "+ (currentMazeView->getUserGeneratedStatus()? QString::number(score):"Não Aplicável"));
-
-            updateLeaderboard(score);
-
-            if(currentMazeView->getUserGeneratedStatus()){
-                QMessageBox::information(this,"You've got Mail!","1 Mensagem Nova:\nDe: Computador\nPara: Utilizador desta aplicação\nConteúdo: "+ getHardnessRating(score));
+            bool success=1;
+            switch(selectedAlgorithm){
+            case 1:
+                if(!currentMazeView->recursiveMazeSolver()) success=0;
+                break;
+            case 2:
+                if(!currentMazeView->wallFollowerMazeSolver()) success=0;
+                break;
             }
+            if(success){
+                if(currentMazeView->getUserGeneratedStatus()&&(!currentMazeView->getEvaluated())){
+                    score=(((currentMazeView->x()*currentMazeView->y())/2*0.75+runtime->elapsed()*0.25)*300);
+                }
 
-            ui->graphicsView->setBusy(0);
+                QMessageBox::information(this,"Informação","Demorei: "+QString::number((float)runtime->elapsed()/1000)+"s\nPontuação: "+ (!(score<0) ? QString::number(score):"Não Aplicável"));
+
+
+                updateLeaderboard(score);
+
+                if(!(score<0)){
+                    QMessageBox::information(this,"You've got Mail!","1 Mensagem Nova:\nDe: Computador\nPara: Utilizador desta aplicação\nConteúdo: "+ getHardnessRating(score));
+                }
+
+                ui->graphicsView->setBusy(0);
+                ui->graphicsView->clearCells();
+                ui->lblStatus->setText("ESTADO: A Mostrar o Caminho Correto...");
+                ui->graphicsView->scene()->update();
+                for(int i=0;i<(int)currentMazeView->tempPath.size();i++){
+                    ui->graphicsView->changeCellColour(currentMazeView->tempPath[i]->x,currentMazeView->tempPath[i]->y,currentMazeView->tempPath[i]->k,QColor(0, 200, 81));
+                    delete currentMazeView->tempPath[i];
+                    QTime dieTime= QTime::currentTime().addMSecs(1);
+                    while (QTime::currentTime() < dieTime)
+                        QCoreApplication::processEvents(QEventLoop::AllEvents, 100);
+                }
+
+                QString fileName = currentMazeView->getName();
+                if(!(score<0)){
+                    QFile file(QStandardPaths::writableLocation(QStandardPaths::DocumentsLocation)+"/MazeOS/userMazes/"+fileName.replace(" ","")+".maz");
+                    if(file.open(QIODevice::Append)){
+                        QTextStream out(&file);
+                        out<<"EVALUATED";
+                        file.close();
+                    }
+
+                }
+                setMenuButtonsEnabled(1);
+                ui->btnSolveMaze->setEnabled(1);
+                currentMazeView->tempPath.clear();
+                ui->lblStatus->setText("ESTADO: Idle");
+                delete runtime;
+            }
+            else {
+                ui->graphicsView->setBusy(0);
+                setMenuButtonsEnabled(1);
+                ui->lblStatus->setText("ESTADO: Causaste-me uma hemorragia cerebral.");
+                ui->graphicsView->clearCells();
+            }
+        }
+
+        void menuWindow::mazeSolvingTimeOut(){
+            QMessageBox::critical(this,"You've got Mail!","1 Mensagem Nova:\nDe: Computador\nPara: Utilizador desta aplicação\nConteúdo: Este labirinto é demasiado aberto e está-me a confundir todo! Por favor para.");
+            ui->btnSolveMaze->setEnabled(0);
             ui->graphicsView->clearCells();
-            ui->lblStatus->setText("ESTADO: A Mostrar o Caminho Correto...");
-            ui->graphicsView->scene()->update();
-            for(int i=currentMazeView->tempPath.size()-1;i>=0;i--){
-                ui->graphicsView->changeCellColour(currentMazeView->tempPath[i]->x,currentMazeView->tempPath[i]->y,currentMazeView->tempPath[i]->k,QColor(0, 200, 81));
-                delete currentMazeView->tempPath[i];
-                QTime dieTime= QTime::currentTime().addMSecs(1);
-                while (QTime::currentTime() < dieTime)
-                    QCoreApplication::processEvents(QEventLoop::AllEvents, 100);
-            }
-
-
-
-            ui->btnGenerate->setEnabled(1);
-            ui->btnResolve->setEnabled(1);
-            ui->btnCredits->setEnabled(1);
-            ui->btnSolveMaze->setEnabled(1);
-            currentMazeView->tempPath.clear();
-            ui->lblStatus->setText("ESTADO: Idle");
-            delete runtime;
         }
 
         void menuWindow::chartPathToCell(const int& tX,const int& tY){
             //qDebug()<<tX<<" "<<tY;
             if(ui->btnSolveMaze->isEnabled()){
                 ui->lblStatus->setText("ESTADO: A Mostrar Caminho para ("+QString::number(tX)+","+QString::number(tY)+")");
-                currentMazeView->mazeSolver(tX,tY);
+                currentMazeView->recursiveMazeSolver(tX,tY);
 
                 for(int i=currentMazeView->tempPath.size()-1;i>=0;i--){
                     ui->graphicsView->changeCellColour(currentMazeView->tempPath[i]->x,currentMazeView->tempPath[i]->y,currentMazeView->tempPath[i]->k,QColor(250, 200, 81));
@@ -383,6 +539,7 @@ QMazes* currentMazeView=nullptr;
                 }
                 currentMazeView->tempPath.clear();
             }
+
         }
 
         void menuWindow::updateStatusText(){
@@ -426,7 +583,6 @@ QMazes* currentMazeView=nullptr;
 
         ui->graphicsMazePreview->newMaze();
         ui->graphicsMazePreview->fitInView(ui->graphicsMazePreview->sceneRect());
-        ui->lblMazeCreatorName->setText("Sem Nome.maz");
     }
 
     void menuWindow::on_btnUserOpenMaze_clicked()
@@ -454,6 +610,8 @@ QMazes* currentMazeView=nullptr;
             QMessageBox::critical(this,"Labirinto Inválido","Labirinto têm de ter uma entrada e uma saída");
             return;
         }
+
+        if(ui->graphicsMazePreview->getSavedStatus()){ return;}
         QString mazeName;
         std::thread worker;
         if(currentMazeCreator!=nullptr) {
@@ -472,6 +630,7 @@ QMazes* currentMazeView=nullptr;
                 NameDialog popUp=NameDialog(this);
                 int result=popUp.exec();
                 if(result==QDialog::Rejected){
+                    if (worker.joinable()) worker.join();
                     return;
                 }
                 mazeName=popUp.getName();
@@ -483,7 +642,7 @@ QMazes* currentMazeView=nullptr;
             ui->graphicsMazePreview->setSavedStatus(1);
             currentMazeCreator->saveAsFile(mazeName.replace(" ",""));
         } else {
-            QMessageBox::critical(this,"Labirinto Inválido","Têm de haver 1 caminho válido para a saída.");
+            QMessageBox::critical(this,"Labirinto Inválido","Têm de haver 1 caminho válido para a saída e o labirinto NÃO pode ser demasiado aberto.");
         }
         if (worker.joinable()) worker.join();
     }
@@ -501,9 +660,9 @@ QMazes* currentMazeView=nullptr;
     }
 
     void menuWindow::resetMazeCreator(){
-        ui->lblMazeCreatorName->setText("Sem Título.maz");
+        ui->lblMazeCreatorName->setText("Sem Nome.maz");
         ui->graphicsMazePreview->deleteScene(ui->graphicsMazePreview->scene());
-        ui->graphicsMazePreview->setScene(nullptr);
+        ui->graphicsMazePreview->setScene(new QGraphicsScene);
         delete currentMazeCreator;
         currentMazeCreator=nullptr;
     }
@@ -579,9 +738,6 @@ QMazes* currentMazeView=nullptr;
             }
         }
     }
-
-
-
 
     void menuWindow::on_btnAddWall_clicked()
     {

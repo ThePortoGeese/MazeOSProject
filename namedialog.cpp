@@ -33,17 +33,30 @@ void NameDialog::on_buttonBox_clicked(QAbstractButton *button)
         setResult(QDialog::Accepted);
         emit finished(QDialog::Accepted);
     }
-    else {
-        QMessageBox::critical(this,"Inválido.","Nome não pode ser vazio nem conter caracteres especiais ([\\/:*?\"<>|]).");
-    }
 }
 
 bool NameDialog::validateStringForFile(const QString& fileName){
     static const QString invalidChars = "<>:\"/\\|?*"; // Windows restricted characters
-    if(fileName.isEmpty()) return false;
+    static const QStringList profaneWords = {
+        "merda", "porra", "caralho", "fdp", "foda", "puta", "cabrão","cabrao","estupido","merdoso", "estúpido", "burro",
+        "shit", "fuck", "bitch", "asshole", "bastard", "crap", "damn", "cunt", "motherfucker","nigger"
+    };
+
+    if (fileName.isEmpty()) {
+        QMessageBox::critical(this,"Inválido.","Nome não pode ser vazio.");
+        return false;
+    }
     for (const QChar &ch : fileName) {
         if (invalidChars.contains(ch)) {
-                return false; // Invalid character found
+            QMessageBox::critical(this,"Inválido.","Nome não pode ser vazio nem conter caracteres especiais ([\\/:*?\"<>|]).");
+            return false; // Caractere inválido encontrado
+        }
+    }
+
+    for (const QString &word : profaneWords) {
+        if (fileName.toLower().contains(word, Qt::CaseInsensitive)) {
+            QMessageBox::critical(this,"Inválido.","Nome não pode conter profanidade.");
+            return false; // Palavra proibida encontrada
         }
     }
 

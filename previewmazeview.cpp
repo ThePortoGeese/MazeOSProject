@@ -126,7 +126,7 @@ void PreviewMazeView::incrementCellsH(int h){
                 rect->setOuter();
             }
 
-            setSceneRect(0, 0, 4*x+(x+1), 4*y+(y+1));
+            setSceneRect(0, 0, sceneRect().width()+5,sceneRect().height());
         }
         fitInView(sceneRect());
     }
@@ -191,7 +191,7 @@ void PreviewMazeView::incrementCellsV(int h){
             }*/
 
 
-            setSceneRect(0, 0, 5*x+1, 5*y+1);
+            setSceneRect(0, 0, sceneRect().width(), sceneRect().height()+5);
         }
         fitInView(sceneRect());
     }
@@ -217,10 +217,20 @@ void PreviewMazeView::decrementCellsH(int h){
         }
 
         for(int j=0;j<y+1;j++){
+            if(j==0){
+                if(vWalls[j][x-1]->Brush()==cellB){
+                    entrance=0;
+                }
+            } else if(j==y){
+                if(vWalls[j][x-1]->Brush()==cellB){
+                    exit=0;
+                }
+            }
             //This deleted all horizontal walls from the last line
             scene()->removeItem(vWalls[j][x-1]);
             delete vWalls[j][x-1];
             vWalls[j].removeAt(x-1);
+
             //I still have to manually delete it cause I didn't use smart pointers (oops)
         }
 
@@ -241,6 +251,22 @@ void PreviewMazeView::decrementCellsV(int h){
         }
         for(int j=0;j<x+1;j++){
             //This deleted all horizontal walls from the last line
+
+
+            //Btw, hWalls always has y-1 lines of X columns, this is reversed for vWalls which has y lines of X-1 columns
+
+
+            //I need to make these variables 0 or the program will think there's an entrance and exit to the maze when there isn't
+            if(j==0){
+                if(hWalls[y-1][j]->Brush()==cellB){
+                    entrance=0;
+                }
+            } else if(j==0){
+                if(hWalls[y-1][j]->Brush()==cellB){
+                    exit=0;
+                }
+            }
+
             scene()->removeItem(hWalls[y-1][j]);
             delete hWalls[y-1][j];
             //I still have to manually delete it cause I didn't use smart pointers (oops)
@@ -248,7 +274,7 @@ void PreviewMazeView::decrementCellsV(int h){
         hWalls[y-1].clear();
 
         for(int j=0;j<x;j++){
-            //This deleted all horizontal walls from the last line
+            //This deleted all vertical walls from the last line
             scene()->removeItem(vWalls[y-1][j]);
             delete vWalls[y-1][j];
             //I still have to manually delete it cause I didn't use smart pointers (oops)

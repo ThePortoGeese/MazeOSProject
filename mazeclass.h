@@ -4,7 +4,7 @@
 #include <vector>
 #include <QWidget>
 #include <QObject>
-
+#include <chrono>
 
 namespace MazeEnums{
 enum directions{
@@ -36,9 +36,13 @@ public:
         return daMaze;
     }
     bool mazeChecker();
+    std::tuple<int,int> getEntrancePos();
 
-    void mazeSolver();
-    void mazeSolver(const int& tX,const int& tY);
+    virtual bool wallFollowerMazeSolver();
+    virtual bool recursiveMazeSolver();
+
+    virtual bool recursiveMazeSolver(const int& tX,const int& tY);
+
     const int& x() {return X;}
     const int& y() {return Y;}
 
@@ -49,9 +53,11 @@ public:
 protected:
     int X,Y;
     std::vector<std::vector<cell>> daMaze;
-    virtual bool recursiveSolver(std::vector<std::vector<bool>>& booleanGrid, const int i, const int y, const bool &store); //This is a recursive backtracker function
-    virtual bool recursiveSolver(std::vector<std::vector<bool>>& booleanGrid, const int i, const int y,const int& tX, const int& tY); //This is also a recursive backtracker function
+    virtual bool recursiveSolvingFunction(std::vector<std::vector<bool>>& booleanGrid, const int i, const int y, const bool &store); //This is a recursive backtracker function
+    virtual bool recursiveSolvingFunction(std::vector<std::vector<bool>>& booleanGrid, const int i, const int y,const int& tX, const int& tY); //This is also a recursive backtracker function
     virtual void recursiveDiggingFunction(int x, int y, std::vector<std::vector<bool> > &booleanGrid);
+private:
+    std::chrono::time_point<std::chrono::system_clock> startOfSolver;
 };
 
 class connection

@@ -17,6 +17,8 @@ public:
     void mousePressEvent(QGraphicsSceneMouseEvent *event) override;
 
     void hoverLeaveEvent(QGraphicsSceneHoverEvent* event) override;
+private:
+    bool clicked=0;
 signals:
     void solveToEvent(CellGraphicsRectItem*);
     void clearCells();

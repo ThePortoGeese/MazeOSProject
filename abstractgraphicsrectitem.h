@@ -54,7 +54,6 @@ public:
     void setOuter(){
         outerWall=1;
     }
-
     const bool& getOuter(){
         return outerWall;
     }
@@ -66,7 +65,6 @@ signals:
     void removedExit();
 protected:
     bool outerWall=0;
-    bool clicked=0;
     QBrush brush = QBrush(backGround);
 
 };

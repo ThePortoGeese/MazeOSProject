@@ -51,7 +51,6 @@ void cell::setup(std::vector<std::vector<cell>>& cells,std::tuple<int,int> pos){
         if(std::get<0>(pos)>=1) cells[(int)std::get<0>(pos)][(int)std::get<1>(pos)].connectionFrom.push_back(&cells[(int)std::get<0>(pos)-1][((int)std::get<1>(pos))].connectionsTo[1]);
         else cells[(int)std::get<0>(pos)][(int)std::get<1>(pos)].connectionFrom.push_back(nullptr);
 
-
     }
 
     {
@@ -191,8 +190,7 @@ void mazeClass::recursiveDiggingFunction(int x,int y, std::vector<std::vector<bo
     return;
 }
 
-void mazeClass::mazeSolver() {
-    std::vector<std::vector<bool>> booleanGrid(daMaze.size(), std::vector<bool>(daMaze[0].size(), false));
+std::tuple<int,int> mazeClass::getEntrancePos(){
     int ix=-1,iy=-1;
     for(int i=0;i<(int)daMaze.size();i++){
         for(int k=0;k<(int)daMaze[i][0].connectionFrom.size();k++){
@@ -217,16 +215,28 @@ void mazeClass::mazeSolver() {
         }
     }
 
-    //std::cout<<"Ix value: "<<ix<< " Iy value: "<<iy<<'\n';
+    return std::tuple<int,int>(ix,iy);
+}
 
-    if(recursiveSolver(booleanGrid, ix, iy,1)){
-        //std::cout<<"Success!\n";
+bool mazeClass::recursiveMazeSolver() {
+    std::vector<std::vector<bool>> booleanGrid(daMaze.size(), std::vector<bool>(daMaze[0].size(), false));
+    std::tuple<int,int> a = getEntrancePos();
+
+    //std::cout<<"Ix value: "<<ix<< " Iy value: "<<iy<<'\n';
+    startOfSolver = std::chrono::system_clock::now();
+    if(recursiveSolvingFunction(booleanGrid, std::get<0>(a), std::get<1>(a),1)){
+        std::reverse(correctPath.begin(),correctPath.end());
+        return 1;
     } else {
-        //std::cout<<"MASSIVE fail!\n";
+        return 0;
     }
 }
 
-bool mazeClass::recursiveSolver(std::vector<std::vector<bool>>& booleanGrid, const int i, const int j, const bool& store) {
+bool mazeClass::recursiveSolvingFunction(std::vector<std::vector<bool>>& booleanGrid, const int i, const int j, const bool& store) {
+    if(std::chrono::system_clock::now()-startOfSolver>std::chrono::milliseconds((long)(X*Y*1.25))){
+        return false;
+    }
+
     if (i<0||i>=(int)daMaze.size()||j<0||j>=(int)daMaze[0].size()||booleanGrid[i][j]) {
         return false;
     }
@@ -243,12 +253,11 @@ bool mazeClass::recursiveSolver(std::vector<std::vector<bool>>& booleanGrid, con
 
     booleanGrid[i][j] = true;
     std::random_shuffle(nums.begin(),nums.end());
-
     for(int k=0;k<4;k++){
         switch(nums[k]){
         case 1:
             if(daMaze[i][j].connectionFrom[0]!=nullptr&&daMaze[i][j].connectionFrom[0]->obstacle==0){
-                if(recursiveSolver(booleanGrid, i, j-1,store)) {
+                if(recursiveSolvingFunction(booleanGrid, i, j-1,store)) {
                     if(store)correctPath.push_back(&daMaze[i][j]);
                     return true;
                 }
@@ -256,7 +265,7 @@ bool mazeClass::recursiveSolver(std::vector<std::vector<bool>>& booleanGrid, con
             break;
         case 2:
             if(daMaze[i][j].connectionFrom[1]!=nullptr&&daMaze[i][j].connectionFrom[1]->obstacle==0){
-                if(recursiveSolver(booleanGrid, i-1, j,store)) {
+                if(recursiveSolvingFunction(booleanGrid, i-1, j,store)) {
                     if(store)correctPath.push_back(&daMaze[i][j]);
                     return true;
                 }
@@ -264,18 +273,21 @@ bool mazeClass::recursiveSolver(std::vector<std::vector<bool>>& booleanGrid, con
             break;
         case 3:
             if(daMaze[i][j].connectionsTo[0].to!=nullptr&&daMaze[i][j].connectionsTo[0].obstacle==0){
-                if(recursiveSolver(booleanGrid, i, j +1,store)) {
+                if(recursiveSolvingFunction(booleanGrid, i, j +1,store)) {
                     if(store)correctPath.push_back(&daMaze[i][j]);
                     return true;}
             }
             break;
         case 4:
             if(daMaze[i][j].connectionsTo[1].to!=nullptr&&daMaze[i][j].connectionsTo[1].obstacle==0){
-                if(recursiveSolver(booleanGrid, i+1, j,store)) {
+                if(recursiveSolvingFunction(booleanGrid, i+1, j,store)) {
                     if(store)correctPath.push_back(&daMaze[i][j]);
                     return true;}
             }
             break;
+        }
+        if(std::chrono::system_clock::now()-startOfSolver>std::chrono::milliseconds((long)(X*Y*1.25))){
+            return false;
         }
     }
 
@@ -285,46 +297,24 @@ bool mazeClass::recursiveSolver(std::vector<std::vector<bool>>& booleanGrid, con
 }
 
 
-void mazeClass::mazeSolver(const int& tX,const int& tY) {
+bool mazeClass::recursiveMazeSolver(const int& tX,const int& tY) {
     if(correctPath.size()!=0) {
         correctPath.clear();
     }
     std::vector<std::vector<bool>> booleanGrid(daMaze.size(), std::vector<bool>(daMaze[0].size(), false));
-    int ix=-1,iy=-1;
-    for(int i=0;i<(int)daMaze.size();i++){
-        for(int k=0;k<(int)daMaze[i][0].connectionFrom.size();k++){
-            if(daMaze[i][0].connectionFrom[k]!=nullptr){
-                if(daMaze[i][0].connectionFrom[k]->obstacle==2){
-                    ix=i;
-                    iy=0;
-                }
-            }
-        }
-    }
-    if(iy==-1){
-        for(int i=0;i<(int)daMaze[0].size();i++){
-            for(int k=0;k<(int)daMaze[0][i].connectionFrom.size();k++){
-                if(daMaze[0][i].connectionFrom[k]!=nullptr){
-                    if(daMaze[0][i].connectionFrom[k]->obstacle==2){
-                        ix=0;
-                        iy=i;
-                    }
-                }
-            }
-        }
-    }
+    std::tuple<int,int> a = getEntrancePos();
 
     //std::cout<<"Ix value: "<<ix<< " Iy value: "<<iy<<'\n';
 
-    if(recursiveSolver(booleanGrid, ix, iy,tX,tY)){
-        //std::cout<<"Success!\n";
+    if(recursiveSolvingFunction(booleanGrid, std::get<0>(a), std::get<1>(a),tX,tY)){
+        return true;
     } else {
-        //std::cout<<"MASSIVE fail!\n";
+        return false;
     }
 }
 
 //Overload of solver operation to find path to cell at (tX, tY)
-bool mazeClass::recursiveSolver(std::vector<std::vector<bool>>& booleanGrid, const int i, const int j,const int& tX,const int& tY) {
+bool mazeClass::recursiveSolvingFunction(std::vector<std::vector<bool>>& booleanGrid, const int i, const int j,const int& tX,const int& tY) {
     if(i==tY&&j==tX){
         //Do whatever you wanna do with this path here
         return true;
@@ -343,7 +333,7 @@ bool mazeClass::recursiveSolver(std::vector<std::vector<bool>>& booleanGrid, con
         switch(nums[k]){
         case 1:
             if(daMaze[i][j].connectionFrom[0]!=nullptr&&daMaze[i][j].connectionFrom[0]->obstacle==0){
-                if(recursiveSolver(booleanGrid, i, j-1,tX,tY)) {
+                if(recursiveSolvingFunction(booleanGrid, i, j-1,tX,tY)) {
                     //Do whatever you wanna do with this path here
                     return true;
                 }
@@ -351,7 +341,7 @@ bool mazeClass::recursiveSolver(std::vector<std::vector<bool>>& booleanGrid, con
             break;
         case 2:
             if(daMaze[i][j].connectionFrom[1]!=nullptr&&daMaze[i][j].connectionFrom[1]->obstacle==0){
-                if(recursiveSolver(booleanGrid, i-1, j,tX,tY)) {
+                if(recursiveSolvingFunction(booleanGrid, i-1, j,tX,tY)) {
                     //Do whatever you wanna do with this path here
                     return true;
                 }
@@ -359,55 +349,145 @@ bool mazeClass::recursiveSolver(std::vector<std::vector<bool>>& booleanGrid, con
             break;
         case 3:
             if(daMaze[i][j].connectionsTo[0].to!=nullptr&&daMaze[i][j].connectionsTo[0].obstacle==0){
-                if(recursiveSolver(booleanGrid, i, j +1,tX,tY)) {
+                if(recursiveSolvingFunction(booleanGrid, i, j +1,tX,tY)) {
                     //Do whatever you wanna do with this path here
                     return true;}
             }
             break;
         case 4:
             if(daMaze[i][j].connectionsTo[1].to!=nullptr&&daMaze[i][j].connectionsTo[1].obstacle==0){
-                if(recursiveSolver(booleanGrid, i+1, j,tX,tY)) {
+                if(recursiveSolvingFunction(booleanGrid, i+1, j,tX,tY)) {
                     //Do whatever you wanna do with this path here
                     return true;}
             }
             break;
         }
-
     }
     booleanGrid[i][j] = false;
 
     return false;
 }
+
+bool mazeClass::wallFollowerMazeSolver() {
+
+    correctPath.clear();
+    std::tuple<int,int> indices = getEntrancePos();
+
+    //std::cout<<"Ix value: "<<ix<< " Iy value: "<<iy<<'\n';
+    /*switch(rand()%2){
+
+    //Chooses if it follows the Right or Left direction
+    case 0:
+        dir = 'R';
+        break;
+    case 1:
+        dir = 'L';
+        break;
+    }*/
+    enum MoveDir { LEFT = 0, UP = 1, RIGHT = 2, DOWN = 3 };
+    MoveDir direction = RIGHT;
+    cell* currentCell = &daMaze[std::get<0>(indices)][std::get<1>(indices)];
+    startOfSolver = std::chrono::system_clock::now();
+    while (true) {
+
+        if(std::chrono::system_clock::now()-startOfSolver>std::chrono::milliseconds((long)(X*Y*5))){
+            return false;
+        }
+
+        cell *nextCell = nullptr;
+
+        // The Program tries to turn left first
+        MoveDir leftDir = static_cast<MoveDir>((direction + 3) % 4);
+
+        if (leftDir <= UP) { //Since half of the connections are stored in different places, I need to do this
+            if (currentCell->connectionFrom[leftDir] && currentCell->connectionFrom[leftDir]->obstacle == MazeEnums::noObstacles) {
+                direction = leftDir;
+                nextCell = currentCell->connectionFrom[leftDir]->from;
+            }
+        } else { // Conexões para direita e baixo estão em connectionsTo
+            if (currentCell->connectionsTo[leftDir - 2].to && currentCell->connectionsTo[leftDir - 2].obstacle == MazeEnums::noObstacles) {
+                direction = leftDir;
+                nextCell = currentCell->connectionsTo[leftDir - 2].to;
+            }
+        }
+
+        // Tries to continue moving
+        if (!nextCell) {
+            if (direction <= UP) { // Same as thing as before
+                if (currentCell->connectionFrom[direction] && currentCell->connectionFrom[direction]->obstacle == MazeEnums::noObstacles) {
+                    nextCell = currentCell->connectionFrom[direction]->from;
+                }
+            } else { // Same thing as before
+                if (currentCell->connectionsTo[direction - 2].to && currentCell->connectionsTo[direction - 2].obstacle == MazeEnums::noObstacles) {
+                    nextCell = currentCell->connectionsTo[direction - 2].to;
+                }
+            }
+        }
+
+        // Tries to turn right
+        if (!nextCell) {
+            MoveDir rightDir = static_cast<MoveDir>((direction + 1) % 4);
+            if (rightDir <= UP) {
+                if (currentCell->connectionFrom[rightDir] && currentCell->connectionFrom[rightDir]->obstacle == MazeEnums::noObstacles) {
+                    direction = rightDir;
+                    nextCell = currentCell->connectionFrom[rightDir]->from;
+                }
+            } else {
+                if (currentCell->connectionsTo[rightDir - 2].to && currentCell->connectionsTo[rightDir - 2].obstacle == MazeEnums::noObstacles) {
+                    direction = rightDir;
+                    nextCell = currentCell->connectionsTo[rightDir - 2].to;
+                }
+            }
+        }
+
+        // Turns Back, which means this was a dead end, therefore, I will mark it as true in the boolean grid
+        if (!nextCell) {
+            direction = static_cast<MoveDir>((direction + 2) % 4);
+            if (direction <= UP) { // Esquerda/Cima -> connectionFrom
+                nextCell = currentCell->connectionFrom[direction] ? currentCell->connectionFrom[direction]->from : nullptr;
+            } else { // Direita/Baixo -> connectionsTo
+                nextCell = currentCell->connectionsTo[direction - 2].to ? currentCell->connectionsTo[direction - 2].to : nullptr;
+            }
+
+        }
+
+        // Se encontrou um próximo passo, avança
+        if (nextCell) {
+            correctPath.push_back(currentCell);
+            //tempPathHolder.push_back(std::get<1>(indices),std::get<0>(indices),direction);
+            currentCell = nextCell;
+
+            // Verifica se chegou à saída
+            for (const auto &conn : currentCell->connectionsTo) {
+                if (conn.obstacle == MazeEnums::exit) {
+                    correctPath.push_back(currentCell);
+                    return true; // Solução encontrada!
+                }
+            }
+
+            if (direction == LEFT) {
+                std::get<1>(indices)--; // Move para a esquerda (diminuindo a coluna)
+            } else if (direction == UP) {
+                std::get<0>(indices)--; // Move para cima (diminuindo a linha)
+            } else if (direction == RIGHT) {
+                std::get<1>(indices)++; // Move para a esquerda (diminuindo a coluna)
+            } else if (direction == DOWN) {
+                std::get<0>(indices)++; // Move para cima (diminuindo a linha)
+            }
+        } else {
+            break; // Nenhuma saída encontrada
+        }
+    }
+}
+
 //This function ONLY checks the maze, it does NOT store the correct path anywhere, could be useful
 bool mazeClass::mazeChecker() {
     std::vector<std::vector<bool>> booleanGrid(daMaze.size(), std::vector<bool>(daMaze[0].size(), false));
-    int ix=-1,iy=-1;
-    for(int i=0;i<(int)daMaze.size();i++){
-        for(int k=0;k<(int)daMaze[i][0].connectionFrom.size();k++){
-            if(daMaze[i][0].connectionFrom[k]!=nullptr){
-                if(daMaze[i][0].connectionFrom[k]->obstacle==2){
-                    ix=i;
-                    iy=0;
-                }
-            }
-        }
-    }
-    if(iy==-1){
-        for(int i=0;i<(int)daMaze[0].size();i++){
-            for(int k=0;k<(int)daMaze[0][i].connectionFrom.size();k++){
-                if(daMaze[0][i].connectionFrom[k]!=nullptr){
-                    if(daMaze[0][i].connectionFrom[k]->obstacle==2){
-                        ix=0;
-                        iy=i;
-                    }
-                }
-            }
-        }
-    }
+    std::tuple<int,int> indices = getEntrancePos();
 
-    //std::cout<<"Ix value: "<<ix<< " Iy value: "<<iy<<'\n';
+    startOfSolver = std::chrono::system_clock::now();
 
-    if(recursiveSolver(booleanGrid, ix, iy,0)){
+    if(mazeClass::recursiveSolvingFunction(booleanGrid, std::get<0>(indices), std::get<1>(indices),0)){
         return true;
     } else {
         return false;

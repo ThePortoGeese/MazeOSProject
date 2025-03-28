@@ -8,11 +8,12 @@
         <file>resources/appLogo.png</file>
         <file>resources/algorithmTxt.html</file>
         <file>resources/recursiveDescription.txt</file>
-        <file>resources/recursiveFuncVideo.mp4</file>
         <file>resources/hardnessRating.txt</file>
         <file>resources/welcomepageStrip.png</file>
         <file>resources/appLogoBig.png</file>
         <file>resources/wallfollowerDesciption.txt</file>
+        <file>resources/proccessinstructions.txt</file>
+        <file>resources/deadEndFillingDescription.txt</file>
     </qresource>
     <qresource prefix="/fonts">
         <file>Roboto-Medium.ttf</file>

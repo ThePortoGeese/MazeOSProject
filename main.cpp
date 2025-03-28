@@ -1,4 +1,4 @@
-#include "menuwindow.h"
+#include "Widgets/menuwindow.h"
 #include "qmazes.h"
 #include <QApplication>
 #include <map>

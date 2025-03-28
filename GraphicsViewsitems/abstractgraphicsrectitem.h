@@ -6,6 +6,8 @@ static const QBrush cellB(QColor(0,0,0));
 static const QBrush backGround(QColor(111, 183, 214));
 static const QBrush correctPathColor(QColor(0, 200, 81));
 
+
+
 class AbstractGraphicsRectItem : public QGraphicsObject
 {
     Q_OBJECT
@@ -27,26 +29,20 @@ public:
         update();
     }
 
-    //Need to Rework this
-    virtual void mousePressEvent(QGraphicsSceneMouseEvent *event) override{
-        if(brush==cellB) {
-            emit removedEntrance();
-            emit removedExit();
-            setBrush(backGround);
-        }
-        else {
-             setBrush(cellB);
-             emit addedEntrance(this);
-             emit addedExit(this);
-        }
-
-        QGraphicsObject::mousePressEvent(event);
-    }
     void paint(QPainter *painter,
                const QStyleOptionGraphicsItem *option, QWidget *widget) override{
         Q_UNUSED(option);
         Q_UNUSED(widget);
         painter->setBrush(brush);
+
+
+        if(entrance){
+            painter->setBrush(Qt::green);
+
+        } else if(exit){
+            painter->setBrush(Qt::red);
+        }
+
         painter->setPen(Qt::NoPen);
         painter->drawRect(boundingRect());
     }
@@ -57,6 +53,15 @@ public:
     const bool& getOuter(){
         return outerWall;
     }
+    void setEntrance(bool b) {entrance=b;}
+
+    void setExit(bool b) {exit=b;}
+    const bool& getEntrance(){
+        return entrance;
+    }
+    const bool& getExit(){
+        return exit;
+    }
 signals:
     void addedEntrance(AbstractGraphicsRectItem*);
     void addedExit(AbstractGraphicsRectItem*);
@@ -65,6 +70,8 @@ signals:
     void removedExit();
 protected:
     bool outerWall=0;
+    bool entrance = 0;
+    bool exit = 0;
     QBrush brush = QBrush(backGround);
 
 };

@@ -483,7 +483,7 @@
    <string>MazeOS</string>
   </property>
   <property name="windowIcon">
-   <iconset resource="data.qrc">
+   <iconset resource="../data.qrc">
     <normaloff>:/others/resources/appLogo.png</normaloff>:/others/resources/appLogo.png</iconset>
   </property>
   <widget class="QWidget" name="centralwidget">
@@ -1009,6 +1009,9 @@
            <width>60</width>
            <height>60</height>
           </size>
+         </property>
+         <property name="toolTip">
+          <string>Clica-me para voltar à página principal!</string>
          </property>
          <property name="text">
           <string/>
@@ -1536,6 +1539,9 @@
              <family>Yu Gothic UI</family>
              <pointsize>16</pointsize>
             </font>
+           </property>
+           <property name="toolTip">
+            <string notr="true">Este botão leva-te a uma janela para criares o TEU próprio labirinto!</string>
            </property>
            <property name="styleSheet">
             <string notr="true">QPushButton {
@@ -2585,6 +2591,9 @@ QPushButton:disabled {
              </disabled>
             </palette>
            </property>
+           <property name="toolTip">
+            <string>Já viste que lugar tens no placar? Pressiona-me e vê!</string>
+           </property>
            <property name="styleSheet">
             <string notr="true">QPushButton {
 	background-color: rgb(0, 168, 232);
@@ -2617,7 +2626,7 @@ QPushButton:disabled {
             <string/>
            </property>
            <property name="icon">
-            <iconset resource="data.qrc">
+            <iconset resource="../data.qrc">
              <normaloff>:/buttonIcons/resources/trophyIcon.png</normaloff>:/buttonIcons/resources/trophyIcon.png</iconset>
            </property>
            <property name="iconSize">
@@ -3749,7 +3758,7 @@ QPushButton:disabled {
                  <string/>
                 </property>
                 <property name="pixmap">
-                 <pixmap resource="data.qrc">:/others/resources/appLogoBig.png</pixmap>
+                 <pixmap resource="../data.qrc">:/others/resources/appLogoBig.png</pixmap>
                 </property>
                 <property name="scaledContents">
                  <bool>true</bool>
@@ -3909,7 +3918,7 @@ QPushButton:disabled {
                  <string/>
                 </property>
                 <property name="pixmap">
-                 <pixmap resource="data.qrc">:/others/resources/welcomepageStrip.png</pixmap>
+                 <pixmap resource="../data.qrc">:/others/resources/welcomepageStrip.png</pixmap>
                 </property>
                 <property name="scaledContents">
                  <bool>true</bool>
@@ -3924,34 +3933,21 @@ QPushButton:disabled {
         </widget>
         <widget class="QWidget" name="pgNewUser">
          <layout class="QGridLayout" name="gridLayout_7">
-          <item row="2" column="5">
-           <spacer name="verticalSpacer_10">
+          <item row="1" column="0">
+           <spacer name="horizontalSpacer_12">
             <property name="orientation">
-             <enum>Qt::Orientation::Vertical</enum>
+             <enum>Qt::Orientation::Horizontal</enum>
+            </property>
+            <property name="sizeType">
+             <enum>QSizePolicy::Policy::Fixed</enum>
             </property>
             <property name="sizeHint" stdset="0">
              <size>
-              <width>20</width>
-              <height>40</height>
+              <width>40</width>
+              <height>20</height>
              </size>
             </property>
            </spacer>
-          </item>
-          <item row="1" column="2">
-           <widget class="QLabel" name="lblMazeCreatorName">
-            <property name="sizePolicy">
-             <sizepolicy hsizetype="MinimumExpanding" vsizetype="Preferred">
-              <horstretch>0</horstretch>
-              <verstretch>0</verstretch>
-             </sizepolicy>
-            </property>
-            <property name="text">
-             <string>Sem Nome.maz</string>
-            </property>
-            <property name="alignment">
-             <set>Qt::AlignmentFlag::AlignBottom|Qt::AlignmentFlag::AlignHCenter</set>
-            </property>
-           </widget>
           </item>
           <item row="3" column="5">
            <widget class="QGroupBox" name="groupBox_2">
@@ -3972,6 +3968,11 @@ QPushButton:disabled {
                  <horstretch>0</horstretch>
                  <verstretch>0</verstretch>
                 </sizepolicy>
+               </property>
+               <property name="toolTip">
+                <string>Este pincel permite-te demolir paredes em paredes válidas.
+
+(Só pode haver uma saída e uma entrada)</string>
                </property>
                <property name="styleSheet">
                 <string notr="true">QPushButton {
@@ -4003,7 +4004,7 @@ QPushButton:disabled {
                 <string/>
                </property>
                <property name="icon">
-                <iconset resource="data.qrc">
+                <iconset resource="../data.qrc">
                  <normaloff>:/buttonIcons/resources/removeWallsBrush.png</normaloff>:/buttonIcons/resources/removeWallsBrush.png</iconset>
                </property>
                <property name="iconSize">
@@ -4025,6 +4026,13 @@ QPushButton:disabled {
                  <verstretch>0</verstretch>
                 </sizepolicy>
                </property>
+               <property name="toolTip">
+                <string>Este botão diminui o labirinto horizontalmente por 1
+
+Shift+Click para diminuir o labirinto horizontalmente por 10
+
+Ctrl+Click para diminuir o labirinto horizontalmente por 10</string>
+               </property>
                <property name="styleSheet">
                 <string notr="true">QPushButton {
     color: rgb(2, 13, 26);
@@ -4036,7 +4044,7 @@ QPushButton:disabled {
                 <string/>
                </property>
                <property name="icon">
-                <iconset resource="data.qrc">
+                <iconset resource="../data.qrc">
                  <normaloff>:/buttonIcons/resources/contractMazeH.png</normaloff>:/buttonIcons/resources/contractMazeH.png</iconset>
                </property>
                <property name="iconSize">
@@ -4055,6 +4063,13 @@ QPushButton:disabled {
                  <verstretch>0</verstretch>
                 </sizepolicy>
                </property>
+               <property name="toolTip">
+                <string>Este botão diminui o labirinto verticalmente por 1
+
+Shift+Click para diminuir o labirinto verticalmente por 10
+
+Ctrl+Click para diminuir o labirinto verticalmente por 10</string>
+               </property>
                <property name="styleSheet">
                 <string notr="true">QPushButton {
     color: rgb(2, 13, 26);
@@ -4066,7 +4081,7 @@ QPushButton:disabled {
                 <string/>
                </property>
                <property name="icon">
-                <iconset resource="data.qrc">
+                <iconset resource="../data.qrc">
                  <normaloff>:/buttonIcons/resources/contractMazeV.png</normaloff>:/buttonIcons/resources/contractMazeV.png</iconset>
                </property>
                <property name="iconSize">
@@ -4080,31 +4095,138 @@ QPushButton:disabled {
             </layout>
            </widget>
           </item>
-          <item row="2" column="1" rowspan="2" colspan="4">
-           <widget class="PreviewMazeView" name="graphicsMazePreview">
+          <item row="1" column="1">
+           <widget class="QGroupBox" name="grpTools">
+            <property name="maximumSize">
+             <size>
+              <width>220</width>
+              <height>16777215</height>
+             </size>
+            </property>
+            <property name="title">
+             <string/>
+            </property>
+            <layout class="QHBoxLayout" name="horizontalLayout_4">
+             <item>
+              <widget class="QPushButton" name="btnNewUserMaze">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+               <property name="toolTip">
+                <string>Este botão cria um labirinto vazio</string>
+               </property>
+               <property name="styleSheet">
+                <string notr="true">QPushButton {
+    color: rgb(2, 13, 26);
+    border-width: 1px;
+    border-radius: 10px;
+}</string>
+               </property>
+               <property name="text">
+                <string/>
+               </property>
+               <property name="icon">
+                <iconset resource="../data.qrc">
+                 <normaloff>:/buttonIcons/resources/addMaze.png</normaloff>:/buttonIcons/resources/addMaze.png</iconset>
+               </property>
+               <property name="iconSize">
+                <size>
+                 <width>50</width>
+                 <height>50</height>
+                </size>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QPushButton" name="btnUserOpenMaze">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+               <property name="toolTip">
+                <string>Pressiona este botão para abrir um labirinto a partir dos ficheiros</string>
+               </property>
+               <property name="styleSheet">
+                <string notr="true">QPushButton {
+    color: rgb(2, 13, 26);
+    border-width: 1px;
+    border-radius: 10px;
+}</string>
+               </property>
+               <property name="text">
+                <string/>
+               </property>
+               <property name="icon">
+                <iconset resource="../data.qrc">
+                 <normaloff>:/buttonIcons/resources/openMaze.png</normaloff>:/buttonIcons/resources/openMaze.png</iconset>
+               </property>
+               <property name="iconSize">
+                <size>
+                 <width>50</width>
+                 <height>50</height>
+                </size>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QPushButton" name="btnUserSave">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+               <property name="toolTip">
+                <string>Pressiona este botão para guardares o teu labirinto</string>
+               </property>
+               <property name="styleSheet">
+                <string notr="true">QPushButton {
+    color: rgb(2, 13, 26);
+    border-width: 1px;
+    border-radius: 10px;
+}</string>
+               </property>
+               <property name="text">
+                <string/>
+               </property>
+               <property name="icon">
+                <iconset resource="../data.qrc">
+                 <normaloff>:/buttonIcons/resources/saveMaze.png</normaloff>:/buttonIcons/resources/saveMaze.png</iconset>
+               </property>
+               <property name="iconSize">
+                <size>
+                 <width>50</width>
+                 <height>50</height>
+                </size>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </widget>
+          </item>
+          <item row="1" column="2">
+           <widget class="QLabel" name="lblMazeCreatorName">
             <property name="sizePolicy">
-             <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
+             <sizepolicy hsizetype="MinimumExpanding" vsizetype="Preferred">
               <horstretch>0</horstretch>
               <verstretch>0</verstretch>
              </sizepolicy>
             </property>
+            <property name="toolTip">
+             <string>O nome do teu labirinto</string>
+            </property>
+            <property name="text">
+             <string>Sem Nome.maz</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignmentFlag::AlignBottom|Qt::AlignmentFlag::AlignHCenter</set>
+            </property>
            </widget>
-          </item>
-          <item row="1" column="0">
-           <spacer name="horizontalSpacer_12">
-            <property name="orientation">
-             <enum>Qt::Orientation::Horizontal</enum>
-            </property>
-            <property name="sizeType">
-             <enum>QSizePolicy::Policy::Fixed</enum>
-            </property>
-            <property name="sizeHint" stdset="0">
-             <size>
-              <width>40</width>
-              <height>20</height>
-             </size>
-            </property>
-           </spacer>
           </item>
           <item row="4" column="1">
            <spacer name="verticalSpacer_4">
@@ -4142,6 +4264,9 @@ QPushButton:disabled {
                  <verstretch>0</verstretch>
                 </sizepolicy>
                </property>
+               <property name="toolTip">
+                <string>Este pincel permite-te adicionar paredes em lugares livres</string>
+               </property>
                <property name="styleSheet">
                 <string notr="true">QPushButton {
     color: rgb(2, 13, 26);
@@ -4171,7 +4296,7 @@ QPushButton:disabled {
                 <string/>
                </property>
                <property name="icon">
-                <iconset resource="data.qrc">
+                <iconset resource="../data.qrc">
                  <normaloff>:/buttonIcons/resources/addWallsBrush.png</normaloff>:/buttonIcons/resources/addWallsBrush.png</iconset>
                </property>
                <property name="iconSize">
@@ -4196,6 +4321,13 @@ QPushButton:disabled {
                  <verstretch>0</verstretch>
                 </sizepolicy>
                </property>
+               <property name="toolTip">
+                <string>Este botão expande o labirinto horizontalmente por 1
+
+Shift+Click para expandir o labirinto horizontalmente por 10
+
+Ctrl+Click para expandir o labirinto horizontalmente por 10</string>
+               </property>
                <property name="styleSheet">
                 <string notr="true">QPushButton {
     color: rgb(2, 13, 26);
@@ -4207,7 +4339,7 @@ QPushButton:disabled {
                 <string/>
                </property>
                <property name="icon">
-                <iconset resource="data.qrc">
+                <iconset resource="../data.qrc">
                  <normaloff>:/buttonIcons/resources/expandMazeH.png</normaloff>:/buttonIcons/resources/expandMazeH.png</iconset>
                </property>
                <property name="iconSize">
@@ -4226,6 +4358,13 @@ QPushButton:disabled {
                  <verstretch>0</verstretch>
                 </sizepolicy>
                </property>
+               <property name="toolTip">
+                <string>Este botão expande o labirinto verticalmente por 1
+
+Shift+Click para expandir o labirinto verticalmente por 10
+
+Ctrl+Click para expandir o labirinto verticalmente por 10</string>
+               </property>
                <property name="styleSheet">
                 <string notr="true">QPushButton {
     color: rgb(2, 13, 26);
@@ -4237,7 +4376,7 @@ QPushButton:disabled {
                 <string/>
                </property>
                <property name="icon">
-                <iconset resource="data.qrc">
+                <iconset resource="../data.qrc">
                  <normaloff>:/buttonIcons/resources/expandMazeV.png</normaloff>:/buttonIcons/resources/expandMazeV.png</iconset>
                </property>
                <property name="iconSize">
@@ -4251,109 +4390,27 @@ QPushButton:disabled {
             </layout>
            </widget>
           </item>
-          <item row="1" column="1">
-           <widget class="QGroupBox" name="grpTools">
-            <property name="maximumSize">
+          <item row="2" column="5">
+           <spacer name="verticalSpacer_10">
+            <property name="orientation">
+             <enum>Qt::Orientation::Vertical</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
              <size>
-              <width>220</width>
-              <height>16777215</height>
+              <width>20</width>
+              <height>40</height>
              </size>
             </property>
-            <property name="title">
-             <string/>
+           </spacer>
+          </item>
+          <item row="2" column="1" rowspan="2" colspan="4">
+           <widget class="PreviewMazeView" name="graphicsMazePreview">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
             </property>
-            <layout class="QHBoxLayout" name="horizontalLayout_4">
-             <item>
-              <widget class="QPushButton" name="btnNewUserMaze">
-               <property name="sizePolicy">
-                <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
-                 <horstretch>0</horstretch>
-                 <verstretch>0</verstretch>
-                </sizepolicy>
-               </property>
-               <property name="styleSheet">
-                <string notr="true">QPushButton {
-    color: rgb(2, 13, 26);
-    border-width: 1px;
-    border-radius: 10px;
-}</string>
-               </property>
-               <property name="text">
-                <string/>
-               </property>
-               <property name="icon">
-                <iconset resource="data.qrc">
-                 <normaloff>:/buttonIcons/resources/addMaze.png</normaloff>:/buttonIcons/resources/addMaze.png</iconset>
-               </property>
-               <property name="iconSize">
-                <size>
-                 <width>50</width>
-                 <height>50</height>
-                </size>
-               </property>
-              </widget>
-             </item>
-             <item>
-              <widget class="QPushButton" name="btnUserOpenMaze">
-               <property name="sizePolicy">
-                <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
-                 <horstretch>0</horstretch>
-                 <verstretch>0</verstretch>
-                </sizepolicy>
-               </property>
-               <property name="styleSheet">
-                <string notr="true">QPushButton {
-    color: rgb(2, 13, 26);
-    border-width: 1px;
-    border-radius: 10px;
-}</string>
-               </property>
-               <property name="text">
-                <string/>
-               </property>
-               <property name="icon">
-                <iconset resource="data.qrc">
-                 <normaloff>:/buttonIcons/resources/openMaze.png</normaloff>:/buttonIcons/resources/openMaze.png</iconset>
-               </property>
-               <property name="iconSize">
-                <size>
-                 <width>50</width>
-                 <height>50</height>
-                </size>
-               </property>
-              </widget>
-             </item>
-             <item>
-              <widget class="QPushButton" name="btnUserSave">
-               <property name="sizePolicy">
-                <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
-                 <horstretch>0</horstretch>
-                 <verstretch>0</verstretch>
-                </sizepolicy>
-               </property>
-               <property name="styleSheet">
-                <string notr="true">QPushButton {
-    color: rgb(2, 13, 26);
-    border-width: 1px;
-    border-radius: 10px;
-}</string>
-               </property>
-               <property name="text">
-                <string/>
-               </property>
-               <property name="icon">
-                <iconset resource="data.qrc">
-                 <normaloff>:/buttonIcons/resources/saveMaze.png</normaloff>:/buttonIcons/resources/saveMaze.png</iconset>
-               </property>
-               <property name="iconSize">
-                <size>
-                 <width>50</width>
-                 <height>50</height>
-                </size>
-               </property>
-              </widget>
-             </item>
-            </layout>
            </widget>
           </item>
          </layout>
@@ -6140,103 +6197,14 @@ QPushButton:disabled {
         </widget>
         <widget class="QWidget" name="pgLabProcess">
          <layout class="QGridLayout" name="gridLayout_6">
-          <item row="0" column="1">
+          <item row="2" column="1">
            <widget class="QStackedWidget" name="stackedWidgetLabView">
+            <property name="currentIndex">
+             <number>2</number>
+            </property>
             <widget class="QWidget" name="pgSelectFile">
              <layout class="QGridLayout" name="gridLayout_9">
-              <item row="0" column="1">
-               <spacer name="verticalSpacer_7">
-                <property name="orientation">
-                 <enum>Qt::Orientation::Vertical</enum>
-                </property>
-                <property name="sizeType">
-                 <enum>QSizePolicy::Policy::Fixed</enum>
-                </property>
-                <property name="sizeHint" stdset="0">
-                 <size>
-                  <width>20</width>
-                  <height>40</height>
-                 </size>
-                </property>
-               </spacer>
-              </item>
-              <item row="9" column="4">
-               <spacer name="verticalSpacer_8">
-                <property name="orientation">
-                 <enum>Qt::Orientation::Vertical</enum>
-                </property>
-                <property name="sizeType">
-                 <enum>QSizePolicy::Policy::Minimum</enum>
-                </property>
-                <property name="sizeHint" stdset="0">
-                 <size>
-                  <width>20</width>
-                  <height>60</height>
-                 </size>
-                </property>
-               </spacer>
-              </item>
-              <item row="1" column="1" colspan="2">
-               <widget class="QPushButton" name="btnSelectFileForViewing">
-                <property name="sizePolicy">
-                 <sizepolicy hsizetype="Minimum" vsizetype="MinimumExpanding">
-                  <horstretch>0</horstretch>
-                  <verstretch>0</verstretch>
-                 </sizepolicy>
-                </property>
-                <property name="minimumSize">
-                 <size>
-                  <width>50</width>
-                  <height>50</height>
-                 </size>
-                </property>
-                <property name="maximumSize">
-                 <size>
-                  <width>16777215</width>
-                  <height>16777215</height>
-                 </size>
-                </property>
-                <property name="text">
-                 <string>Selecione Um Ficheiro de Tipo .maz</string>
-                </property>
-                <property name="autoDefault">
-                 <bool>false</bool>
-                </property>
-                <property name="flat">
-                 <bool>false</bool>
-                </property>
-               </widget>
-              </item>
-              <item row="9" column="2">
-               <spacer name="horizontalSpacer_8">
-                <property name="orientation">
-                 <enum>Qt::Orientation::Horizontal</enum>
-                </property>
-                <property name="sizeType">
-                 <enum>QSizePolicy::Policy::MinimumExpanding</enum>
-                </property>
-                <property name="sizeHint" stdset="0">
-                 <size>
-                  <width>200</width>
-                  <height>20</height>
-                 </size>
-                </property>
-               </spacer>
-              </item>
-              <item row="5" column="1">
-               <spacer name="verticalSpacer_13">
-                <property name="orientation">
-                 <enum>Qt::Orientation::Vertical</enum>
-                </property>
-                <property name="sizeHint" stdset="0">
-                 <size>
-                  <width>20</width>
-                  <height>40</height>
-                 </size>
-                </property>
-               </spacer>
-              </item>
-              <item row="9" column="1">
+              <item row="7" column="1">
                <widget class="QPushButton" name="btnSelectFileNext">
                 <property name="sizePolicy">
                  <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
@@ -6730,26 +6698,45 @@ QPushButton:disabled {
                   <pointsize>16</pointsize>
                  </font>
                 </property>
+                <property name="toolTip">
+                 <string>Quando estiveres acabdo, pressiona-me para continuar</string>
+                </property>
                 <property name="text">
                  <string>Próximo</string>
                 </property>
                </widget>
               </item>
-              <item row="8" column="4">
-               <spacer name="verticalSpacer_6">
+              <item row="7" column="4">
+               <spacer name="verticalSpacer_8">
                 <property name="orientation">
                  <enum>Qt::Orientation::Vertical</enum>
                 </property>
                 <property name="sizeType">
-                 <enum>QSizePolicy::Policy::MinimumExpanding</enum>
+                 <enum>QSizePolicy::Policy::Minimum</enum>
                 </property>
                 <property name="sizeHint" stdset="0">
                  <size>
                   <width>20</width>
-                  <height>40</height>
+                  <height>60</height>
                  </size>
                 </property>
                </spacer>
+              </item>
+              <item row="1" column="3" colspan="2">
+               <widget class="QLabel" name="lblSelectedFile">
+                <property name="minimumSize">
+                 <size>
+                  <width>400</width>
+                  <height>0</height>
+                 </size>
+                </property>
+                <property name="toolTip">
+                 <string>Nome do ficheiro selecionado</string>
+                </property>
+                <property name="text">
+                 <string/>
+                </property>
+               </widget>
               </item>
               <item row="0" column="4">
                <spacer name="horizontalSpacer_10">
@@ -6767,23 +6754,39 @@ QPushButton:disabled {
                 </property>
                </spacer>
               </item>
-              <item row="1" column="3" colspan="2">
-               <widget class="QLabel" name="lblSelectedFile">
-                <property name="minimumSize">
-                 <size>
-                  <width>400</width>
-                  <height>0</height>
-                 </size>
-                </property>
+              <item row="2" column="1" colspan="2">
+               <widget class="QLabel" name="label">
                 <property name="text">
-                 <string/>
+                 <string>ou</string>
+                </property>
+                <property name="alignment">
+                 <set>Qt::AlignmentFlag::AlignCenter</set>
                 </property>
                </widget>
               </item>
-              <item row="7" column="1">
-               <spacer name="verticalSpacer_11">
+              <item row="6" column="4">
+               <spacer name="verticalSpacer_6">
                 <property name="orientation">
                  <enum>Qt::Orientation::Vertical</enum>
+                </property>
+                <property name="sizeType">
+                 <enum>QSizePolicy::Policy::MinimumExpanding</enum>
+                </property>
+                <property name="sizeHint" stdset="0">
+                 <size>
+                  <width>20</width>
+                  <height>40</height>
+                 </size>
+                </property>
+               </spacer>
+              </item>
+              <item row="0" column="1">
+               <spacer name="verticalSpacer_7">
+                <property name="orientation">
+                 <enum>Qt::Orientation::Vertical</enum>
+                </property>
+                <property name="sizeType">
+                 <enum>QSizePolicy::Policy::Fixed</enum>
                 </property>
                 <property name="sizeHint" stdset="0">
                  <size>
@@ -6801,12 +6804,78 @@ QPushButton:disabled {
                   <verstretch>0</verstretch>
                  </sizepolicy>
                 </property>
+                <property name="toolTip">
+                 <string>Este botão pede ao computador para gerar um labirinto &quot;aleatório&quot;.</string>
+                </property>
                 <property name="text">
                  <string>Labirinto Aleatório</string>
                 </property>
                </widget>
               </item>
-              <item row="6" column="1">
+              <item row="5" column="1">
+               <spacer name="verticalSpacer_11">
+                <property name="orientation">
+                 <enum>Qt::Orientation::Vertical</enum>
+                </property>
+                <property name="sizeHint" stdset="0">
+                 <size>
+                  <width>20</width>
+                  <height>40</height>
+                 </size>
+                </property>
+               </spacer>
+              </item>
+              <item row="7" column="2">
+               <spacer name="horizontalSpacer_8">
+                <property name="orientation">
+                 <enum>Qt::Orientation::Horizontal</enum>
+                </property>
+                <property name="sizeType">
+                 <enum>QSizePolicy::Policy::MinimumExpanding</enum>
+                </property>
+                <property name="sizeHint" stdset="0">
+                 <size>
+                  <width>200</width>
+                  <height>20</height>
+                 </size>
+                </property>
+               </spacer>
+              </item>
+              <item row="1" column="1" colspan="2">
+               <widget class="QPushButton" name="btnSelectFileForViewing">
+                <property name="sizePolicy">
+                 <sizepolicy hsizetype="Minimum" vsizetype="MinimumExpanding">
+                  <horstretch>0</horstretch>
+                  <verstretch>0</verstretch>
+                 </sizepolicy>
+                </property>
+                <property name="minimumSize">
+                 <size>
+                  <width>50</width>
+                  <height>50</height>
+                 </size>
+                </property>
+                <property name="maximumSize">
+                 <size>
+                  <width>16777215</width>
+                  <height>16777215</height>
+                 </size>
+                </property>
+                <property name="toolTip">
+                 <string>Este botão abre o gestor de ficheiros para te permitir selecionar qualquer labirinto criado por utilizadores.</string>
+                </property>
+                <property name="text">
+                 <string>Selecione Um Ficheiro de Tipo .maz</string>
+                </property>
+                <property name="autoDefault">
+                 <bool>false</bool>
+                </property>
+                <property name="flat">
+                 <bool>false</bool>
+                </property>
+               </widget>
+              </item>
+              <item row="4" column="1">
                <spacer name="verticalSpacer_12">
                 <property name="orientation">
                  <enum>Qt::Orientation::Vertical</enum>
@@ -6819,17 +6888,7 @@ QPushButton:disabled {
                 </property>
                </spacer>
               </item>
-              <item row="2" column="1" colspan="2">
-               <widget class="QLabel" name="label">
-                <property name="text">
-                 <string>ou</string>
-                </property>
-                <property name="alignment">
-                 <set>Qt::AlignmentFlag::AlignCenter</set>
-                </property>
-               </widget>
-              </item>
-              <item row="8" column="1" colspan="2">
+              <item row="6" column="1" colspan="2">
                <spacer name="horizontalSpacer_11">
                 <property name="orientation">
                  <enum>Qt::Orientation::Horizontal</enum>
@@ -6845,36 +6904,10 @@ QPushButton:disabled {
                 </property>
                </spacer>
               </item>
-              <item row="4" column="1">
-               <spacer name="verticalSpacer_14">
-                <property name="orientation">
-                 <enum>Qt::Orientation::Vertical</enum>
-                </property>
-                <property name="sizeHint" stdset="0">
-                 <size>
-                  <width>20</width>
-                  <height>40</height>
-                 </size>
-                </property>
-               </spacer>
-              </item>
              </layout>
             </widget>
             <widget class="QWidget" name="pgSelectAlgorithm">
              <layout class="QGridLayout" name="gridLayout_10">
-              <item row="1" column="1">
-               <spacer name="horizontalSpacer_9">
-                <property name="orientation">
-                 <enum>Qt::Orientation::Horizontal</enum>
-                </property>
-                <property name="sizeHint" stdset="0">
-                 <size>
-                  <width>40</width>
-                  <height>20</height>
-                 </size>
-                </property>
-               </spacer>
-              </item>
               <item row="1" column="0">
                <widget class="QPushButton" name="btnSelectAlgorithmNext">
                 <property name="sizePolicy">
@@ -7363,10 +7396,26 @@ QPushButton:disabled {
                   <pointsize>16</pointsize>
                  </font>
                 </property>
+                <property name="toolTip">
+                 <string>Quando estiveres acabdo, pressiona-me para continuar</string>
+                </property>
                 <property name="text">
                  <string>Próximo</string>
                 </property>
                </widget>
+              </item>
+              <item row="1" column="1">
+               <spacer name="horizontalSpacer_9">
+                <property name="orientation">
+                 <enum>Qt::Orientation::Horizontal</enum>
+                </property>
+                <property name="sizeHint" stdset="0">
+                 <size>
+                  <width>40</width>
+                  <height>20</height>
+                 </size>
+                </property>
+               </spacer>
               </item>
               <item row="0" column="0" colspan="2">
                <widget class="QScrollArea" name="scrlAreaSelectAlgorithm">
@@ -7384,35 +7433,25 @@ QPushButton:disabled {
                   <rect>
                    <x>0</x>
                    <y>0</y>
-                   <width>52</width>
-                   <height>16</height>
+                   <width>98</width>
+                   <height>28</height>
                   </rect>
                  </property>
                  <layout class="QHBoxLayout" name="horizontalLayout_3"/>
                 </widget>
                </widget>
               </item>
-              <item row="1" column="2">
-               <spacer name="verticalSpacer_9">
-                <property name="orientation">
-                 <enum>Qt::Orientation::Vertical</enum>
-                </property>
-                <property name="sizeType">
-                 <enum>QSizePolicy::Policy::Minimum</enum>
-                </property>
-                <property name="sizeHint" stdset="0">
-                 <size>
-                  <width>20</width>
-                  <height>60</height>
-                 </size>
-                </property>
-               </spacer>
-              </item>
              </layout>
             </widget>
             <widget class="QWidget" name="pgLabViewProccess">
              <layout class="QGridLayout" name="gridLayout_8">
-              <item row="1" column="3">
+              <property name="topMargin">
+               <number>12</number>
+              </property>
+              <item row="1" column="1" colspan="4">
+               <widget class="mazeView" name="graphicsView"/>
+              </item>
+              <item row="0" column="4">
                <widget class="QLabel" name="lblStatus">
                 <property name="palette">
                  <palette>
@@ -7492,6 +7531,9 @@ QPushButton:disabled {
                   <pointsize>16</pointsize>
                  </font>
                 </property>
+                <property name="toolTip">
+                 <string>O que o computador estou a fazer</string>
+                </property>
                 <property name="text">
                  <string>ESTADO: Idle</string>
                 </property>
@@ -7501,22 +7543,6 @@ QPushButton:disabled {
                </widget>
               </item>
               <item row="2" column="4">
-               <spacer name="horizontalSpacer_5">
-                <property name="orientation">
-                 <enum>Qt::Orientation::Horizontal</enum>
-                </property>
-                <property name="sizeType">
-                 <enum>QSizePolicy::Policy::Fixed</enum>
-                </property>
-                <property name="sizeHint" stdset="0">
-                 <size>
-                  <width>40</width>
-                  <height>20</height>
-                 </size>
-                </property>
-               </spacer>
-              </item>
-              <item row="3" column="3">
                <spacer name="horizontalSpacer_4">
                 <property name="orientation">
                  <enum>Qt::Orientation::Horizontal</enum>
@@ -7532,10 +7558,23 @@ QPushButton:disabled {
                 </property>
                </spacer>
               </item>
-              <item row="2" column="1" colspan="3">
-               <widget class="mazeView" name="graphicsView"/>
+              <item row="1" column="5">
+               <spacer name="horizontalSpacer_5">
+                <property name="orientation">
+                 <enum>Qt::Orientation::Horizontal</enum>
+                </property>
+                <property name="sizeType">
+                 <enum>QSizePolicy::Policy::Fixed</enum>
+                </property>
+                <property name="sizeHint" stdset="0">
+                 <size>
+                  <width>40</width>
+                  <height>20</height>
+                 </size>
+                </property>
+               </spacer>
               </item>
-              <item row="2" column="0">
+              <item row="1" column="0">
                <spacer name="horizontalSpacer_7">
                 <property name="orientation">
                  <enum>Qt::Orientation::Horizontal</enum>
@@ -7551,7 +7590,49 @@ QPushButton:disabled {
                 </property>
                </spacer>
               </item>
-              <item row="3" column="0" colspan="3">
+              <item row="0" column="0" colspan="2">
+               <widget class="QLabel" name="lblMazeName">
+                <property name="palette">
+                 <palette>
+                  <active>
+                   <colorrole role="WindowText">
+                    <brush brushstyle="SolidPattern">
+                     <color alpha="255">
+                      <red>176</red>
+                      <green>190</green>
+                      <blue>197</blue>
+                     </color>
+                    </brush>
+                   </colorrole>
+                  </active>
+                  <inactive>
+                   <colorrole role="WindowText">
+                    <brush brushstyle="SolidPattern">
+                     <color alpha="255">
+                      <red>176</red>
+                      <green>190</green>
+                      <blue>197</blue>
+                     </color>
+                    </brush>
+                   </colorrole>
+                  </inactive>
+                  <disabled/>
+                 </palette>
+                </property>
+                <property name="font">
+                 <font>
+                  <pointsize>32</pointsize>
+                 </font>
+                </property>
+                <property name="toolTip">
+                 <string>O nome deste labirinto</string>
+                </property>
+                <property name="text">
+                 <string>TextLabel</string>
+                </property>
+               </widget>
+              </item>
+              <item row="2" column="0" colspan="4">
                <widget class="QPushButton" name="btnSolveMaze">
                 <property name="sizePolicy">
                  <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
@@ -8045,56 +8126,36 @@ QPushButton:disabled {
                   <pointsize>16</pointsize>
                  </font>
                 </property>
+                <property name="toolTip">
+                 <string>Pressiona-me para resolver o labirinto. Achas que consegues ser mais rápido?
+</string>
+                </property>
                 <property name="text">
                  <string>Resolver o Labirinto</string>
                 </property>
                </widget>
               </item>
-              <item row="0" column="0" rowspan="2" colspan="3">
-               <layout class="QHBoxLayout" name="horizontalLayout_5">
-                <item>
-                 <widget class="QLabel" name="lblMazeName">
-                  <property name="palette">
-                   <palette>
-                    <active>
-                     <colorrole role="WindowText">
-                      <brush brushstyle="SolidPattern">
-                       <color alpha="255">
-                        <red>176</red>
-                        <green>190</green>
-                        <blue>197</blue>
-                       </color>
-                      </brush>
-                     </colorrole>
-                    </active>
-                    <inactive>
-                     <colorrole role="WindowText">
-                      <brush brushstyle="SolidPattern">
-                       <color alpha="255">
-                        <red>176</red>
-                        <green>190</green>
-                        <blue>197</blue>
-                       </color>
-                      </brush>
-                     </colorrole>
-                    </inactive>
-                    <disabled/>
-                   </palette>
-                  </property>
-                  <property name="font">
-                   <font>
-                    <pointsize>32</pointsize>
-                   </font>
-                  </property>
-                  <property name="text">
-                   <string>TextLabel</string>
-                  </property>
-                 </widget>
-                </item>
-               </layout>
-              </item>
              </layout>
             </widget>
+           </widget>
+          </item>
+          <item row="0" column="1">
+           <widget class="GraphicsLabViewProccess" name="graphicsLabProccessView">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="MinimumExpanding" vsizetype="Maximum">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>16777215</width>
+              <height>120</height>
+             </size>
+            </property>
+            <property name="toolTip">
+             <string>Os passos que tens de seguir para o computador resolver o labirinto</string>
+            </property>
            </widget>
           </item>
          </layout>
@@ -8181,6 +8242,9 @@ QPushButton:disabled {
           <verstretch>0</verstretch>
          </sizepolicy>
         </property>
+        <property name="toolTip">
+         <string>Queres saber quem fez isto? Pressiona-me!</string>
+        </property>
         <property name="text">
          <string>Créditos</string>
         </property>
@@ -8191,6 +8255,9 @@ QPushButton:disabled {
       </item>
       <item row="1" column="0">
        <widget class="QPushButton" name="btnSummary">
+        <property name="toolTip">
+         <string>Queres saber como isto funciona? Pressiona-me!</string>
+        </property>
         <property name="text">
          <string/>
         </property>
@@ -8224,32 +8291,57 @@ QPushButton:disabled {
   <customwidget>
    <class>CustomVideoWidget</class>
    <extends>QWidget</extends>
-   <header location="global">customvideowidget.h</header>
+   <header>Widgets/customvideowidget.h</header>
    <container>1</container>
   </customwidget>
   <customwidget>
    <class>mazeView</class>
    <extends>QGraphicsView</extends>
-   <header location="global">mazeview.h</header>
+   <header>GraphicsViews/mazeview.h</header>
   </customwidget>
   <customwidget>
    <class>PreviewMazeView</class>
    <extends>QGraphicsView</extends>
-   <header>previewmazeview.h</header>
+   <header>GraphicsViews/previewmazeview.h</header>
   </customwidget>
   <customwidget>
    <class>CrementButtons</class>
    <extends>QPushButton</extends>
-   <header>crementbuttons.h</header>
+   <header>Widgets/crementbuttons.h</header>
   </customwidget>
   <customwidget>
    <class>QLabelWithPressSignal</class>
    <extends>QLabel</extends>
-   <header>qlabelwithpresssignal.h</header>
+   <header>Widgets/qlabelwithpresssignal.h</header>
+  </customwidget>
+  <customwidget>
+   <class>GraphicsLabViewProccess</class>
+   <extends>QGraphicsView</extends>
+   <header>GraphicsViews/graphicslabviewproccess.h</header>
   </customwidget>
  </customwidgets>
  <resources>
-  <include location="data.qrc"/>
+  <include location="../data.qrc"/>
  </resources>
- <connections/>
+ <connections>
+  <connection>
+   <sender>btnResolve</sender>
+   <signal>clicked()</signal>
+   <receiver>menuWindow</receiver>
+   <slot>startLabViewProccess()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>836</x>
+     <y>67</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>844</x>
+     <y>103</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+ <slots>
+  <slot>startLabViewProccess()</slot>
+ </slots>
 </ui>

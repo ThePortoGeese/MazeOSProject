@@ -50,11 +50,11 @@ QMazes* currentMazeView=nullptr;
 
 
         //Stuff Related to the algorithm choosing thingies
-        AlgorithmSelectionBox* recursive = new AlgorithmSelectionBox("Algoritmo Recursivo","qrc:/others/resources/recursiveDescription.txt","qrc:/others/resources/recursiveFuncVideo.mp4",ui->scrlAreaSelectAlgorithm);
+        AlgorithmSelectionBox* recursive = new AlgorithmSelectionBox("Algoritmo Recursivo","qrc:/others/resources/recursiveDescription.txt",ui->scrlAreaSelectAlgorithm);
         ui->scrlAreaSelectAlgorithmContents->layout()->addWidget(recursive);
-        AlgorithmSelectionBox* other = new AlgorithmSelectionBox("Algoritmo \"Abraça Paredes\"","qrc:/others/resources/wallfollowerDesciption.txt","",ui->scrlAreaSelectAlgorithm);
+        AlgorithmSelectionBox* other = new AlgorithmSelectionBox("\"Abraça Paredes\"","qrc:/others/resources/wallfollowerDesciption.txt",ui->scrlAreaSelectAlgorithm);
         ui->scrlAreaSelectAlgorithmContents->layout()->addWidget(other);
-        AlgorithmSelectionBox* other1 = new AlgorithmSelectionBox("Brevemente","","",ui->scrlAreaSelectAlgorithm);
+        AlgorithmSelectionBox* other1 = new AlgorithmSelectionBox("Preenchedor de Becos","qrc:/others/resources/deadEndFillingDescription.txt",ui->scrlAreaSelectAlgorithm);
         ui->scrlAreaSelectAlgorithmContents->layout()->addWidget(other1);
         for(int i=0;i<ui->scrlAreaSelectAlgorithmContents->children().size();i++){
             AlgorithmSelectionBox* box=dynamic_cast<AlgorithmSelectionBox*>(ui->scrlAreaSelectAlgorithmContents->children()[i]);
@@ -110,6 +110,9 @@ QMazes* currentMazeView=nullptr;
             lbl->setSizePolicy(QSizePolicy::Minimum,QSizePolicy::Fixed);
         }
         connect(ui->lblImage,SIGNAL(mousePressed()),this,SLOT(appLogoClick()));
+
+        ui->graphicsLabProccessView->setNBalls(3);
+
     }
 
     menuWindow::~menuWindow()
@@ -139,11 +142,19 @@ QMazes* currentMazeView=nullptr;
         }
         QWidget::resizeEvent(event);
     }
+
+    void menuWindow::keyPressEvent(QKeyEvent* event)
+    {
+        if (event->modifiers() == Qt::ControlModifier && event->key()==Qt::Key_Z && ui->stackedWidget->currentIndex()==pgNewUser)
+        {
+            ui->graphicsMazePreview->undoActions();
+        }
+    }
 //End og General Functions
 
 //Functions about the above and below the stacked widgetbuttons
 
-    void menuWindow::on_btnResolve_clicked()
+    void menuWindow::startLabViewProccess()
     {
         ui->btnResolve->setChecked(1);
         ui->btnLeaderBoards->setChecked(0);
@@ -164,11 +175,20 @@ QMazes* currentMazeView=nullptr;
 
 
         if(ui->stackedWidget->currentIndex()==pgNewUser) resetMazeCreator();
+        else if (ui->stackedWidget->currentIndex()==pgLabViewProccess && ui->stackedWidgetLabView->currentIndex()==pgLabView){
+            QGraphicsScene* scene = ui->graphicsView->scene();
+            ui->graphicsView->setScene(new QGraphicsScene);
+            ui->graphicsView->deleteScene(scene);
+        }
 
         ui->stackedWidget->setCurrentIndex(pgLabViewProccess);
         ui->stackedWidgetLabView->setCurrentIndex(pgSelectFile);
         ui->lblSelectedFile->setText("");
         ui->btnSelectFileNext->setVisible(0);
+
+        ui->graphicsLabProccessView->setBallsInactive();
+        ui->graphicsLabProccessView->setNCircleActive(0);
+
     }
     void menuWindow::appLogoClick()
     {
@@ -191,6 +211,11 @@ QMazes* currentMazeView=nullptr;
 
 
         if(ui->stackedWidget->currentIndex()==pgNewUser) resetMazeCreator();
+        else if (ui->stackedWidget->currentIndex()==pgLabViewProccess && ui->stackedWidgetLabView->currentIndex()==pgLabView){
+            QGraphicsScene* scene = ui->graphicsView->scene();
+            ui->graphicsView->setScene(new QGraphicsScene);
+            ui->graphicsView->deleteScene(scene);
+        }
 
         ui->stackedWidget->setCurrentIndex(pgMenu);
     }
@@ -209,6 +234,7 @@ QMazes* currentMazeView=nullptr;
             ui->btnRemoveWall->setChecked(1);
             ui->graphicsMazePreview->setToggleBrush(PreviewMazeView::brushRemoveWalls);
         }
+
     }
 
     void menuWindow::on_btnSummary_clicked()
@@ -241,6 +267,11 @@ QMazes* currentMazeView=nullptr;
 
 
         if(ui->stackedWidget->currentIndex()==pgNewUser) resetMazeCreator();
+        else if (ui->stackedWidget->currentIndex()==pgLabViewProccess && ui->stackedWidgetLabView->currentIndex()==pgLabView){
+            QGraphicsScene* scene = ui->graphicsView->scene();
+            ui->graphicsView->setScene(new QGraphicsScene);
+            ui->graphicsView->deleteScene(scene);
+        }
 
         ui->stackedWidget->setCurrentIndex(pgLeaderboard);
     }
@@ -261,6 +292,11 @@ QMazes* currentMazeView=nullptr;
 
 
         if(ui->stackedWidget->currentIndex()==pgNewUser) resetMazeCreator();
+        else if (ui->stackedWidget->currentIndex()==pgLabViewProccess && ui->stackedWidgetLabView->currentIndex()==pgLabView){
+            QGraphicsScene* scene = ui->graphicsView->scene();
+            ui->graphicsView->setScene(new QGraphicsScene);
+            ui->graphicsView->deleteScene(scene);
+        }
 
         QAudioOutput* output;
         output=new QAudioOutput;
@@ -345,7 +381,6 @@ QMazes* currentMazeView=nullptr;
             }
             if(currentMazeView!=nullptr) delete currentMazeView;
             currentMazeView=QMazes::convertFromFile(&file);
-
             if(currentMazeView->getEvaluated()){
                 QMessageBox::information(this,"Atenção","Este labirinto já foi avaliado e portanto não receberá pontuação.");
             }
@@ -369,6 +404,7 @@ QMazes* currentMazeView=nullptr;
                 castBox->setClicked(0);
                 castBox->setDisabled(0);
             }
+            ui->graphicsLabProccessView->setNCircleActive(1);
 
         }
 
@@ -437,6 +473,7 @@ QMazes* currentMazeView=nullptr;
             ui->graphicsView->drawMaze(currentMazeView);
             ui->graphicsView->fitInView(ui->graphicsView->sceneRect());
             ui->btnSolveMaze->setEnabled(1);
+            ui->graphicsLabProccessView->setNCircleActive(2);
         }
 
 
@@ -470,10 +507,14 @@ QMazes* currentMazeView=nullptr;
             case 2:
                 if(!currentMazeView->wallFollowerMazeSolver()) success=0;
                 break;
+            case 3:
+                if(!currentMazeView->deadEndFillingMazeSolver()) success=0;
+                break;
             }
+
             if(success){
                 if(currentMazeView->getUserGeneratedStatus()&&(!currentMazeView->getEvaluated())){
-                    score=(((currentMazeView->x()*currentMazeView->y())/2*0.75+runtime->elapsed()*0.25)*300);
+                    score=(((currentMazeView->x()*currentMazeView->y())/2*0.2+runtime->elapsed()*0.80)*100);
                 }
 
                 QMessageBox::information(this,"Informação","Demorei: "+QString::number((float)runtime->elapsed()/1000)+"s\nPontuação: "+ (!(score<0) ? QString::number(score):"Não Aplicável"));
@@ -560,9 +601,8 @@ QMazes* currentMazeView=nullptr;
                     else in.readLine();
                 }
             }
-            else {
-                return "Não consigo computar a tua genialidade!";
-            }
+
+            return "Não consigo computar a tua genialidade!";
         }
     //End of Viewing Functions
 
@@ -578,11 +618,11 @@ QMazes* currentMazeView=nullptr;
         if(!ui->graphicsMazePreview->getSavedStatus()){
             if(!areYouSureModal()) return;
 
-            resetMazeCreator();
         }
-
+        resetMazeCreator();
         ui->graphicsMazePreview->newMaze();
         ui->graphicsMazePreview->fitInView(ui->graphicsMazePreview->sceneRect());
+
     }
 
     void menuWindow::on_btnUserOpenMaze_clicked()

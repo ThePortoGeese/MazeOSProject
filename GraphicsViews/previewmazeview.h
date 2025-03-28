@@ -1,12 +1,13 @@
 #ifndef PREVIEWMAZEVIEW_H
 #define PREVIEWMAZEVIEW_H
 #include <QGraphicsView>
+#include <stack>
 #include <thread>
 #include <vector>
-#include <wallhgraphicsrectitem.h>
+#include <GraphicsViewsitems/wallhgraphicsrectitem.h>
 #include <map>
-#include <wallvgraphicsrectitem.h>
-#include "cellgraphicsrectitem.h"
+#include <GraphicsViewsitems/wallvgraphicsrectitem.h>
+#include "GraphicsViewsitems/cellgraphicsrectitem.h"
 #include "qevent.h"
 
 class PreviewMazeView : public QGraphicsView
@@ -89,11 +90,17 @@ public slots:
     const bool& getSavedStatus(){
         return savedStatus;
     }
+
+    void undoActions();
+
+    void mousePressEvent(QMouseEvent *event) override;
 private:
     bool entrance,exit;
     std::map<int,QVector<WallHGraphicsRectItem*>> hWalls;
     std::map<int,QVector<WallVGraphicsRectItem*>> vWalls;
     int x=2,y=2;
+
+    std::stack<AbstractGraphicsRectItem*> undoStack;
 
     bool savedStatus=0;
     //Since there are only 2 brushes, I just made it a bool value

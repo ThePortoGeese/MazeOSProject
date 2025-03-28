@@ -40,8 +40,8 @@ public:
 
     virtual bool wallFollowerMazeSolver();
     virtual bool recursiveMazeSolver();
-
     virtual bool recursiveMazeSolver(const int& tX,const int& tY);
+    virtual bool deadEndFillingMazeSolver();
 
     const int& x() {return X;}
     const int& y() {return Y;}
@@ -53,7 +53,7 @@ public:
 protected:
     int X,Y;
     std::vector<std::vector<cell>> daMaze;
-    virtual bool recursiveSolvingFunction(std::vector<std::vector<bool>>& booleanGrid, const int i, const int y, const bool &store); //This is a recursive backtracker function
+    virtual bool recursiveSolvingFunction(std::vector<std::vector<bool>>& booleanGrid, const int i, const int y, const bool &store = 1); //This is a recursive backtracker function
     virtual bool recursiveSolvingFunction(std::vector<std::vector<bool>>& booleanGrid, const int i, const int y,const int& tX, const int& tY); //This is also a recursive backtracker function
     virtual void recursiveDiggingFunction(int x, int y, std::vector<std::vector<bool> > &booleanGrid);
 private:

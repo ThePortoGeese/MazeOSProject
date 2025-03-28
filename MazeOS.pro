@@ -11,10 +11,11 @@ CONFIG += c++17
 QT += multimedia multimediawidgets
 
 SOURCES += \
+    GraphicsViews/graphicslabviewproccess.cpp \
+    GraphicsViewsitems/instructioncircleitem.cpp \
     Widgets/algorithmselectionbox.cpp \
     GraphicsViewsitems/cellgraphicsrectitem.cpp \
     Widgets/customvideowidget.cpp \
-    GraphicsViews/graphicsviewlabviewproccess.cpp \
     Widgets/informationpage.cpp \
     main.cpp \
     GraphicsViews/mazeView.cpp \
@@ -25,12 +26,14 @@ SOURCES += \
     qmazes.cpp
 
 HEADERS += \
+    GraphicsViews/graphicslabviewproccess.h \
     GraphicsViewsitems/abstractgraphicsrectitem.h \
+    GraphicsViewsitems/abstractshapeitem.h \
+    GraphicsViewsitems/instructioncircleitem.h \
     Widgets/algorithmselectionbox.h \
     GraphicsViewsitems/cellgraphicsrectitem.h \
     Widgets/crementbuttons.h \
     Widgets/customvideowidget.h \
-    GraphicsViews/graphicsviewlabviewproccess.h \
     Widgets/informationpage.h \
     mazeclass.h \
     GraphicsViews/mazeview.h \
@@ -56,4 +59,6 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
 RESOURCES += \
+    Widgets/data.qrc \
+    Widgets/data.qrc \
     data.qrc

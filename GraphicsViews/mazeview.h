@@ -2,7 +2,7 @@
 #define MAZEVIEW_H
 #include <qmazes.h>
 #include <QGraphicsView>
-#include <cellgraphicsrectitem.h>
+#include <GraphicsViewsitems/cellgraphicsrectitem.h>
 class mazeView : public QGraphicsView
 {
     Q_OBJECT

@@ -6,11 +6,11 @@
 #include "qmediaplayer.h"
 #include "QtMultimedia/QAudioOutput"
 #include <qmessagebox.h>
-#include <informationpage.h>
+#include <Widgets/informationpage.h>
 #include <QFileDialog>
 #include <qmazesconversionmethods.h>
-#include <iostream>
 #include <QStandardItemModel>
+#include <GraphicsViews/graphicslabviewproccess.h>
 namespace Ui {
 class menuWindow;
 }
@@ -34,7 +34,7 @@ private slots:
     void endCreditsAbruptly(QMediaPlayer::PlaybackState state);
     void endCredits(QMediaPlayer::MediaStatus status);
 
-    void on_btnResolve_clicked();
+    void startLabViewProccess();
 
     void on_btnGenerate_clicked();
 
@@ -84,6 +84,9 @@ private slots:
     QString getHardnessRating(int score);
 
     void mazeSolvingTimeOut();
+
+    void keyPressEvent(QKeyEvent *event);
+
 private:
     Ui::menuWindow *ui;
 };

@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="pt">
+<body>
+    <p>O algoritmo de <strong>Dead-End Filling</strong> é uma técnica eficiente para resolver labirintos, eliminando becos sem saída antes mesmo da exploração.</p>
+    <p><strong>Passos:</strong></p>
+    <ul>
+        <li>Identifica todas as células que são becos sem saída (possuem apenas uma conexão possível).</li>
+        <li>Marca essas células como bloqueadas, removendo-as do labirinto.</li>
+        <li>Repete o processo até que não restem mais becos sem saída.</li>
+        <li>Após a remoção dos becos sem saída, o caminho restante liga diretamente a entrada à saída.</li>
+    </ul>
+    <p>Este método funciona bem para labirintos com muitas ramificações, tornando a solução mais rápida e reduzindo a necessidade de backtracking.</p>
+</body>
+</html>

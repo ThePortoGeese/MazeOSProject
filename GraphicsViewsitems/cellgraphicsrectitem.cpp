@@ -12,7 +12,3 @@ void CellGraphicsRectItem::hoverLeaveEvent(QGraphicsSceneHoverEvent* event){
     }
     QGraphicsObject::hoverLeaveEvent(event);
 }
-
-QRectF CellGraphicsRectItem::boundingRect() const{
-    return QRectF(0,0,4,4);
-}

@@ -1,5 +1,6 @@
 #include "mazeclass.h"
 #include <iostream>
+#include <stack>
 mazeClass::mazeClass(int x,int y) {
     daMaze.resize(y,std::vector<cell>(x,cell()));
     for(int i=0;i<y;i++){
@@ -195,10 +196,16 @@ std::tuple<int,int> mazeClass::getEntrancePos(){
     for(int i=0;i<(int)daMaze.size();i++){
         for(int k=0;k<(int)daMaze[i][0].connectionFrom.size();k++){
             if(daMaze[i][0].connectionFrom[k]!=nullptr){
-                if(daMaze[i][0].connectionFrom[k]->obstacle==2){
+                if(daMaze[i][0].connectionFrom[k]->obstacle==MazeEnums::entrance){
                     ix=i;
                     iy=0;
                 }
+            }
+        }
+        for(int k=0;k<(int)daMaze[i][daMaze[0].size()-1].connectionsTo.size();k++){
+            if(daMaze[i][daMaze[0].size()-1].connectionsTo[k].obstacle==MazeEnums::entrance){
+                    ix=i;
+                    iy=daMaze[0].size()-1;
             }
         }
     }
@@ -210,6 +217,13 @@ std::tuple<int,int> mazeClass::getEntrancePos(){
                         ix=0;
                         iy=i;
                     }
+                }
+            }
+
+            for(int k=0;k<(int)daMaze[daMaze.size()-1][i].connectionsTo.size();k++){
+                if(daMaze[daMaze.size()-1][i].connectionsTo[k].obstacle==MazeEnums::entrance){
+                    ix=daMaze.size()-1;
+                    iy=i;
                 }
             }
         }
@@ -233,7 +247,7 @@ bool mazeClass::recursiveMazeSolver() {
 }
 
 bool mazeClass::recursiveSolvingFunction(std::vector<std::vector<bool>>& booleanGrid, const int i, const int j, const bool& store) {
-    if(std::chrono::system_clock::now()-startOfSolver>std::chrono::milliseconds((long)(X*Y*1.25))){
+    if(std::chrono::system_clock::now()-startOfSolver>std::chrono::milliseconds((long)(X*Y*1.7))){
         return false;
     }
 
@@ -242,13 +256,21 @@ bool mazeClass::recursiveSolvingFunction(std::vector<std::vector<bool>>& boolean
     }
     //std::cout<<"Path to: "<<i<< " "<<y<<'\n';
     for(int k=0;k<(int)daMaze[i][j].connectionsTo.size();k++){
-        if (daMaze[i][j].connectionsTo[k].obstacle==5) {
+        if (daMaze[i][j].connectionsTo[k].obstacle==MazeEnums::exit) {
             if(store)correctPath.push_back(&daMaze[i][j]);
             //std::cout<<"Found solution at: "<<i<<" "<<y<<'\n';
             return true;
         }
-
     }
+
+    for(int k=0;k<(int)daMaze[i][j].connectionFrom.size();k++){
+        if (daMaze[i][j].connectionFrom[k] && daMaze[i][j].connectionFrom[k]->obstacle==MazeEnums::exit) {
+            if(store)correctPath.push_back(&daMaze[i][j]);
+            //std::cout<<"Found solution at: "<<i<<" "<<y<<'\n';
+            return true;
+        }
+    }
+
     std::array<int,4> nums{1,2,3,4};
 
     booleanGrid[i][j] = true;
@@ -291,8 +313,6 @@ bool mazeClass::recursiveSolvingFunction(std::vector<std::vector<bool>>& boolean
         }
     }
 
-    booleanGrid[i][j] = false;
-
     return false;
 }
 
@@ -305,7 +325,7 @@ bool mazeClass::recursiveMazeSolver(const int& tX,const int& tY) {
     std::tuple<int,int> a = getEntrancePos();
 
     //std::cout<<"Ix value: "<<ix<< " Iy value: "<<iy<<'\n';
-
+    startOfSolver = std::chrono::system_clock::now();
     if(recursiveSolvingFunction(booleanGrid, std::get<0>(a), std::get<1>(a),tX,tY)){
         return true;
     } else {
@@ -318,6 +338,10 @@ bool mazeClass::recursiveSolvingFunction(std::vector<std::vector<bool>>& boolean
     if(i==tY&&j==tX){
         //Do whatever you wanna do with this path here
         return true;
+    }
+
+    if(std::chrono::system_clock::now()-startOfSolver>std::chrono::milliseconds((long)(X*Y*1.25))){
+        return false;
     }
 
     if (i<0||i>=(int)daMaze.size()||j<0||j>=(int)daMaze[0].size()||booleanGrid[i][j]) {
@@ -362,8 +386,10 @@ bool mazeClass::recursiveSolvingFunction(std::vector<std::vector<bool>>& boolean
             }
             break;
         }
+        if(std::chrono::system_clock::now()-startOfSolver>std::chrono::milliseconds((long)(X*Y*1.25))){
+            return false;
+        }
     }
-    booleanGrid[i][j] = false;
 
     return false;
 }
@@ -390,7 +416,7 @@ bool mazeClass::wallFollowerMazeSolver() {
     startOfSolver = std::chrono::system_clock::now();
     while (true) {
 
-        if(std::chrono::system_clock::now()-startOfSolver>std::chrono::milliseconds((long)(X*Y*5))){
+        if(std::chrono::system_clock::now()-startOfSolver>std::chrono::milliseconds((long)(X*Y*2))){
             return false;
         }
 
@@ -465,6 +491,13 @@ bool mazeClass::wallFollowerMazeSolver() {
                 }
             }
 
+            for (const auto &conn : currentCell->connectionFrom) {
+                if (conn && conn->obstacle == MazeEnums::exit) {
+                    correctPath.push_back(currentCell);
+                    return true; // Solução encontrada!
+                }
+            }
+
             if (direction == LEFT) {
                 std::get<1>(indices)--; // Move para a esquerda (diminuindo a coluna)
             } else if (direction == UP) {
@@ -477,6 +510,105 @@ bool mazeClass::wallFollowerMazeSolver() {
         } else {
             break; // Nenhuma saída encontrada
         }
+    }
+}
+
+
+//To avoid altering the consintuecy of the Maze like the other functions, I needed to create a copy of the Maze
+//(you could make a bool vector however I fear I would mess up the logic and this would also allow it to be applied in 2d+ labyrinths)
+bool mazeClass::deadEndFillingMazeSolver(){
+    //Step 1: Find all the cells with one exit and store them
+
+    std::stack<std::tuple<int,int>> oneExitStack;
+    for(int i=0;i<(int)daMaze.size();i++){
+        for(int j=0;j<(int)daMaze[0].size();j++){
+            int countOfNoObstacles=0;
+            cell* currentCell = &daMaze[i][j];
+            for(size_t k=0;k<currentCell->connectionFrom.size();k++){
+                if(currentCell->connectionFrom[k] && !(currentCell->connectionFrom[k]->obstacle==MazeEnums::obstacle)){
+                    countOfNoObstacles++;
+                }
+            }
+            for(size_t k=0;k<currentCell->connectionsTo.size();k++){
+                if(!(currentCell->connectionsTo[k].obstacle==MazeEnums::obstacle) ){
+                    countOfNoObstacles++;
+                }
+            }
+
+            if(countOfNoObstacles==1){
+                oneExitStack.push(std::make_tuple(i,j));
+            }
+        }
+    }
+
+    //Step 2: Apply the algorithm to each one
+    std::vector<std::vector<bool>> booleanGrid(daMaze.size(), std::vector<bool>(daMaze[0].size(), false));
+
+    //While the stack is not empty meaning while there are still cells with only one exit (Dead ends)
+
+    while(!oneExitStack.empty()){
+        int i=std::get<0>(oneExitStack.top());
+        int j=std::get<1>(oneExitStack.top());
+        auto currentCell = &daMaze[i][j];
+        int countOfNoObstacles = 1;
+
+        while(countOfNoObstacles==1){
+            booleanGrid[i][j]=1;
+
+            //Since I have to alter a 2d boolean grid with -1s and +1s, I didnt want to make a thingy with MOD
+
+            //An alternative to this 2dd boolean grid for labyrinths of further dimensions could just be making a copy of the maze structure itself
+            //And block off exits until only one path remains. I didnt do this bbecause I wanted this to run on a very low end PC and wanted to avoid copying
+            //The data structure
+
+            //Goes left, decrements column
+            if(currentCell->connectionFrom[MazeEnums::left] && currentCell->connectionFrom[MazeEnums::left]->obstacle == MazeEnums::noObstacles && !booleanGrid[i][j-1]){
+                currentCell =  &daMaze[i][--j];
+            }
+
+            //Goes up, decrements line
+            else if(currentCell->connectionFrom[MazeEnums::up] && currentCell->connectionFrom[MazeEnums::up]->obstacle == MazeEnums::noObstacles && !booleanGrid[i-1][j]){
+                currentCell =  &daMaze[--i][j];
+            }
+
+            //Goes right, increments column
+            else if(currentCell->connectionsTo[MazeEnums::right].to && currentCell->connectionsTo[MazeEnums::right].obstacle == MazeEnums::noObstacles && !booleanGrid[i][j+1]){
+                currentCell =  &daMaze[i][++j];
+            }
+
+            //Goes down, increments line
+            else if(currentCell->connectionsTo[MazeEnums::down].to && currentCell->connectionsTo[MazeEnums::down].obstacle == MazeEnums::noObstacles && !booleanGrid[i+1][j]){
+                currentCell =  &daMaze[++i][j];
+            }
+            countOfNoObstacles=0;
+            //checks how many obstacles are there
+            for(int k=0;k<2;k++){
+                if (currentCell->connectionFrom[k] && !(currentCell->connectionFrom[k]->obstacle == MazeEnums::obstacle)){
+                    if(currentCell->connectionFrom[k]->obstacle==MazeEnums::entrance || currentCell->connectionFrom[k]->obstacle==MazeEnums::exit)countOfNoObstacles++;
+                    else if(!booleanGrid[i-k%2][j-(k+1)%2]) countOfNoObstacles++;
+                }
+
+                if (currentCell->connectionsTo[k].to && !(currentCell->connectionsTo[k].obstacle == MazeEnums::obstacle)){
+                    if(!booleanGrid[i+k%2][j+(k+1)%2]) countOfNoObstacles++;
+                }
+            }
+        }
+        oneExitStack.pop();
+    }
+
+    //Step 3: Walk through the formed path
+
+    auto indexes = getEntrancePos();
+    startOfSolver = std::chrono::system_clock::now();
+
+    //I will just use the recursive algorithm to walk through the last path since all dead ends have been filled
+    if(recursiveSolvingFunction(booleanGrid,std::get<0>(indexes),std::get<1>(indexes))){
+        std::reverse(correctPath.begin(),correctPath.end());
+        return true;
+    } else {
+
+        //TIMEOUT!!!!!!!!!
+        return false;
     }
 }
 

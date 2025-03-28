@@ -50,6 +50,7 @@ public:
         return userGenerated;
     }
     bool wallFollowerMazeSolver() override ;
+    bool deadEndFillingMazeSolver() override;
     void saveAsFile(QString fileName);
 
     void setEvaluated(bool b){
@@ -65,7 +66,7 @@ signals:
 private:
     QElapsedTimer runtimeTime;
     bool evaluated=0;
-    bool recursiveSolvingFunction(std::vector<std::vector<bool>>& booleanGrid, const int i, const int y,const bool& store) override;
+    bool recursiveSolvingFunction(std::vector<std::vector<bool>>& booleanGrid, const int i, const int y,const bool& store = 1) override;
     bool recursiveSolvingFunction(std::vector<std::vector<bool>>& booleanGrid, const int i, const int y,const int& tX,const int& tY) override;
     QString name="";
     bool userGenerated=1;

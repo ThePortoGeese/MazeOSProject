@@ -1,7 +1,6 @@
 #ifndef ALGORITHMSELECTIONBOX_H
 #define ALGORITHMSELECTIONBOX_H
 
-#include "qmediaplayer.h"
 #include <QGroupBox>
 
 namespace Ui {
@@ -14,7 +13,7 @@ class AlgorithmSelectionBox : public QGroupBox
 
 public:
     AlgorithmSelectionBox(QWidget* parent=nullptr) : QGroupBox(parent){}
-    explicit AlgorithmSelectionBox(QString algTitle, QString algDesc, QString videoFile, QWidget *parent = nullptr);
+    explicit AlgorithmSelectionBox(QString algTitle, QString algDesc, QWidget *parent = nullptr);
     ~AlgorithmSelectionBox();
     void mousePressEvent(QMouseEvent *event) override;
     const bool& isClicked(){
@@ -31,7 +30,6 @@ signals:
     void algorithmSelectionHoverEntered(AlgorithmSelectionBox*);
     void algorithmSelectionHoverLeave();
 private:
-    QMediaPlayer* player;
     Ui::AlgorithmSelectionBox *ui;
     bool clicked=0;
 };

@@ -11,6 +11,11 @@ PreviewMazeView::PreviewMazeView(QWidget* parent) : QGraphicsView(parent){
 }
 
 void PreviewMazeView::newMaze(){
+
+    while(!undoStack.empty()){
+        undoStack.pop();
+    }
+
     savedStatus=0;
     setScene(new QGraphicsScene);
     scene()->setBackgroundBrush(backGround);
@@ -72,7 +77,7 @@ void PreviewMazeView::newMaze(){
             vWalls[j].push_back(rect);
         }
     }
-    setSceneRect(0,0,11,11);
+    setSceneRect(0,0,10.8,10.8);
 }
 
 void PreviewMazeView::incrementCellsH(int h){
@@ -294,12 +299,85 @@ void PreviewMazeView::decrementCellsV(int h){
 }
 
 void PreviewMazeView::mouseMoveEvent(QMouseEvent *event){
-    if(items(event->pos()).count()>0&&event->buttons()==Qt::LeftButton){
-        if(dynamic_cast<WallHGraphicsRectItem*>(items(event->pos())[0])!=nullptr||dynamic_cast<WallVGraphicsRectItem*>(items(event->pos())[0])!=nullptr){
-            if(!((AbstractGraphicsRectItem*)this->items(event->pos())[0])->getOuter()){
-                ((AbstractGraphicsRectItem*)this->items(event->pos())[0])->setBrush(toggleBrush?backGround:cellB);
-            }
-            savedStatus=0;
+    if (items(event->pos()).isEmpty() || event->buttons() != Qt::LeftButton) {
+        QWidget::mouseMoveEvent(event);
+        return;
+    }
+
+    auto *item = dynamic_cast<AbstractGraphicsRectItem*>(items(event->pos()).first());
+    if (!item) {
+        QWidget::mouseMoveEvent(event);
+        return;
+    }
+
+    if (!dynamic_cast<WallHGraphicsRectItem*>(item) && !dynamic_cast<WallVGraphicsRectItem*>(item)) {
+        QWidget::mouseMoveEvent(event);
+        return;
+    }
+
+    if (!item->getOuter()) {
+        if ((toggleBrush == brushRemoveWalls && item->Brush() == backGround) ||
+            (toggleBrush == brushAddWalls && item->Brush() == cellB)) {
+            undoStack.push(item);
         }
+
+        item->setBrush(toggleBrush ? backGround : cellB);
+    } else {
+        if (!entranceExists() && toggleBrush == brushRemoveWalls) {
+            undoStack.push(item);
+            item->setEntrance(1);
+            item->setBrush(cellB);
+            entrance = 1;
+        }
+        else if (!exitExists() && toggleBrush == brushRemoveWalls) {
+            if(item->getEntrance()) return;
+            undoStack.push(item);
+            item->setExit(1);
+            item->setBrush(cellB);
+            exit = 1;
+        }
+        else if ((item->Brush() == cellB || item->Brush() == Qt::green || item->Brush() == Qt::red) && toggleBrush == brushAddWalls) {
+            undoStack.push(item);
+            if (item->getEntrance()) {
+                entrance = 0;
+                item->setEntrance(0);
+            }
+            else if (item->getExit()) {
+                exit = 0;
+                item->setExit(0);
+            }
+            item->setBrush(backGround);
+        }
+    }
+
+    savedStatus = 0;
+    QWidget::mouseMoveEvent(event);
+}
+
+void PreviewMazeView::mousePressEvent(QMouseEvent *event){
+    if(items(event->pos()).count()>0&&event->buttons()==Qt::LeftButton){
+        while(!undoStack.empty()){
+            undoStack.pop();
+        }
+    }
+    QWidget::mousePressEvent(event);
+}
+
+void PreviewMazeView::undoActions(){
+    while(!undoStack.empty()){
+        if(undoStack.top()->getOuter()){
+            if(undoStack.top()->getEntrance()){
+                entrance=0;
+                undoStack.top()->setEntrance(0);
+            }
+            else if(undoStack.top()->getExit()){
+                exit=0;
+                undoStack.top()->setExit(0);
+            }
+        }
+
+        undoStack.top()->setBrush(undoStack.top()->Brush()==cellB?backGround : cellB);
+
+        undoStack.pop();
     }
 }

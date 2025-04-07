@@ -60,7 +60,6 @@ void QMazes::createMaze(){
 }
 
 bool QMazes::recursiveMazeSolver(){
-    runtimeTime.start();
     if(mazeClass::recursiveMazeSolver()){
         std::reverse(tempPath.begin(),tempPath.end());
         std::reverse(correctPath.begin(),correctPath.end());
@@ -72,30 +71,25 @@ bool QMazes::recursiveMazeSolver(){
 }
 
 bool QMazes::recursiveMazeSolver(const int& tX,const int& tY){
-    runtimeTime.start();
     if(mazeClass::recursiveMazeSolver(tX,tY)){
 
         return 1;
     }else{
-        emit timeOut();
+        emit couldntReach();
         return 0;
     }
 }
 
 bool QMazes::recursiveSolvingFunction(std::vector<std::vector<bool>>& booleanGrid, const int i, const int y,const bool& store) {
-    if(runtimeTime.elapsed() > X*Y*2.5){
-        return false;
-    }
-
     if (i<0||i>=(int)daMaze.size()||y<0||y>=(int)daMaze[0].size()||booleanGrid[i][y]) {
         return false;
     }
     for(int k=0;k<(int)daMaze[i][y].connectionsTo.size();k++){
         if (daMaze[i][y].connectionsTo[k].obstacle==MazeEnums::exit) {
-            emit cellTriggered(i,y,2+k);
+            emit cellTriggered(i,y,-1);
             if(store){
                 correctPath.push_back(&daMaze[i][y]);
-                tempPath.push_back(new temporaryPathHolder(i,y,2+k));
+                tempPath.push_back(new temporaryPathHolder(i,y,-1));
             }
             //qDebug()<<"Found solution at: "<<i<<" "<<y;
             return true;
@@ -104,12 +98,12 @@ bool QMazes::recursiveSolvingFunction(std::vector<std::vector<bool>>& booleanGri
 
     for(int k=0;k<(int)daMaze[i][y].connectionFrom.size();k++){
         if (daMaze[i][y].connectionFrom[k] && daMaze[i][y].connectionFrom[k]->obstacle==MazeEnums::exit) {
-            emit cellTriggered(i,y,k);
+            emit cellTriggered(i,y,-1);
             if(store){
                 correctPath.push_back(&daMaze[i][y]);
-                tempPath.push_back(new temporaryPathHolder(i,y,2+k));
+                tempPath.push_back(new temporaryPathHolder(i,y,-1));
             }
-            //std::cout<<"Found solution at: "<<i<<" "<<y<<'\n';
+            //qDebug()<<"Found solution at: "<<i<<" "<<y<<'\n';
             return true;
         }
     }
@@ -124,9 +118,6 @@ bool QMazes::recursiveSolvingFunction(std::vector<std::vector<bool>>& booleanGri
     std::random_shuffle(nums.begin(),nums.end());
     correctPath.push_back(&daMaze[i][y]);
     for(int k=0;k<4;k++){
-        if(runtimeTime.elapsed() > X*Y*3){
-            return false;
-        }
         switch(nums[k]){
         case 1:
             if(daMaze[i][y].connectionFrom[0]!=nullptr&&daMaze[i][y].connectionFrom[0]->obstacle==0){
@@ -185,10 +176,6 @@ bool QMazes::recursiveSolvingFunction(std::vector<std::vector<bool>>& booleanGri
 
 
 bool QMazes::recursiveSolvingFunction(std::vector<std::vector<bool>>& booleanGrid, const int i, const int j, const int& tX, const int& tY) {
-    if(runtimeTime.elapsed() > X*Y*1.4){
-        return false;
-    }
-
     if(i==tY&&j==tX){
         tempPath.push_back(new temporaryPathHolder(i,j,-1));
         return true;
@@ -204,9 +191,6 @@ bool QMazes::recursiveSolvingFunction(std::vector<std::vector<bool>>& booleanGri
     std::random_shuffle(nums.begin(),nums.end());
     correctPath.push_back(&daMaze[i][j]);
     for(int k=0;k<4;k++){
-        if(runtimeTime.elapsed() > X*Y*1.4){
-            return false;
-        }
         switch(nums[k]){
         case 1:
             if(daMaze[i][j].connectionFrom[0]!=nullptr&&daMaze[i][j].connectionFrom[0]->obstacle==0){
@@ -309,15 +293,26 @@ bool QMazes::wallFollowerMazeSolver() {
     enum MoveDir { LEFT = 0, UP = 1, RIGHT = 2, DOWN = 3 };
     MoveDir direction = RIGHT;
     cell* currentCell = &daMaze[std::get<0>(indices)][std::get<1>(indices)];
-    runtimeTime.start();
-    while (true) {
-
-        if(runtimeTime.elapsed()>(X*Y)*5){
-            emit timeOut();
-            return 0;
+    {
+        for (int conn = 0; (int)currentCell->connectionsTo.size()>conn;conn++) {
+            if (currentCell->connectionsTo[conn].obstacle == MazeEnums::exit) {
+                emit cellTriggered(std::get<0>(indices),std::get<1>(indices),-1);
+                correctPath.push_back(currentCell);
+                tempPath.push_back(new temporaryPathHolder(std::get<0>(indices),std::get<1>(indices),-1));
+                return true; // Solução encontrada!
+            }
         }
 
-
+        for (int conn = 0; (int)currentCell->connectionFrom.size()>conn;conn++) {
+            if (currentCell->connectionFrom[conn] && currentCell->connectionFrom[conn]->obstacle == MazeEnums::exit) {
+                emit cellTriggered(std::get<0>(indices),std::get<1>(indices),-1);
+                correctPath.push_back(currentCell);
+                tempPath.push_back(new temporaryPathHolder(std::get<0>(indices),std::get<1>(indices),-1));
+                return true; // Solução encontrada!
+            }
+        }
+    }
+    while (true) {
         QTime dieTime= QTime::currentTime().addMSecs(1);
         while (QTime::currentTime() < dieTime)
             QCoreApplication::processEvents(QEventLoop::AllEvents, 100);
@@ -366,7 +361,7 @@ bool QMazes::wallFollowerMazeSolver() {
             }
         }
 
-        // Turns Back, which means this was a dead end, therefore, I will mark it as true in the boolean grid
+        // Turns Back, which means this was a dead end
         if (!nextCell) {
             direction = static_cast<MoveDir>((direction + 2) % 4);
             if (direction <= UP) { // Esquerda/Cima -> connectionFrom
@@ -396,18 +391,18 @@ bool QMazes::wallFollowerMazeSolver() {
             // Verifica se chegou à saída
             for (int conn = 0; (int)currentCell->connectionsTo.size()>conn;conn++) {
                 if (currentCell->connectionsTo[conn].obstacle == MazeEnums::exit) {
-                    emit cellTriggered(std::get<0>(indices),std::get<1>(indices),2+conn);
+                    emit cellTriggered(std::get<0>(indices),std::get<1>(indices),-1);
                     correctPath.push_back(currentCell);
-                    tempPath.push_back(new temporaryPathHolder(std::get<0>(indices),std::get<1>(indices),2+conn));
+                    tempPath.push_back(new temporaryPathHolder(std::get<0>(indices),std::get<1>(indices),-1));
                     return true; // Solução encontrada!
                 }
             }
 
             for (int conn = 0; (int)currentCell->connectionFrom.size()>conn;conn++) {
                 if (currentCell->connectionFrom[conn] && currentCell->connectionFrom[conn]->obstacle == MazeEnums::exit) {
-                    emit cellTriggered(std::get<0>(indices),std::get<1>(indices),conn);
+                    emit cellTriggered(std::get<0>(indices),std::get<1>(indices),-1);
                     correctPath.push_back(currentCell);
-                    tempPath.push_back(new temporaryPathHolder(std::get<0>(indices),std::get<1>(indices),2+conn));
+                    tempPath.push_back(new temporaryPathHolder(std::get<0>(indices),std::get<1>(indices),-1));
                     return true; // Solução encontrada!
                 }
             }
@@ -495,7 +490,7 @@ bool QMazes::deadEndFillingMazeSolver(){
 
                 if (currentCell->connectionsTo[k].to && !(currentCell->connectionsTo[k].obstacle == MazeEnums::obstacle)){
                     if(!booleanGrid[i+k%2][j+(k+1)%2]) countOfNoObstacles++;
-                }
+                } else if(currentCell->connectionsTo[k].obstacle==MazeEnums::exit || currentCell->connectionsTo[k].obstacle==MazeEnums::entrance) countOfNoObstacles++;
             }
         }
         oneExitStack.pop();
@@ -504,7 +499,6 @@ bool QMazes::deadEndFillingMazeSolver(){
     //Step 3: Walk through the formed path
 
     auto indexes = getEntrancePos();
-    runtimeTime.start();
     //I will just use the recursive algorithm to walk through the last path since all dead ends have been filled
     if(recursiveSolvingFunction(booleanGrid,std::get<0>(indexes),std::get<1>(indexes))){
         std::reverse(correctPath.begin(),correctPath.end());
@@ -642,25 +636,40 @@ QMazes* QMazes::convertFromFile(QFile* file){
 
         std::vector<QString> mazeLines;
         bool evaluated=0;
+
+        if(in.atEnd()) return nullptr;
+
         do{
             QString inStr=in.readLine();
             if(inStr=="EVALUATED"){
                 evaluated=1;
+            } else if(mazeLines.size()>0){
+                if(inStr.length() == mazeLines[0].size()){
+                    mazeLines.push_back(inStr);
+                } else {
+                    return nullptr;
+                }
             }
-            else mazeLines.push_back(inStr);
+            else {
+                if(inStr.size()%2==0) return nullptr;
+                mazeLines.push_back(inStr);
+            }
         } while(!in.atEnd());
+
+        if(mazeLines.size()%2==0) return nullptr;
 
         QMazes* returnMaze=new QMazes((mazeLines[0].size()-1)/2,(mazeLines.size()-1)/2);
         returnMaze->setEvaluated(evaluated);
 
         for(int i=0;i<(int)mazeLines.size();i++){
-            for(int j=0;j<mazeLines[i].size();j++){
+            for(int j=0;j<mazeLines[i].size();j++){            
+
                 if(i%2==0&&j%2==0){
                     //ignore corners
                     continue;
                 }
 
-                if(i%2!=0&&j%2!=0){
+                if((i%2!=0 && j%2!=0)){
                     //ignore cells
                     continue;
                 }
@@ -673,7 +682,7 @@ QMazes* QMazes::convertFromFile(QFile* file){
                     else if(mazeLines[0][j]==QChar(MazeFileCoding::exit)){
                         returnMaze->daMaze[0][(j-1)/2].connectionFrom[MazeEnums::up]=new connection(nullptr,&returnMaze->daMaze[0][(j-1)/2],MazeEnums::exit);
                         continue;
-                    }
+                    } else if(mazeLines[0][j]==QChar(MazeFileCoding::null)) continue;
                 }
                 if(j==0){
                     if(mazeLines[i][0]==QChar(MazeFileCoding::entrance)){
@@ -685,6 +694,8 @@ QMazes* QMazes::convertFromFile(QFile* file){
                         returnMaze->daMaze[(i-1)/2][0].connectionFrom[MazeEnums::left]=new connection(nullptr,&returnMaze->daMaze[(i-1)/2][0],MazeEnums::exit);
                         continue;
                     }
+
+                    else if(mazeLines[i][0]==QChar(MazeFileCoding::null)) continue;
                 }
                 if(i%2!=0){
                     if(j==(int)mazeLines[i].size()-1){
@@ -699,6 +710,8 @@ QMazes* QMazes::convertFromFile(QFile* file){
                             returnMaze->daMaze[(i-1)/2][(j-1)/2].connectionsTo[MazeEnums::right].obstacle=MazeEnums::entrance;
                             continue;
                         }
+
+                        else if(mazeLines[i][j]==QChar(MazeFileCoding::null)) continue;
                     }
 
                     else if(mazeLines[i][j]==QChar(MazeFileCoding::noObstacle)){
@@ -706,6 +719,9 @@ QMazes* QMazes::convertFromFile(QFile* file){
                         continue;
                     }
 
+                    else if(mazeLines[i][j]==QChar(MazeFileCoding::obstacle)){
+                        continue;
+                    }
                 }
                 else if(j%2!=0){ //Since j represents columns, is odd and I've checked corners, null connections and cells,
                     // this can only be a vertica lConnection since they "occupy" the same j (column) as cells (graphically speaking)
@@ -721,13 +737,23 @@ QMazes* QMazes::convertFromFile(QFile* file){
                             returnMaze->daMaze[(i-1)/2][(j-1)/2].connectionsTo[MazeEnums::down].obstacle=MazeEnums::entrance;
                             continue;
                         }
+                        else if(mazeLines[i][j]==QChar(MazeFileCoding::null)) continue;
                     }
 
                     else if(mazeLines[i][j]==QChar(MazeFileCoding::noObstacle)){
                         returnMaze->daMaze[(i-1)/2][(j-1)/2].connectionsTo[MazeEnums::down].obstacle=MazeEnums::noObstacles;
                         continue;
                     }
+
+                    else if(mazeLines[i][j]==QChar(MazeFileCoding::obstacle)){
+                        continue;
+                    }
                 }
+
+                //qDebug()<<i<<" "<<j;
+                delete returnMaze;
+                //If this gets here, it means there were edits to the file. Meaning it is corrupted
+                return nullptr;
             }
         }
         file->close();

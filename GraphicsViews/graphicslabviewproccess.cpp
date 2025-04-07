@@ -25,14 +25,14 @@ void GraphicsLabViewProccess::setNBalls(int nBalls){
 }
 
 void GraphicsLabViewProccess::setNCircleActive(int n){
-    if(n<0||n>=circles.size()) return ;
+    if(n<0||n>=(int)circles.size()) return ;
     circles[n]->setNPen(QPen(Qt::black));
     circles[n]->setTextPen(QPen(Qt::white));
     circles[n]->setBrush(Qt::white);
 }
 
 void GraphicsLabViewProccess::setBallsInactive(){
-    for(int i=0;i<circles.size();i++){
+    for(int i=0;i<(int)circles.size();i++){
         circles[i]->setToDefaultNPen();
         circles[i]->setToDefaultTextPen();
         circles[i]->setToDefaultBrush();

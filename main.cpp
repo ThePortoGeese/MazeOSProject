@@ -3,6 +3,7 @@
 #include <QApplication>
 #include <map>
 #include <vector>
+#include <QtPlugin>
 
 int main(int argc, char *argv[])
 {

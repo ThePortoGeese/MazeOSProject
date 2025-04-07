@@ -121,7 +121,9 @@ void mazeView::clearCells(){
         for(auto i : scene()->items()){
             auto it= dynamic_cast<QGraphicsRectItem*>(i);
 
-            if(it!=nullptr) it->setBrush(cellB);
+            if(it!=nullptr) {
+                if(it->brush()!=Qt::green && it->brush()!=Qt::red) it->setBrush(cellB);
+            }
             else {
                 auto ip = dynamic_cast<CellGraphicsRectItem*>(i);
                 ip->setBrush(cellB);
@@ -135,21 +137,28 @@ void mazeView::changeCellColour(int x,int y,int conNb,QBrush brush){
     QGraphicsRectItem* a;
     switch(conNb){
     case 0:
-        a = (QGraphicsRectItem*)((scene()->items(QPoint(cells[x][y]->scenePos().x()-squareSizeWidth/8,cells[x][y]->scenePos().y()+1)))[0]);
-        if(a!=nullptr){ a->setBrush(brush);}
+        if((scene()->items(QPoint(cells[x][y]->scenePos().x()-squareSizeWidth/8,cells[x][y]->scenePos().y()+1)).length()>0)){
+            a = (QGraphicsRectItem*)((scene()->items(QPoint(cells[x][y]->scenePos().x()-squareSizeWidth/8,cells[x][y]->scenePos().y()+1)))[0]);
+            if(a!=nullptr){ a->setBrush(brush);}
+        }
         break;
     case 1:
-        a = (QGraphicsRectItem*)((scene()->items(QPoint(cells[x][y]->scenePos().x()+1,cells[x][y]->scenePos().y()-squareSizeHeight/8)))[0]);
-        if(a!=nullptr){ a->setBrush(brush);}
+        if((scene()->items(QPoint(cells[x][y]->scenePos().x()+1,cells[x][y]->scenePos().y()-squareSizeHeight/8)).length()>0)){
+            a = (QGraphicsRectItem*)((scene()->items(QPoint(cells[x][y]->scenePos().x()+1,cells[x][y]->scenePos().y()-squareSizeHeight/8)))[0]);
+            if(a!=nullptr){ a->setBrush(brush);}
+        }
         break;
     case 2:
-        a = (QGraphicsRectItem*)((scene()->items(QPoint(cells[x][y]->scenePos().x()+squareSizeWidth/8+squareSizeWidth,cells[x][y]->scenePos().y()+1)))[0]);
-        if(a!=nullptr){ a->setBrush(brush);}
-
+        if(scene()->items(QPoint(cells[x][y]->scenePos().x()+squareSizeWidth/8+squareSizeWidth,cells[x][y]->scenePos().y()+1)).length()>0){
+            a = (QGraphicsRectItem*)((scene()->items(QPoint(cells[x][y]->scenePos().x()+squareSizeWidth/8+squareSizeWidth,cells[x][y]->scenePos().y()+1)))[0]);
+            if(a!=nullptr){ a->setBrush(brush);}
+        }
         break;
     case 3:
-        a = (QGraphicsRectItem*)((scene()->items(QPoint(cells[x][y]->scenePos().x()+1,cells[x][y]->scenePos().y()+squareSizeHeight/8+squareSizeHeight)))[0]);
-        if(a!=nullptr){ a->setBrush(brush);}
+        if(scene()->items(QPoint(cells[x][y]->scenePos().x()+1,cells[x][y]->scenePos().y()+squareSizeHeight/8+squareSizeHeight)).length()>0){
+            a = (QGraphicsRectItem*)((scene()->items(QPoint(cells[x][y]->scenePos().x()+1,cells[x][y]->scenePos().y()+squareSizeHeight/8+squareSizeHeight)))[0]);
+            if(a!=nullptr){ a->setBrush(brush);}
+        }
         break;
     }
 

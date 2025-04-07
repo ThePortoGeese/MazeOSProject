@@ -57,7 +57,7 @@ protected:
     virtual bool recursiveSolvingFunction(std::vector<std::vector<bool>>& booleanGrid, const int i, const int y,const int& tX, const int& tY); //This is also a recursive backtracker function
     virtual void recursiveDiggingFunction(int x, int y, std::vector<std::vector<bool> > &booleanGrid);
 private:
-    std::chrono::time_point<std::chrono::system_clock> startOfSolver;
+
 };
 
 class connection

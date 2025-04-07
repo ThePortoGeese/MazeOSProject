@@ -1,8 +1,11 @@
 #include "cellgraphicsrectitem.h"
+#include <QGraphicsSceneMouseEvent>
 
 void CellGraphicsRectItem::mousePressEvent(QGraphicsSceneMouseEvent *event){
-    clicked=1;
-    emit solveToEvent(this);
+    if(event->button()==Qt::LeftButton){
+        clicked=1;
+        emit solveToEvent(this);
+    }
 }
 
 void CellGraphicsRectItem::hoverLeaveEvent(QGraphicsSceneHoverEvent* event){

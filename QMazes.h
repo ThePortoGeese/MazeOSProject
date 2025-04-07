@@ -63,17 +63,21 @@ signals:
     void cellTriggered(int x,int y,int connectionNumber);
     void mazeSolved();
     void timeOut();
+    void couldntReach();
 private:
-    QElapsedTimer runtimeTime;
+
     bool evaluated=0;
     bool recursiveSolvingFunction(std::vector<std::vector<bool>>& booleanGrid, const int i, const int y,const bool& store = 1) override;
     bool recursiveSolvingFunction(std::vector<std::vector<bool>>& booleanGrid, const int i, const int y,const int& tX,const int& tY) override;
     QString name="";
     bool userGenerated=1;
+private Q_SLOTS:
+    void emitCellTriggeredSignal(int x, int y, int connectionNumber){
+        emit cellTriggered(x,y,connectionNumber);
+    }
 public slots:
     void setName(QString& str){
         name=str;
     }
-
 };
 #endif // QMAZES_H

@@ -26,14 +26,17 @@ void AlgorithmSelectionBox::mousePressEvent(QMouseEvent *event){
 
         clicked=0;
         emit algorithmSelectionChanged(nullptr);
+
+        QWidget::mousePressEvent(event);
 }
 
 void AlgorithmSelectionBox::enterEvent(QEnterEvent* e){
 
     emit algorithmSelectionHoverEntered(this);
-
+    QWidget::enterEvent(e);
 }
 
 void AlgorithmSelectionBox::leaveEvent(QEvent* e){
     emit algorithmSelectionHoverLeave();
+    QWidget::leaveEvent(e);
 }

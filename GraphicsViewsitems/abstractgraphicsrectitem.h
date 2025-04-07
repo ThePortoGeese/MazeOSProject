@@ -3,7 +3,7 @@
 #include "qpainter.h"
 #include <QGraphicsObject>
 static const QBrush cellB(QColor(0,0,0));
-static const QBrush backGround(QColor(111, 183, 214));
+static const QBrush backGround(QColor(47, 108, 168));
 static const QBrush correctPathColor(QColor(0, 200, 81));
 
 

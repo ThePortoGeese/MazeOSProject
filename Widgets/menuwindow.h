@@ -3,8 +3,6 @@
 #include <qmazes.h>
 #include <QMainWindow>
 #include "algorithmselectionbox.h"
-#include "qmediaplayer.h"
-#include "QtMultimedia/QAudioOutput"
 #include <qmessagebox.h>
 #include <Widgets/informationpage.h>
 #include <QFileDialog>
@@ -27,13 +25,13 @@ public:
     bool areYouSureModal();
     void closeEvent(QCloseEvent *e) override;
 
+
+
     void resetMazeCreator();
     static void deleteMaze(QMazes* mazeToDelete);
 private slots:
     void on_btnCredits_clicked();
-    void endCreditsAbruptly(QMediaPlayer::PlaybackState state);
-    void endCredits(QMediaPlayer::MediaStatus status);
-
+    void updateSaveIndicator();
     void startLabViewProccess();
 
     void on_btnGenerate_clicked();

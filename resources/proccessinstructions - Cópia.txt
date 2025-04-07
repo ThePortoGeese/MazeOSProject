@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Créditos</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #000000;
+            color: #ffffff;
+            text-align: center;
+            padding: 50px;
+        }
+        .credits {
+            background: rgba(255, 255, 255, 0.1);
+            display: inline-block;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(255, 255, 255, 0.2);
+        }
+        h1 {
+            color: #00a8e8;
+        }
+        p {
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="credits">
+        <h1>Créditos</h1>
+        <p><strong>Programação e Design:</strong> ThePortoGeese</p>
+        <p><strong>Encontro de Bugs:</strong> Daniel Silva e Diogo Fernandes</p>
+        <p><strong>Framework:</strong> Qt</p>
+        <p><strong>Linguagem:</strong> C++</p>
+    </div>
+</body>
+</html>

@@ -78,9 +78,11 @@ void PreviewMazeView::newMaze(){
         }
     }
     setSceneRect(0,0,10.8,10.8);
+    savedStatus=0;
 }
 
 void PreviewMazeView::incrementCellsH(int h){
+    if(x<128) {emit updateSaveIndicator();savedStatus=0;}
     for(int j=0;j<h;j++){
         //It's hard to explain how I figured the exact coordinates for each piece but I needed to grab a paper to visualise it
         if(x<=128){
@@ -138,6 +140,7 @@ void PreviewMazeView::incrementCellsH(int h){
 }
 
 void PreviewMazeView::incrementCellsV(int h){
+    if(y<128) {emit updateSaveIndicator();savedStatus=0;}
     for(int j=0;j<h;j++){
         if(y<=128){
             y+=1;
@@ -200,9 +203,11 @@ void PreviewMazeView::incrementCellsV(int h){
         }
         fitInView(sceneRect());
     }
+    if(y+h>2) emit updateSaveIndicator();
 }
 
 void PreviewMazeView::decrementCellsH(int h){
+    if(x>2) {emit updateSaveIndicator();savedStatus=0;}
     for(int i=0;i<h;i++){
         if(x==2) continue;
         //Removes all the cells
@@ -246,6 +251,7 @@ void PreviewMazeView::decrementCellsH(int h){
 }
 
 void PreviewMazeView::decrementCellsV(int h){
+    if(y>2) {emit updateSaveIndicator();savedStatus=0;}
     for(int i=0;i<h;i++){
         if(y==2) continue;
         //Removes all the cells
@@ -352,6 +358,7 @@ void PreviewMazeView::mouseMoveEvent(QMouseEvent *event){
 
     savedStatus = 0;
     QWidget::mouseMoveEvent(event);
+    emit updateSaveIndicator();
 }
 
 void PreviewMazeView::mousePressEvent(QMouseEvent *event){
@@ -380,4 +387,5 @@ void PreviewMazeView::undoActions(){
 
         undoStack.pop();
     }
+    emit updateSaveIndicator();
 }

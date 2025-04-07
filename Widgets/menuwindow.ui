@@ -3972,7 +3972,9 @@ QPushButton:disabled {
                <property name="toolTip">
                 <string>Este pincel permite-te demolir paredes em paredes válidas.
 
-(Só pode haver uma saída e uma entrada)</string>
+(Só pode haver uma saída e uma entrada)
+
+Ctrl+2 para selecionar</string>
                </property>
                <property name="styleSheet">
                 <string notr="true">QPushButton {
@@ -4116,7 +4118,9 @@ Ctrl+Click para diminuir o labirinto verticalmente por 10</string>
                 </sizepolicy>
                </property>
                <property name="toolTip">
-                <string>Este botão cria um labirinto vazio</string>
+                <string>Este botão cria um labirinto vazio
+
+Ctrl+N para chamar este botão</string>
                </property>
                <property name="styleSheet">
                 <string notr="true">QPushButton {
@@ -4149,7 +4153,9 @@ Ctrl+Click para diminuir o labirinto verticalmente por 10</string>
                 </sizepolicy>
                </property>
                <property name="toolTip">
-                <string>Pressiona este botão para abrir um labirinto a partir dos ficheiros</string>
+                <string>Pressiona este botão para abrir um labirinto a partir dos ficheiros
+
+Ctrl+O para chamar este botão</string>
                </property>
                <property name="styleSheet">
                 <string notr="true">QPushButton {
@@ -4182,7 +4188,9 @@ Ctrl+Click para diminuir o labirinto verticalmente por 10</string>
                 </sizepolicy>
                </property>
                <property name="toolTip">
-                <string>Pressiona este botão para guardares o teu labirinto</string>
+                <string>Pressiona este botão para guardares o teu labirinto
+
+Ctrl+S para chamar este botão</string>
                </property>
                <property name="styleSheet">
                 <string notr="true">QPushButton {
@@ -4265,7 +4273,9 @@ Ctrl+Click para diminuir o labirinto verticalmente por 10</string>
                 </sizepolicy>
                </property>
                <property name="toolTip">
-                <string>Este pincel permite-te adicionar paredes em lugares livres</string>
+                <string>Este pincel permite-te adicionar paredes em lugares livres
+
+Ctrl+1 para selecionar</string>
                </property>
                <property name="styleSheet">
                 <string notr="true">QPushButton {
@@ -4410,6 +4420,22 @@ Ctrl+Click para expandir o labirinto verticalmente por 10</string>
               <horstretch>0</horstretch>
               <verstretch>0</verstretch>
              </sizepolicy>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="5">
+           <widget class="QLabel" name="lblSavedIndicator">
+            <property name="toolTip">
+             <string>Indica se o Labirinto foi salvo ou não</string>
+            </property>
+            <property name="text">
+             <string/>
+            </property>
+            <property name="pixmap">
+             <pixmap resource="../data.qrc">:/others/resources/saveButtonX.png</pixmap>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignmentFlag::AlignCenter</set>
             </property>
            </widget>
           </item>
@@ -6311,9 +6337,9 @@ Ctrl+Click para expandir o labirinto verticalmente por 10</string>
                    <colorrole role="Base">
                     <brush brushstyle="SolidPattern">
                      <color alpha="255">
-                      <red>255</red>
-                      <green>255</green>
-                      <blue>255</blue>
+                      <red>0</red>
+                      <green>168</green>
+                      <blue>232</blue>
                      </color>
                     </brush>
                    </colorrole>
@@ -6466,9 +6492,9 @@ Ctrl+Click para expandir o labirinto verticalmente por 10</string>
                    <colorrole role="Base">
                     <brush brushstyle="SolidPattern">
                      <color alpha="255">
-                      <red>255</red>
-                      <green>255</green>
-                      <blue>255</blue>
+                      <red>0</red>
+                      <green>168</green>
+                      <blue>232</blue>
                      </color>
                     </brush>
                    </colorrole>
@@ -6701,6 +6727,20 @@ Ctrl+Click para expandir o labirinto verticalmente por 10</string>
                 <property name="toolTip">
                  <string>Quando estiveres acabdo, pressiona-me para continuar</string>
                 </property>
+                <property name="styleSheet">
+                 <string notr="true">QPushButton {
+	background-color: rgb(0, 168, 232);
+	color: rgb(4, 26, 52);
+	border-width: 1px;
+	border-style: solid;
+	border-color: rgb(4, 26, 52);
+}
+
+QPushButton:pressed {
+	background-color: black;
+	color: white;
+}</string>
+                </property>
                 <property name="text">
                  <string>Próximo</string>
                 </property>
@@ -6804,8 +6844,248 @@ Ctrl+Click para expandir o labirinto verticalmente por 10</string>
                   <verstretch>0</verstretch>
                  </sizepolicy>
                 </property>
+                <property name="palette">
+                 <palette>
+                  <active>
+                   <colorrole role="WindowText">
+                    <brush brushstyle="SolidPattern">
+                     <color alpha="255">
+                      <red>255</red>
+                      <green>255</green>
+                      <blue>255</blue>
+                     </color>
+                    </brush>
+                   </colorrole>
+                   <colorrole role="Button">
+                    <brush brushstyle="SolidPattern">
+                     <color alpha="255">
+                      <red>0</red>
+                      <green>0</green>
+                      <blue>0</blue>
+                     </color>
+                    </brush>
+                   </colorrole>
+                   <colorrole role="Text">
+                    <brush brushstyle="SolidPattern">
+                     <color alpha="255">
+                      <red>255</red>
+                      <green>255</green>
+                      <blue>255</blue>
+                     </color>
+                    </brush>
+                   </colorrole>
+                   <colorrole role="ButtonText">
+                    <brush brushstyle="SolidPattern">
+                     <color alpha="255">
+                      <red>255</red>
+                      <green>255</green>
+                      <blue>255</blue>
+                     </color>
+                    </brush>
+                   </colorrole>
+                   <colorrole role="Base">
+                    <brush brushstyle="SolidPattern">
+                     <color alpha="255">
+                      <red>0</red>
+                      <green>0</green>
+                      <blue>0</blue>
+                     </color>
+                    </brush>
+                   </colorrole>
+                   <colorrole role="Window">
+                    <brush brushstyle="SolidPattern">
+                     <color alpha="255">
+                      <red>0</red>
+                      <green>0</green>
+                      <blue>0</blue>
+                     </color>
+                    </brush>
+                   </colorrole>
+                   <colorrole role="Link">
+                    <brush brushstyle="SolidPattern">
+                     <color alpha="255">
+                      <red>255</red>
+                      <green>85</green>
+                      <blue>255</blue>
+                     </color>
+                    </brush>
+                   </colorrole>
+                   <colorrole role="PlaceholderText">
+                    <brush brushstyle="SolidPattern">
+                     <color alpha="128">
+                      <red>255</red>
+                      <green>255</green>
+                      <blue>255</blue>
+                     </color>
+                    </brush>
+                   </colorrole>
+                  </active>
+                  <inactive>
+                   <colorrole role="WindowText">
+                    <brush brushstyle="SolidPattern">
+                     <color alpha="255">
+                      <red>255</red>
+                      <green>255</green>
+                      <blue>255</blue>
+                     </color>
+                    </brush>
+                   </colorrole>
+                   <colorrole role="Button">
+                    <brush brushstyle="SolidPattern">
+                     <color alpha="255">
+                      <red>0</red>
+                      <green>0</green>
+                      <blue>0</blue>
+                     </color>
+                    </brush>
+                   </colorrole>
+                   <colorrole role="Text">
+                    <brush brushstyle="SolidPattern">
+                     <color alpha="255">
+                      <red>255</red>
+                      <green>255</green>
+                      <blue>255</blue>
+                     </color>
+                    </brush>
+                   </colorrole>
+                   <colorrole role="ButtonText">
+                    <brush brushstyle="SolidPattern">
+                     <color alpha="255">
+                      <red>255</red>
+                      <green>255</green>
+                      <blue>255</blue>
+                     </color>
+                    </brush>
+                   </colorrole>
+                   <colorrole role="Base">
+                    <brush brushstyle="SolidPattern">
+                     <color alpha="255">
+                      <red>0</red>
+                      <green>0</green>
+                      <blue>0</blue>
+                     </color>
+                    </brush>
+                   </colorrole>
+                   <colorrole role="Window">
+                    <brush brushstyle="SolidPattern">
+                     <color alpha="255">
+                      <red>0</red>
+                      <green>0</green>
+                      <blue>0</blue>
+                     </color>
+                    </brush>
+                   </colorrole>
+                   <colorrole role="Link">
+                    <brush brushstyle="SolidPattern">
+                     <color alpha="255">
+                      <red>255</red>
+                      <green>85</green>
+                      <blue>255</blue>
+                     </color>
+                    </brush>
+                   </colorrole>
+                   <colorrole role="PlaceholderText">
+                    <brush brushstyle="SolidPattern">
+                     <color alpha="128">
+                      <red>255</red>
+                      <green>255</green>
+                      <blue>255</blue>
+                     </color>
+                    </brush>
+                   </colorrole>
+                  </inactive>
+                  <disabled>
+                   <colorrole role="WindowText">
+                    <brush brushstyle="SolidPattern">
+                     <color alpha="255">
+                      <red>255</red>
+                      <green>255</green>
+                      <blue>255</blue>
+                     </color>
+                    </brush>
+                   </colorrole>
+                   <colorrole role="Button">
+                    <brush brushstyle="SolidPattern">
+                     <color alpha="255">
+                      <red>0</red>
+                      <green>0</green>
+                      <blue>0</blue>
+                     </color>
+                    </brush>
+                   </colorrole>
+                   <colorrole role="Text">
+                    <brush brushstyle="SolidPattern">
+                     <color alpha="255">
+                      <red>255</red>
+                      <green>255</green>
+                      <blue>255</blue>
+                     </color>
+                    </brush>
+                   </colorrole>
+                   <colorrole role="ButtonText">
+                    <brush brushstyle="SolidPattern">
+                     <color alpha="255">
+                      <red>255</red>
+                      <green>255</green>
+                      <blue>255</blue>
+                     </color>
+                    </brush>
+                   </colorrole>
+                   <colorrole role="Base">
+                    <brush brushstyle="SolidPattern">
+                     <color alpha="255">
+                      <red>0</red>
+                      <green>0</green>
+                      <blue>0</blue>
+                     </color>
+                    </brush>
+                   </colorrole>
+                   <colorrole role="Window">
+                    <brush brushstyle="SolidPattern">
+                     <color alpha="255">
+                      <red>0</red>
+                      <green>0</green>
+                      <blue>0</blue>
+                     </color>
+                    </brush>
+                   </colorrole>
+                   <colorrole role="Link">
+                    <brush brushstyle="SolidPattern">
+                     <color alpha="255">
+                      <red>255</red>
+                      <green>85</green>
+                      <blue>255</blue>
+                     </color>
+                    </brush>
+                   </colorrole>
+                   <colorrole role="PlaceholderText">
+                    <brush brushstyle="SolidPattern">
+                     <color alpha="128">
+                      <red>255</red>
+                      <green>255</green>
+                      <blue>255</blue>
+                     </color>
+                    </brush>
+                   </colorrole>
+                  </disabled>
+                 </palette>
+                </property>
                 <property name="toolTip">
                  <string>Este botão pede ao computador para gerar um labirinto &quot;aleatório&quot;.</string>
+                </property>
+                <property name="styleSheet">
+                 <string notr="true">QPushButton {
+	background-color: black;
+	color: white;
+	border-width: 1px;
+	border-style: solid;
+	border-color: rgb(4, 26, 52);
+}
+
+QPushButton:pressed {
+	background-color: rgb(0, 168, 232);
+	color: rgb(4, 26, 52);
+}</string>
                 </property>
                 <property name="text">
                  <string>Labirinto Aleatório</string>
@@ -6861,8 +7141,248 @@ Ctrl+Click para expandir o labirinto verticalmente por 10</string>
                   <height>16777215</height>
                  </size>
                 </property>
+                <property name="palette">
+                 <palette>
+                  <active>
+                   <colorrole role="WindowText">
+                    <brush brushstyle="SolidPattern">
+                     <color alpha="255">
+                      <red>255</red>
+                      <green>255</green>
+                      <blue>255</blue>
+                     </color>
+                    </brush>
+                   </colorrole>
+                   <colorrole role="Button">
+                    <brush brushstyle="SolidPattern">
+                     <color alpha="255">
+                      <red>0</red>
+                      <green>0</green>
+                      <blue>0</blue>
+                     </color>
+                    </brush>
+                   </colorrole>
+                   <colorrole role="Text">
+                    <brush brushstyle="SolidPattern">
+                     <color alpha="255">
+                      <red>255</red>
+                      <green>255</green>
+                      <blue>255</blue>
+                     </color>
+                    </brush>
+                   </colorrole>
+                   <colorrole role="ButtonText">
+                    <brush brushstyle="SolidPattern">
+                     <color alpha="255">
+                      <red>255</red>
+                      <green>255</green>
+                      <blue>255</blue>
+                     </color>
+                    </brush>
+                   </colorrole>
+                   <colorrole role="Base">
+                    <brush brushstyle="SolidPattern">
+                     <color alpha="255">
+                      <red>0</red>
+                      <green>0</green>
+                      <blue>0</blue>
+                     </color>
+                    </brush>
+                   </colorrole>
+                   <colorrole role="Window">
+                    <brush brushstyle="SolidPattern">
+                     <color alpha="255">
+                      <red>0</red>
+                      <green>0</green>
+                      <blue>0</blue>
+                     </color>
+                    </brush>
+                   </colorrole>
+                   <colorrole role="Link">
+                    <brush brushstyle="SolidPattern">
+                     <color alpha="255">
+                      <red>255</red>
+                      <green>170</green>
+                      <blue>255</blue>
+                     </color>
+                    </brush>
+                   </colorrole>
+                   <colorrole role="PlaceholderText">
+                    <brush brushstyle="SolidPattern">
+                     <color alpha="128">
+                      <red>255</red>
+                      <green>255</green>
+                      <blue>255</blue>
+                     </color>
+                    </brush>
+                   </colorrole>
+                  </active>
+                  <inactive>
+                   <colorrole role="WindowText">
+                    <brush brushstyle="SolidPattern">
+                     <color alpha="255">
+                      <red>255</red>
+                      <green>255</green>
+                      <blue>255</blue>
+                     </color>
+                    </brush>
+                   </colorrole>
+                   <colorrole role="Button">
+                    <brush brushstyle="SolidPattern">
+                     <color alpha="255">
+                      <red>0</red>
+                      <green>0</green>
+                      <blue>0</blue>
+                     </color>
+                    </brush>
+                   </colorrole>
+                   <colorrole role="Text">
+                    <brush brushstyle="SolidPattern">
+                     <color alpha="255">
+                      <red>255</red>
+                      <green>255</green>
+                      <blue>255</blue>
+                     </color>
+                    </brush>
+                   </colorrole>
+                   <colorrole role="ButtonText">
+                    <brush brushstyle="SolidPattern">
+                     <color alpha="255">
+                      <red>255</red>
+                      <green>255</green>
+                      <blue>255</blue>
+                     </color>
+                    </brush>
+                   </colorrole>
+                   <colorrole role="Base">
+                    <brush brushstyle="SolidPattern">
+                     <color alpha="255">
+                      <red>0</red>
+                      <green>0</green>
+                      <blue>0</blue>
+                     </color>
+                    </brush>
+                   </colorrole>
+                   <colorrole role="Window">
+                    <brush brushstyle="SolidPattern">
+                     <color alpha="255">
+                      <red>0</red>
+                      <green>0</green>
+                      <blue>0</blue>
+                     </color>
+                    </brush>
+                   </colorrole>
+                   <colorrole role="Link">
+                    <brush brushstyle="SolidPattern">
+                     <color alpha="255">
+                      <red>255</red>
+                      <green>170</green>
+                      <blue>255</blue>
+                     </color>
+                    </brush>
+                   </colorrole>
+                   <colorrole role="PlaceholderText">
+                    <brush brushstyle="SolidPattern">
+                     <color alpha="128">
+                      <red>255</red>
+                      <green>255</green>
+                      <blue>255</blue>
+                     </color>
+                    </brush>
+                   </colorrole>
+                  </inactive>
+                  <disabled>
+                   <colorrole role="WindowText">
+                    <brush brushstyle="SolidPattern">
+                     <color alpha="255">
+                      <red>255</red>
+                      <green>255</green>
+                      <blue>255</blue>
+                     </color>
+                    </brush>
+                   </colorrole>
+                   <colorrole role="Button">
+                    <brush brushstyle="SolidPattern">
+                     <color alpha="255">
+                      <red>0</red>
+                      <green>0</green>
+                      <blue>0</blue>
+                     </color>
+                    </brush>
+                   </colorrole>
+                   <colorrole role="Text">
+                    <brush brushstyle="SolidPattern">
+                     <color alpha="255">
+                      <red>255</red>
+                      <green>255</green>
+                      <blue>255</blue>
+                     </color>
+                    </brush>
+                   </colorrole>
+                   <colorrole role="ButtonText">
+                    <brush brushstyle="SolidPattern">
+                     <color alpha="255">
+                      <red>255</red>
+                      <green>255</green>
+                      <blue>255</blue>
+                     </color>
+                    </brush>
+                   </colorrole>
+                   <colorrole role="Base">
+                    <brush brushstyle="SolidPattern">
+                     <color alpha="255">
+                      <red>0</red>
+                      <green>0</green>
+                      <blue>0</blue>
+                     </color>
+                    </brush>
+                   </colorrole>
+                   <colorrole role="Window">
+                    <brush brushstyle="SolidPattern">
+                     <color alpha="255">
+                      <red>0</red>
+                      <green>0</green>
+                      <blue>0</blue>
+                     </color>
+                    </brush>
+                   </colorrole>
+                   <colorrole role="Link">
+                    <brush brushstyle="SolidPattern">
+                     <color alpha="255">
+                      <red>255</red>
+                      <green>170</green>
+                      <blue>255</blue>
+                     </color>
+                    </brush>
+                   </colorrole>
+                   <colorrole role="PlaceholderText">
+                    <brush brushstyle="SolidPattern">
+                     <color alpha="128">
+                      <red>255</red>
+                      <green>255</green>
+                      <blue>255</blue>
+                     </color>
+                    </brush>
+                   </colorrole>
+                  </disabled>
+                 </palette>
+                </property>
                 <property name="toolTip">
                  <string>Este botão abre o gestor de ficheiros para te permitir selecionar qualquer labirinto criado por utilizadores.</string>
+                </property>
+                <property name="styleSheet">
+                 <string notr="true">QPushButton {
+	background-color: black;
+	color: white;
+	border-width: 1px;
+	border-style: solid;
+	border-color: rgb(4, 26, 52);
+}
+
+QPushButton:pressed {
+	background-color: rgb(0, 168, 232);
+	color: rgb(4, 26, 52);
+}</string>
                 </property>
                 <property name="text">
                  <string>Selecione Um Ficheiro de Tipo .maz</string>
@@ -7009,9 +7529,9 @@ Ctrl+Click para expandir o labirinto verticalmente por 10</string>
                    <colorrole role="Base">
                     <brush brushstyle="SolidPattern">
                      <color alpha="255">
-                      <red>255</red>
-                      <green>255</green>
-                      <blue>255</blue>
+                      <red>0</red>
+                      <green>168</green>
+                      <blue>232</blue>
                      </color>
                     </brush>
                    </colorrole>
@@ -7164,9 +7684,9 @@ Ctrl+Click para expandir o labirinto verticalmente por 10</string>
                    <colorrole role="Base">
                     <brush brushstyle="SolidPattern">
                      <color alpha="255">
-                      <red>255</red>
-                      <green>255</green>
-                      <blue>255</blue>
+                      <red>0</red>
+                      <green>168</green>
+                      <blue>232</blue>
                      </color>
                     </brush>
                    </colorrole>
@@ -7399,6 +7919,20 @@ Ctrl+Click para expandir o labirinto verticalmente por 10</string>
                 <property name="toolTip">
                  <string>Quando estiveres acabdo, pressiona-me para continuar</string>
                 </property>
+                <property name="styleSheet">
+                 <string notr="true">QPushButton {
+	background-color: rgb(0, 168, 232);
+	color: rgb(4, 26, 52);
+	border-width: 1px;
+	border-style: solid;
+	border-color: rgb(4, 26, 52);
+}
+
+QPushButton:pressed {
+	background-color: black;
+	color: white;
+}</string>
+                </property>
                 <property name="text">
                  <string>Próximo</string>
                 </property>
@@ -7433,8 +7967,8 @@ Ctrl+Click para expandir o labirinto verticalmente por 10</string>
                   <rect>
                    <x>0</x>
                    <y>0</y>
-                   <width>98</width>
-                   <height>28</height>
+                   <width>950</width>
+                   <height>434</height>
                   </rect>
                  </property>
                  <layout class="QHBoxLayout" name="horizontalLayout_3"/>
@@ -7459,27 +7993,27 @@ Ctrl+Click para expandir o labirinto verticalmente por 10</string>
                    <colorrole role="WindowText">
                     <brush brushstyle="SolidPattern">
                      <color alpha="255">
-                      <red>255</red>
-                      <green>79</green>
-                      <blue>0</blue>
+                      <red>0</red>
+                      <green>255</green>
+                      <blue>255</blue>
                      </color>
                     </brush>
                    </colorrole>
                    <colorrole role="Text">
                     <brush brushstyle="SolidPattern">
                      <color alpha="255">
-                      <red>255</red>
-                      <green>79</green>
-                      <blue>0</blue>
+                      <red>0</red>
+                      <green>255</green>
+                      <blue>255</blue>
                      </color>
                     </brush>
                    </colorrole>
                    <colorrole role="BrightText">
                     <brush brushstyle="SolidPattern">
                      <color alpha="255">
-                      <red>253</red>
-                      <green>78</green>
-                      <blue>0</blue>
+                      <red>0</red>
+                      <green>255</green>
+                      <blue>255</blue>
                      </color>
                     </brush>
                    </colorrole>
@@ -7488,27 +8022,27 @@ Ctrl+Click para expandir o labirinto verticalmente por 10</string>
                    <colorrole role="WindowText">
                     <brush brushstyle="SolidPattern">
                      <color alpha="255">
-                      <red>255</red>
-                      <green>79</green>
-                      <blue>0</blue>
+                      <red>0</red>
+                      <green>255</green>
+                      <blue>255</blue>
                      </color>
                     </brush>
                    </colorrole>
                    <colorrole role="Text">
                     <brush brushstyle="SolidPattern">
                      <color alpha="255">
-                      <red>255</red>
-                      <green>79</green>
-                      <blue>0</blue>
+                      <red>0</red>
+                      <green>255</green>
+                      <blue>255</blue>
                      </color>
                     </brush>
                    </colorrole>
                    <colorrole role="BrightText">
                     <brush brushstyle="SolidPattern">
                      <color alpha="255">
-                      <red>253</red>
-                      <green>78</green>
-                      <blue>0</blue>
+                      <red>0</red>
+                      <green>255</green>
+                      <blue>255</blue>
                      </color>
                     </brush>
                    </colorrole>
@@ -7517,9 +8051,9 @@ Ctrl+Click para expandir o labirinto verticalmente por 10</string>
                    <colorrole role="BrightText">
                     <brush brushstyle="SolidPattern">
                      <color alpha="255">
-                      <red>253</red>
-                      <green>78</green>
-                      <blue>0</blue>
+                      <red>0</red>
+                      <green>255</green>
+                      <blue>255</blue>
                      </color>
                     </brush>
                    </colorrole>
@@ -7739,9 +8273,9 @@ Ctrl+Click para expandir o labirinto verticalmente por 10</string>
                    <colorrole role="Base">
                     <brush brushstyle="SolidPattern">
                      <color alpha="255">
-                      <red>255</red>
-                      <green>255</green>
-                      <blue>255</blue>
+                      <red>0</red>
+                      <green>168</green>
+                      <blue>232</blue>
                      </color>
                     </brush>
                    </colorrole>
@@ -7894,9 +8428,9 @@ Ctrl+Click para expandir o labirinto verticalmente por 10</string>
                    <colorrole role="Base">
                     <brush brushstyle="SolidPattern">
                      <color alpha="255">
-                      <red>255</red>
-                      <green>255</green>
-                      <blue>255</blue>
+                      <red>0</red>
+                      <green>168</green>
+                      <blue>232</blue>
                      </color>
                     </brush>
                    </colorrole>
@@ -8130,6 +8664,20 @@ Ctrl+Click para expandir o labirinto verticalmente por 10</string>
                  <string>Pressiona-me para resolver o labirinto. Achas que consegues ser mais rápido?
 </string>
                 </property>
+                <property name="styleSheet">
+                 <string notr="true">QPushButton {
+	background-color: rgb(0, 168, 232);
+	color: rgb(4, 26, 52);
+	border-width: 1px;
+	border-style: solid;
+	border-color: rgb(4, 26, 52);
+}
+
+QPushButton:pressed {
+	background-color: black;
+	color: white;
+}</string>
+                </property>
                 <property name="text">
                  <string>Resolver o Labirinto</string>
                 </property>
@@ -8160,7 +8708,26 @@ Ctrl+Click para expandir o labirinto verticalmente por 10</string>
           </item>
          </layout>
         </widget>
-        <widget class="CustomVideoWidget" name="pgCredits"/>
+        <widget class="QWidget" name="pgCredits">
+         <layout class="QHBoxLayout" name="horizontalLayout_5">
+          <item>
+           <widget class="QTextBrowser" name="textBrowser">
+            <property name="font">
+             <font>
+              <pointsize>14</pointsize>
+              <italic>false</italic>
+              <bold>false</bold>
+             </font>
+            </property>
+            <property name="source">
+             <url>
+              <string>qrc:/others/resources/creditos.txt</string>
+             </url>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
         <widget class="QWidget" name="pgLeaderboard">
          <layout class="QGridLayout" name="gridLayout_11">
           <item row="0" column="0">
@@ -8212,9 +8779,34 @@ Ctrl+Click para expandir o labirinto verticalmente por 10</string>
            <widget class="QTableView" name="tblLeaderboard">
             <property name="font">
              <font>
-              <pointsize>14</pointsize>
+              <pointsize>-1</pointsize>
+              <italic>false</italic>
               <bold>false</bold>
              </font>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">QTableView {
+    color: rgb(33, 52, 76);
+	background-color: white;
+    gridline-color: black;
+    border-color: rgb(2, 13, 26);
+    font: 18px;
+	text-align: center;
+}
+QHeaderView::section {
+    background-color: rgb(0, 168, 232);
+    height: 40px;
+    font: bold 24px;
+	width: 40px;
+	text-align: center;
+}
+
+QTableView QTableCornerButton::section {
+	 background-color: rgb(0, 168, 232);
+    color: white;
+}
+
+</string>
             </property>
             <property name="editTriggers">
              <set>QAbstractItemView::EditTrigger::NoEditTriggers</set>
@@ -8288,12 +8880,6 @@ Ctrl+Click para expandir o labirinto verticalmente por 10</string>
   </widget>
  </widget>
  <customwidgets>
-  <customwidget>
-   <class>CustomVideoWidget</class>
-   <extends>QWidget</extends>
-   <header>Widgets/customvideowidget.h</header>
-   <container>1</container>
-  </customwidget>
   <customwidget>
    <class>mazeView</class>
    <extends>QGraphicsView</extends>

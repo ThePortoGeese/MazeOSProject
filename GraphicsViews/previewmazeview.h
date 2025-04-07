@@ -110,6 +110,7 @@ public slots:
 
 signals:
     void errorCatched(QString errorLog);
+    void updateSaveIndicator();
 
 };
 

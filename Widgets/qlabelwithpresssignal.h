@@ -9,8 +9,10 @@ class QLabelWithPressSignal : public QLabel
 public:
     QLabelWithPressSignal(QWidget* parent=nullptr) : QLabel(parent){}
 
-    void mousePressEvent(QMouseEvent* e) override{
+    void mousePressEvent(QMouseEvent* e) override {
         emit mousePressed();
+
+        QWidget::mousePressEvent(e);
     }
 signals:
     void mousePressed();

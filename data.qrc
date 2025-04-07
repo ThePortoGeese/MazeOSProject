@@ -4,7 +4,6 @@
         <file>resources/secondName.txt</file>
     </qresource>
     <qresource prefix="/others">
-        <file>resources/credits.mp4</file>
         <file>resources/appLogo.png</file>
         <file>resources/algorithmTxt.html</file>
         <file>resources/recursiveDescription.txt</file>
@@ -14,6 +13,9 @@
         <file>resources/wallfollowerDesciption.txt</file>
         <file>resources/proccessinstructions.txt</file>
         <file>resources/deadEndFillingDescription.txt</file>
+        <file>resources/saveButtonCheck.png</file>
+        <file>resources/saveButtonX.png</file>
+        <file>resources/creditos.txt</file>
     </qresource>
     <qresource prefix="/fonts">
         <file>Roboto-Medium.ttf</file>

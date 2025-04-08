@@ -14,6 +14,8 @@ QT += multimedia multimediawidgets
 QT += multimedia multimediawidgets
 
 SOURCES += \
+    2dmaze.cpp \
+    3dmaze.cpp \
     GraphicsViews/graphicslabviewproccess.cpp \
     GraphicsViewsitems/instructioncircleitem.cpp \
     Widgets/algorithmselectionbox.cpp \
@@ -21,13 +23,14 @@ SOURCES += \
     Widgets/informationpage.cpp \
     main.cpp \
     GraphicsViews/mazeView.cpp \
-    mazeclass.cpp \
     Widgets/menuwindow.cpp \
     Widgets/namedialog.cpp \
     GraphicsViews/previewmazeview.cpp \
     qmazes.cpp
 
 HEADERS += \
+    2dmaze.h \
+    3dmaze.h \
     GraphicsViews/graphicslabviewproccess.h \
     GraphicsViewsitems/abstractgraphicsrectitem.h \
     GraphicsViewsitems/abstractshapeitem.h \
@@ -36,13 +39,13 @@ HEADERS += \
     GraphicsViewsitems/cellgraphicsrectitem.h \
     Widgets/crementbuttons.h \
     Widgets/informationpage.h \
-    mazeclass.h \
     GraphicsViews/mazeview.h \
     Widgets/menuwindow.h \
     Widgets/namedialog.h \
     Widgets/noclickqtxtbrowser.h \
     GraphicsViews/previewmazeview.h \
     Widgets/qlabelwithpresssignal.h \
+    basemaze.h \
     qmazes.h \
     qmazesconversionmethods.h \
     GraphicsViewsitems/wallhgraphicsrectitem.h \

@@ -43,74 +43,74 @@ void mazeView::drawMaze(QMazes* currentMaze){
     for(int i=0;i<(int)currentMaze->getMaze().size();i++){
         for(int y=0;y<(int)currentMaze->getMaze()[0].size();y++){
             if(currentMaze->getMaze()[i][y].connectionFrom[0]!=nullptr){
-                if(currentMaze->getMaze()[i][y].connectionFrom[MazeEnums::left]->obstacle==MazeEnums::noObstacles){
+                if(currentMaze->getMaze()[i][y].connectionFrom[QMazes::left]->obstacle==QMazes::noObstacles){
                     QGraphicsRectItem* a=scene()->addRect(0,0,std::ceil(squareSizeWidth/4),squareSizeHeight,Qt::NoPen,cellB);
                     a->setPos(cells[i][y]->scenePos().x()-squareSizeWidth/4,cells[i][y]->scenePos().y());
                 }
-                else if(currentMaze->getMaze()[i][y].connectionFrom[MazeEnums::left]->obstacle==MazeEnums::entrance){
+                else if(currentMaze->getMaze()[i][y].connectionFrom[QMazes::left]->obstacle==QMazes::entrance){
                     //qDebug()<<i<<" "<<y;
 
                     QGraphicsRectItem* a=scene()->addRect(0,0,std::ceil(squareSizeWidth/4),squareSizeHeight,Qt::NoPen,Qt::green);
                     a->setPos(0,cells[i][y]->scenePos().y());
                 }
-                else if(currentMaze->getMaze()[i][y].connectionFrom[MazeEnums::left]->obstacle==MazeEnums::exit){
+                else if(currentMaze->getMaze()[i][y].connectionFrom[QMazes::left]->obstacle==QMazes::exit){
                     //qDebug()<<i<<" "<<y;
 
                     QGraphicsRectItem* a=scene()->addRect(0,0,std::ceil(squareSizeWidth/4),squareSizeHeight,Qt::NoPen,Qt::red);
                     a->setPos(0,cells[i][y]->scenePos().y());
                 }
             }
-            if(currentMaze->getMaze()[i][y].connectionFrom[MazeEnums::up]!=nullptr){
-                if(currentMaze->getMaze()[i][y].connectionFrom[1]->obstacle==MazeEnums::noObstacles){
+            if(currentMaze->getMaze()[i][y].connectionFrom[QMazes::up]!=nullptr){
+                if(currentMaze->getMaze()[i][y].connectionFrom[1]->obstacle==QMazes::noObstacles){
 
                     QGraphicsRectItem* a=scene()->addRect(0,0,squareSizeWidth,std::ceil(squareSizeHeight/4),Qt::NoPen,cellB);
                     a->setPos(cells[i][y]->scenePos().x(),cells[i][y]->scenePos().y()-squareSizeHeight/4);
                 }
-                else if(currentMaze->getMaze()[i][y].connectionFrom[MazeEnums::up]->obstacle==MazeEnums::entrance){
+                else if(currentMaze->getMaze()[i][y].connectionFrom[QMazes::up]->obstacle==QMazes::entrance){
                     //qDebug()<<i<<" "<<y;
 
                     QGraphicsRectItem* a=scene()->addRect(0,0,squareSizeWidth,std::ceil(squareSizeHeight/4),Qt::NoPen,Qt::green);
                     a->setPos(cells[i][y]->scenePos().x(),0);
                 }
-                else if(currentMaze->getMaze()[i][y].connectionFrom[MazeEnums::up]->obstacle==MazeEnums::exit){
+                else if(currentMaze->getMaze()[i][y].connectionFrom[QMazes::up]->obstacle==QMazes::exit){
                     //qDebug()<<i<<" "<<y;
 
                     QGraphicsRectItem* a=scene()->addRect(0,0,squareSizeWidth,std::ceil(squareSizeHeight/4),Qt::NoPen,Qt::red);
                     a->setPos(cells[i][y]->scenePos().x(),0);
                 }
             }
-            if(currentMaze->getMaze()[i][y].connectionsTo[MazeEnums::right].to!=nullptr){
-                if(currentMaze->getMaze()[i][y].connectionsTo[MazeEnums::right].obstacle==MazeEnums::noObstacles){
+            if(currentMaze->getMaze()[i][y].connectionsTo[QMazes::right].to!=nullptr){
+                if(currentMaze->getMaze()[i][y].connectionsTo[QMazes::right].obstacle==QMazes::noObstacles){
                     QGraphicsRectItem* a=scene()->addRect(0,0,std::ceil(squareSizeWidth/4),squareSizeHeight,Qt::NoPen,cellB);
                     a->setPos(cells[i][y]->scenePos().x()+squareSizeWidth,cells[i][y]->scenePos().y());
                 }
             }
-            else if(currentMaze->getMaze()[i][y].connectionsTo[MazeEnums::right].obstacle==MazeEnums::exit){
+            else if(currentMaze->getMaze()[i][y].connectionsTo[QMazes::right].obstacle==QMazes::exit){
                 QGraphicsRectItem* a=scene()->addRect(0,0,squareSizeWidth,squareSizeHeight,Qt::NoPen,Qt::red);
                 a->setPos(cells[i][y]->scenePos().x()+squareSizeWidth,cells[i][y]->scenePos().y());
             }
-            else if(currentMaze->getMaze()[i][y].connectionsTo[MazeEnums::right].obstacle==MazeEnums::entrance){
+            else if(currentMaze->getMaze()[i][y].connectionsTo[QMazes::right].obstacle==QMazes::entrance){
                 QGraphicsRectItem* a=scene()->addRect(0,0,squareSizeWidth,squareSizeHeight,Qt::NoPen,Qt::green);
                 a->setPos(cells[i][y]->scenePos().x()+squareSizeWidth,cells[i][y]->scenePos().y());
             }
-            if(currentMaze->getMaze()[i][y].connectionsTo[MazeEnums::down].to!=nullptr){
-                if(currentMaze->getMaze()[i][y].connectionsTo[MazeEnums::down].obstacle==MazeEnums::noObstacles){
+            if(currentMaze->getMaze()[i][y].connectionsTo[QMazes::down].to!=nullptr){
+                if(currentMaze->getMaze()[i][y].connectionsTo[QMazes::down].obstacle==QMazes::noObstacles){
                     QGraphicsRectItem* a=scene()->addRect(0,0,squareSizeWidth,std::ceil(squareSizeHeight/4),Qt::NoPen,cellB);
                     a->setPos(cells[i][y]->scenePos().x(),cells[i][y]->scenePos().y()+squareSizeHeight);
                 }
             }
-            else if(currentMaze->getMaze()[i][y].connectionsTo[MazeEnums::down].obstacle==MazeEnums::exit){
+            else if(currentMaze->getMaze()[i][y].connectionsTo[QMazes::down].obstacle==QMazes::exit){
                 QGraphicsRectItem* a=scene()->addRect(0,0,squareSizeWidth,squareSizeHeight,Qt::NoPen,Qt::red);
                 a->setPos(cells[i][y]->scenePos().x(),cells[i][y]->scenePos().y()+squareSizeHeight);
             }
-            else if(currentMaze->getMaze()[i][y].connectionsTo[MazeEnums::down].obstacle==MazeEnums::entrance){
+            else if(currentMaze->getMaze()[i][y].connectionsTo[QMazes::down].obstacle==QMazes::entrance){
                 QGraphicsRectItem* a=scene()->addRect(0,0,squareSizeWidth,squareSizeHeight,Qt::NoPen,Qt::green);
                 a->setPos(cells[i][y]->scenePos().x(),cells[i][y]->scenePos().y()+squareSizeHeight);
             }
 
         }
     }
-    scene()->setSceneRect(0, 0,5*currentMaze->x()+1,5*currentMaze->y()+1);
+    scene()->setSceneRect(0, 0,5*currentMaze->getWidth()+1,5*currentMaze->getHeight()+1);
 
     worker.join();
 }

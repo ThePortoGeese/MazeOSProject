@@ -529,7 +529,7 @@ QMazes* currentMazeView=nullptr;
 
             if(success){
                 if(currentMazeView->getUserGeneratedStatus()&&(!currentMazeView->getEvaluated())){
-                    score=(((currentMazeView->x()*currentMazeView->y())/2*0.2+runtime->elapsed()*0.80)*100);
+                    score=(((currentMazeView->getWidth()*currentMazeView->getHeight())/2*0.2+runtime->elapsed()*0.80)*100);
                 }
 
                 QMessageBox::information(this,"Informação","Demorei: "+QString::number((float)runtime->elapsed()/1000)+"s\nPontuação: "+ (!(score<0) ? QString::number(score):"Não Aplicável"));

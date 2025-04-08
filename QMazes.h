@@ -1,6 +1,6 @@
 #ifndef QMAZES_H
 #define QMAZES_H
-#include "mazeclass.h"
+#include "2dmaze.h"
 #include "qgraphicsscene.h"
 #include <QTCore>
 #include <vector>
@@ -20,7 +20,7 @@ public:
     }
 };
 
-class QMazes : public QObject, public mazeClass
+class QMazes : public QObject, public TwoDMaze
 {
     friend class QMazesConversionMethods;
     Q_OBJECT

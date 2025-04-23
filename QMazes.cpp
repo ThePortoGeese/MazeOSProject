@@ -1,6 +1,5 @@
 #include "qmazes.h"
 #include <QDebug>
-#include <iostream>
 #include <stack>
 
 namespace MazeFileCoding{
@@ -412,6 +411,7 @@ bool QMazes::wallFollowerMazeSolver() {
             break; // Nenhuma saída encontrada
         }
     }
+    return false;
 }
 
 bool QMazes::deadEndFillingMazeSolver(){

@@ -77,8 +77,8 @@ void cell::setup(std::vector<std::vector<cell>>& cells,std::tuple<int,int> pos){
 }
 
 void TwoDMaze::createMaze(){
-    int entranceX;
-    int entranceY;
+    int entranceX = 0;
+    int entranceY = 0;
     srand(time(0));
 
     //For this to be a cell connected to the outside, at least one of the position parameters needs to be 0 or param.size()-1

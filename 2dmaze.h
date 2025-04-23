@@ -24,7 +24,7 @@ public:
         exit=5,
     };
 
-    TwoDMaze(int x,int y);
+    TwoDMaze(int y,int x);
 
     virtual void connectionsPrint() override;
 

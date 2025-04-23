@@ -170,7 +170,7 @@ void mazeView::findRectItemPosition(CellGraphicsRectItem *rect)
         auto k = std::find(cells[i].begin(),cells[i].end(),rect);
         if(k!=cells[i].end()){
             int d=std::distance(cells[i].begin(),k);
-            emit chartPathToCell(d,i);
+            emit chartPathToCell(i,d);
         }
     }
 }

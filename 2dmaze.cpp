@@ -1,8 +1,7 @@
 #include "2dmaze.h"
-#include "qmazes.h"
 #include <iostream>
 #include <stack>
-TwoDMaze::TwoDMaze(int x,int y) {
+TwoDMaze::TwoDMaze(int y,int x) {
     MazeStructure.resize(y,std::vector<cell>(x,cell()));
     for(int i=0;i<y;i++){
         for(int j=0;j<x;j++){
@@ -140,10 +139,10 @@ void TwoDMaze::createMaze(){
     //std::cout<<"Exit X and Y: "<<exitX<<" "<<exitY<<'\n';
     //connectionsPrint();
     std::vector<std::vector<bool>> booleanGrid(this->getHeight(), std::vector<bool>(this->getWidth(), false));
-    this->recursiveDiggingFunction(entranceX,entranceY,booleanGrid);
+    this->recursiveDiggingFunction(entranceY,entranceX,booleanGrid);
 }
 
-void TwoDMaze::recursiveDiggingFunction(int x,int y, std::vector<std::vector<bool>>& booleanGrid){
+void TwoDMaze::recursiveDiggingFunction(int y,int x, std::vector<std::vector<bool>>& booleanGrid){
     if(y<0||y>=this->getHeight()||x<0||x>=this->getWidth()) return;
     booleanGrid[y][x] = true;
     std::array<int,4> nums{1,2,3,4};
@@ -161,7 +160,7 @@ void TwoDMaze::recursiveDiggingFunction(int x,int y, std::vector<std::vector<boo
             if(MazeStructure[y][x].connectionFrom[left]!=nullptr&&MazeStructure[y][x].connectionFrom[left]->obstacle!=2){
                 if(!booleanGrid[y][x-1]){
                     MazeStructure[y][x].connectionFrom[left]->obstacle=noObstacles;
-                    recursiveDiggingFunction(x-1 , y,booleanGrid);
+                    recursiveDiggingFunction(y , x-1,booleanGrid);
                 }
             }
             break;
@@ -169,7 +168,7 @@ void TwoDMaze::recursiveDiggingFunction(int x,int y, std::vector<std::vector<boo
             if(MazeStructure[y][x].connectionFrom[up]!=nullptr&&MazeStructure[y][x].connectionFrom[up]->obstacle!=2){
                 if(!booleanGrid[y-1][x]){
                     MazeStructure[y][x].connectionFrom[up]->obstacle=noObstacles;
-                    recursiveDiggingFunction(x, y-1,booleanGrid);
+                    recursiveDiggingFunction(y-1, x,booleanGrid);
                 }
             }
             break;
@@ -177,7 +176,7 @@ void TwoDMaze::recursiveDiggingFunction(int x,int y, std::vector<std::vector<boo
             if(MazeStructure[y][x].connectionsTo[right].to!=nullptr){
                 if(!booleanGrid[y][x+1]){
                     MazeStructure[y][x].connectionsTo[right].obstacle=noObstacles;
-                    recursiveDiggingFunction( x+1, y,booleanGrid);
+                    recursiveDiggingFunction( y, x+1,booleanGrid);
                 }
             }
             break;
@@ -185,7 +184,7 @@ void TwoDMaze::recursiveDiggingFunction(int x,int y, std::vector<std::vector<boo
             if(MazeStructure[y][x].connectionsTo[down].to!=nullptr){
                 if(!booleanGrid[y+1][x]){
                     MazeStructure[y][x].connectionsTo[down].obstacle=noObstacles;
-                    recursiveDiggingFunction(x, y+1,booleanGrid);
+                    recursiveDiggingFunction(y+1, x,booleanGrid);
                 }
             }
             break;
@@ -239,7 +238,6 @@ bool TwoDMaze::recursiveMazeSolver() {
 }
 
 bool TwoDMaze::recursiveSolvingFunction(std::vector<std::vector<bool>>& booleanGrid, const int i, const int j, const bool& store) {
-
     if (i<0||i>=(int)MazeStructure.size()||j<0||j>=(int)MazeStructure[0].size()||booleanGrid[i][j]) {
         return false;
     }
@@ -267,7 +265,7 @@ bool TwoDMaze::recursiveSolvingFunction(std::vector<std::vector<bool>>& booleanG
     for(int k=0;k<4;k++){
         switch(nums[k]){
         case 1:
-            if(MazeStructure[i][j].connectionFrom[0]!=nullptr&&MazeStructure[i][j].connectionFrom[0]->obstacle==0){
+            if(MazeStructure[i][j].connectionFrom[left]!=nullptr&&MazeStructure[i][j].connectionFrom[left]->obstacle==0){
                 if(recursiveSolvingFunction(booleanGrid, i, j-1,store)) {
                     if(store)correctPath.push_back(&MazeStructure[i][j]);
                     return true;
@@ -275,7 +273,7 @@ bool TwoDMaze::recursiveSolvingFunction(std::vector<std::vector<bool>>& booleanG
             }
             break;
         case 2:
-            if(MazeStructure[i][j].connectionFrom[1]!=nullptr&&MazeStructure[i][j].connectionFrom[1]->obstacle==0){
+            if(MazeStructure[i][j].connectionFrom[up]!=nullptr&&MazeStructure[i][j].connectionFrom[up]->obstacle==0){
                 if(recursiveSolvingFunction(booleanGrid, i-1, j,store)) {
                     if(store)correctPath.push_back(&MazeStructure[i][j]);
                     return true;
@@ -283,14 +281,14 @@ bool TwoDMaze::recursiveSolvingFunction(std::vector<std::vector<bool>>& booleanG
             }
             break;
         case 3:
-            if(MazeStructure[i][j].connectionsTo[0].to!=nullptr&&MazeStructure[i][j].connectionsTo[0].obstacle==0){
+            if(MazeStructure[i][j].connectionsTo[right].to!=nullptr&&MazeStructure[i][j].connectionsTo[right].obstacle==0){
                 if(recursiveSolvingFunction(booleanGrid, i, j +1,store)) {
                     if(store)correctPath.push_back(&MazeStructure[i][j]);
                     return true;}
             }
             break;
         case 4:
-            if(MazeStructure[i][j].connectionsTo[1].to!=nullptr&&MazeStructure[i][j].connectionsTo[1].obstacle==0){
+            if(MazeStructure[i][j].connectionsTo[down].to!=nullptr&&MazeStructure[i][j].connectionsTo[down].obstacle==0){
                 if(recursiveSolvingFunction(booleanGrid, i+1, j,store)) {
                     if(store)correctPath.push_back(&MazeStructure[i][j]);
                     return true;}
@@ -303,7 +301,7 @@ bool TwoDMaze::recursiveSolvingFunction(std::vector<std::vector<bool>>& booleanG
 }
 
 
-bool TwoDMaze::recursiveMazeSolver(const int& tX,const int& tY) {
+bool TwoDMaze::recursiveMazeSolver(const int& tY,const int& tX) {
     if(correctPath.size()!=0) {
         correctPath.clear();
     }
@@ -312,7 +310,7 @@ bool TwoDMaze::recursiveMazeSolver(const int& tX,const int& tY) {
 
     //std::cout<<"Ix value: "<<ix<< " Iy value: "<<iy<<'\n';
 
-    if(recursiveSolvingFunction(booleanGrid, std::get<0>(a), std::get<1>(a),tX,tY)){
+    if(recursiveSolvingFunction(booleanGrid, std::get<0>(a), std::get<1>(a),tY,tX)){
         return true;
     } else {
         return false;
@@ -320,7 +318,7 @@ bool TwoDMaze::recursiveMazeSolver(const int& tX,const int& tY) {
 }
 
 //Overload of solver operation to find path to cell at (tX, tY)
-bool TwoDMaze::recursiveSolvingFunction(std::vector<std::vector<bool>>& booleanGrid, const int i, const int j,const int& tX,const int& tY) {
+bool TwoDMaze::recursiveSolvingFunction(std::vector<std::vector<bool>>& booleanGrid, const int i, const int j,const int& tY,const int& tX) {
     if(i==tY&&j==tX){
         //Do whatever you wanna do with this path here
         return true;
@@ -338,31 +336,31 @@ bool TwoDMaze::recursiveSolvingFunction(std::vector<std::vector<bool>>& booleanG
     for(int k=0;k<4;k++){
         switch(nums[k]){
         case 1:
-            if(MazeStructure[i][j].connectionFrom[0]!=nullptr&&MazeStructure[i][j].connectionFrom[0]->obstacle==0){
-                if(recursiveSolvingFunction(booleanGrid, i, j-1,tX,tY)) {
+            if(MazeStructure[i][j].connectionFrom[left]!=nullptr&&MazeStructure[i][j].connectionFrom[left]->obstacle==0){
+                if(recursiveSolvingFunction(booleanGrid, i, j-1,tY,tX)) {
                     //Do whatever you wanna do with this path here
                     return true;
                 }
             }
             break;
         case 2:
-            if(MazeStructure[i][j].connectionFrom[1]!=nullptr&&MazeStructure[i][j].connectionFrom[1]->obstacle==0){
-                if(recursiveSolvingFunction(booleanGrid, i-1, j,tX,tY)) {
+            if(MazeStructure[i][j].connectionFrom[up]!=nullptr&&MazeStructure[i][j].connectionFrom[up]->obstacle==0){
+                if(recursiveSolvingFunction(booleanGrid, i-1, j,tY,tX)) {
                     //Do whatever you wanna do with this path here
                     return true;
                 }
             }
             break;
         case 3:
-            if(MazeStructure[i][j].connectionsTo[0].to!=nullptr&&MazeStructure[i][j].connectionsTo[0].obstacle==0){
-                if(recursiveSolvingFunction(booleanGrid, i, j +1,tX,tY)) {
+            if(MazeStructure[i][j].connectionsTo[right].to!=nullptr&&MazeStructure[i][j].connectionsTo[right].obstacle==0){
+                if(recursiveSolvingFunction(booleanGrid, i, j +1,tY,tX)) {
                     //Do whatever you wanna do with this path here
                     return true;}
             }
             break;
         case 4:
-            if(MazeStructure[i][j].connectionsTo[1].to!=nullptr&&MazeStructure[i][j].connectionsTo[1].obstacle==0){
-                if(recursiveSolvingFunction(booleanGrid, i+1, j,tX,tY)) {
+            if(MazeStructure[i][j].connectionsTo[down].to!=nullptr&&MazeStructure[i][j].connectionsTo[down].obstacle==0){
+                if(recursiveSolvingFunction(booleanGrid, i+1, j,tY,tX)) {
                     //Do whatever you wanna do with this path here
                     return true;}
             }

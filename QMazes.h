@@ -26,7 +26,7 @@ class QMazes : public QObject, public TwoDMaze
     Q_OBJECT
 public:
 
-    QMazes(int x,int y);
+    QMazes(int y,int x);
 
     void connectionsPrint() override;
 

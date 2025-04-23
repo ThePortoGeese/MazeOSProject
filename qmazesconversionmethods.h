@@ -8,7 +8,7 @@ class QMazesConversionMethods
 public:
 
     static QMazes* convertFromView(PreviewMazeView* preview ){
-        QMazes* convertedMaze= new QMazes(preview->X(),preview->Y());
+        QMazes* convertedMaze= new QMazes(preview->Y(),preview->X());
 
         qDebug()<<preview->X();
         qDebug()<<preview->Y();

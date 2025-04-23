@@ -355,7 +355,7 @@ QMazes* currentMazeView=nullptr;
                 }
 
                 ui->lblSelectedFile->setText("");
-                currentMazeView=new QMazes(64,64);
+                currentMazeView=new QMazes(128,128);
                 currentMazeView->createMaze();
                 currentMazeView->nameGenerator();
                 currentMazeView->notUserGenerated();
@@ -586,11 +586,11 @@ QMazes* currentMazeView=nullptr;
             ui->graphicsView->clearCells();
         }
 
-        void menuWindow::chartPathToCell(const int& tX,const int& tY){
+        void menuWindow::chartPathToCell(const int& tY,const int& tX){
             //qDebug()<<tX<<" "<<tY;
             if(ui->btnSolveMaze->isEnabled()){
                 ui->lblStatus->setText("ESTADO: A Mostrar Caminho para ("+QString::number(tX)+","+QString::number(tY)+")");
-                currentMazeView->recursiveMazeSolver(tX,tY);
+                currentMazeView->recursiveMazeSolver(tY,tX);
 
                 for(int i=currentMazeView->tempPath.size()-1;i>=0;i--){
                     ui->graphicsView->changeCellColour(currentMazeView->tempPath[i]->x,currentMazeView->tempPath[i]->y,currentMazeView->tempPath[i]->k,QColor(250, 200, 81));

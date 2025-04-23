@@ -26,7 +26,7 @@ public slots:
     void changeCellColour(int x, int y, int conNb, QBrush brush=QColor(0, 201, 201));
     void findRectItemPosition(CellGraphicsRectItem* rect);
 signals:
-    void chartPathToCell(int x,int y);
+    void chartPathToCell(int y,int x);
     void updateStatusText();
 };
 

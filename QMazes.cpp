@@ -16,7 +16,7 @@ enum fileCoding{
 
 }
 
-QMazes::QMazes(int x,int y) : TwoDMaze(x,y){
+QMazes::QMazes(int y,int x) : TwoDMaze(y,x){
 
 }
 
@@ -70,8 +70,8 @@ bool QMazes::recursiveMazeSolver(){
     }
 }
 
-bool QMazes::recursiveMazeSolver(const int& tX,const int& tY){
-    if(TwoDMaze::recursiveMazeSolver(tX,tY)){
+bool QMazes::recursiveMazeSolver(const int& tY,const int& tX){
+    if(TwoDMaze::recursiveMazeSolver(tY,tX)){
 
         return 1;
     }else{
@@ -175,7 +175,7 @@ bool QMazes::recursiveSolvingFunction(std::vector<std::vector<bool>>& booleanGri
 
 
 
-bool QMazes::recursiveSolvingFunction(std::vector<std::vector<bool>>& booleanGrid, const int i, const int j, const int& tX, const int& tY) {
+bool QMazes::recursiveSolvingFunction(std::vector<std::vector<bool>>& booleanGrid, const int i, const int j, const int& tY, const int& tX) {
     if(i==tY&&j==tX){
         tempPath.push_back(new temporaryPathHolder(i,j,-1));
         return true;
@@ -194,7 +194,7 @@ bool QMazes::recursiveSolvingFunction(std::vector<std::vector<bool>>& booleanGri
         switch(nums[k]){
         case 1:
             if(MazeStructure[i][j].connectionFrom[0]!=nullptr&&MazeStructure[i][j].connectionFrom[0]->obstacle==0){
-                if(recursiveSolvingFunction(booleanGrid, i, j-1,tX,tY)) {
+                if(recursiveSolvingFunction(booleanGrid, i, j-1,tY,tX)) {
                     tempPath.push_back(new temporaryPathHolder(i,j,0));
                     return true;
                 }
@@ -202,7 +202,7 @@ bool QMazes::recursiveSolvingFunction(std::vector<std::vector<bool>>& booleanGri
             break;
         case 2:
             if(MazeStructure[i][j].connectionFrom[1]!=nullptr&&MazeStructure[i][j].connectionFrom[1]->obstacle==0){
-                if(recursiveSolvingFunction(booleanGrid, i-1, j,tX,tY)) {
+                if(recursiveSolvingFunction(booleanGrid, i-1, j,tY,tX)) {
                     tempPath.push_back(new temporaryPathHolder(i,j,1));
                     return true;
                 }
@@ -210,14 +210,14 @@ bool QMazes::recursiveSolvingFunction(std::vector<std::vector<bool>>& booleanGri
             break;
         case 3:
             if(MazeStructure[i][j].connectionsTo[0].to!=nullptr&&MazeStructure[i][j].connectionsTo[0].obstacle==0){
-                if(recursiveSolvingFunction(booleanGrid, i, j +1,tX,tY)) {
+                if(recursiveSolvingFunction(booleanGrid, i, j +1,tY,tX)) {
                     tempPath.push_back(new temporaryPathHolder(i,j,2));
                     return true;}
             }
             break;
         case 4:
             if(MazeStructure[i][j].connectionsTo[1].to!=nullptr&&MazeStructure[i][j].connectionsTo[1].obstacle==0){
-                if(recursiveSolvingFunction(booleanGrid, i+1, j,tX,tY)) {
+                if(recursiveSolvingFunction(booleanGrid, i+1, j,tY,tX)) {
                     tempPath.push_back(new temporaryPathHolder(i,j,3));
                     return true;}
             }
@@ -658,7 +658,7 @@ QMazes* QMazes::convertFromFile(QFile* file){
 
         if(mazeLines.size()%2==0) return nullptr;
 
-        QMazes* returnMaze=new QMazes((mazeLines[0].size()-1)/2,(mazeLines.size()-1)/2);
+        QMazes* returnMaze=new QMazes((mazeLines.size()-1)/2,(mazeLines[0].size()-1)/2);
         returnMaze->setEvaluated(evaluated);
 
         for(int i=0;i<(int)mazeLines.size();i++){

@@ -39,7 +39,7 @@ private slots:
     void on_btnGenerateMaze_clicked();
 
     void on_btnSummary_clicked();
-    void chartPathToCell(const int& tX,const int& tY);
+    void chartPathToCell(const int& tY,const int& tX);
     void updateStatusText();
 
     void on_btnNewUserMaze_clicked();

@@ -6,3 +6,5 @@ Only 3 algorithms were implemented because I'm lazy: The classic recursive funct
 
 
 To open the project on your QCreator, open the .pro document with it, that should render the whole thing there.
+
+WARNING: When using the application, the algorithm will appear slow. This is because I implemented a slowing algorithm that allows the user to actually see the maze being solved. This algorithm is in the QMazes file. If you use the base class, you shouldn't have a problem with this. 
